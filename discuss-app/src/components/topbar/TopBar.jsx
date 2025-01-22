@@ -25,7 +25,7 @@ export default function TopBar() {
             <Link className="link" to="/about" >
               <div className="topLeft">
                 <i  className="fa-solid fa-graduation-cap"></i>
-                <p className="profile-text"><b>CareerTalks</b></p>
+                <p className="profile-text"><b>AchieveHub</b></p>
               </div>
             </Link>
 

@@ -1,55 +1,59 @@
 .settings {
     display: flex;
-    background: linear-gradient(135deg, #c8dee1 0%, #54a19b 50%, #c8dee1 0%);
-
-
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #e3f2fd 100%); /* Light blue gradient */
 }
 
-.settingsWrapper  {
+.settingsWrapper {
     flex: 9;
     padding: 20px;
+    background-color: #ffffff; /* White for contrast */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .settingsTitle {
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-
-.settingsUpdateTitle  {
-    font-size: 30px;
     margin-bottom: 20px;
-    color: lightcoral;
 }
 
-.settingsDeleteTitle  {
-    width: 120px;
+.settingsUpdateTitle {
+    font-size: 30px;
+    color: #4a90e2; /* Soft blue */
+}
+
+.settingsDeleteTitle {
+    width: 140px;
     align-self: center;
-    border: 1px solid teal;
+    border: 1px solid #ff6f61; /* Light coral */
     border-radius: 5px;
     color: white;
-    background-color: red;
-    padding: 2px;
-    margin-top: 20px;
+    background-color: #ff8a80; /* Soft coral */
+    padding: 5px 10px;
     cursor: pointer;
-    font-weight: 300;
+    font-weight: bold;
     font-size: 15px;
-    font-family: 'fantasy';
+    font-family: 'Arial', sans-serif;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .settingsDeleteTitle:hover {
     background-color: white;
-    color: teal;
-    border-color: teal;
+    color: #ff6f61; /* Match border color */
+    border-color: #ff6f61;
 }
 
-.settingsForm  {
+.settingsForm {
     display: flex;
     flex-direction: column;
+    background-color: #f7f9fc; /* Soft light gray */
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #68a5d7; /* Light blue border */
 }
 
-.settingsPP  {
+.settingsPP {
     display: flex;
     align-items: center;
     margin: 10px 0;
@@ -60,57 +64,72 @@
 }
 
 .settingsImg {
-    width: 70px;
-    height: 70px;
-    border-radius: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
     object-fit: cover;
+    border: 2px solid #bbdefb; /* Light blue border for profile picture */
 }
 
 .settingsPPIcon {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
-    background-color: lightcoral;
+    background-color: #4a90e2; /* Soft blue */
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: 10px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.settingsForm > label  {
-    font-size: 20px;
+.settingsPPIcon:hover {
+    background-color: #1e88e5; /* Slightly darker blue */
+}
+
+.settingsForm > label {
+    font-size: 18px;
+    color: #5c6bc0; /* Muted blue */
     margin-top: 20px;
 }
 
-.settingsForm > input  {
-    color: gray;
+.settingsForm > input {
+    color: #424242; /* Darker gray for readability */
     margin: 10px 0;
-    height: 20px;
-    border: none;
-    border-bottom: 1px solid lightgray;
-    padding: 5px;
+    height: 30px;
+    border: 1px solid #cfd8dc; /* Light gray border */
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: #ffffff; /* White input background */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.settingsForm > input:focus {
+    outline: none;
+    border-color: #4a90e2; /* Highlighted blue */
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5); /* Glow effect */
 }
 
 .settingsSubmit {
-    width: 150px;
+    width: 160px;
     align-self: center;
-    border: 1px solid teal;
+    border: 1px solid #4a90e2; /* Soft blue */
     border-radius: 5px;
     color: white;
-    background-color: rgb(9, 48, 51);
-    padding: 10px;
+    background-color: #4a90e2;
+    padding: 10px 15px;
     margin-top: 20px;
     cursor: pointer;
-    font-weight: 500;
-    font-size: 18px;
-    font-family: 'fantasy';
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .settingsSubmit:hover {
     background-color: white;
-    color: teal;
-    border-color: teal;
+    color: #4a90e2;
+    border-color: #4a90e2;
 }

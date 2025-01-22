@@ -1,58 +1,68 @@
 .sidebar {
-  width: 300px; 
+  width: 320px; 
   margin: 20px;
   padding: 15px; 
-  background-color: #5687c7;
+  background-color: #ffffff; /* Light background */
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid teal;
+  border: 2px solid #79beea; /* Lighter border color */
   height: 610px;
   box-sizing: border-box; 
 }
   
-  .sidebarItem {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: linear-gradient(135deg, #dfb6e3 0%, #f4e0e2 100%);
-    padding: 20px; 
-    width: 100%; 
-    box-sizing: border-box; 
+.sidebarItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #ffe6e6 0%, #ffcccc 100%); /* Light peach to light coral */
+  padding: 20px; 
+  width: 100%; 
+  box-sizing: border-box; 
+}
+  
+.sidebarTitle {
+  margin: 0px; /* Reduced margin to decrease space at the top */
+  padding: 1px; /* Reduced padding for tighter spacing */
+  display: inline-block; /* Ensures the text stays on its own line */
+  width: 100%;
+  text-align: center;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 16px; /* Decreased font size */
+  color: #333; /* Dark color for the title */
+  font-weight: 700;
+  line-height: 22px; /* Slightly reduced line height for a more compact look */
+}
 
-  }
-  
-  .sidebarTitle {
-    margin: 10px;
-    padding: 5px;
-    width: 100%; 
-    max-width: 200px;
-    border-top: 2px solid #190606;
-    border-bottom: 2px solid #1f0606;
-    font-family: 'Vareia Round', sans-serif;
-    font-size: 16px; 
-    color: #222;
-    font-weight: 600;
-    line-height: 20px;
-    text-align: center;
-  }
-  
-  .sidebarImg {
-    width: 80%;
-    height: auto;
-    border-radius: 10px;
-    margin: 10px 0;
+.sidebarTitle b, .sidebarTitle i {
+  display: block; /* Forces the text to appear on separate lines */
+}
+
+.sidebarTitle::before,
+.sidebarTitle::after {
+  content: "";
+  display: block;
+  border-top: 2px solid #000; /* Black top border */
+  border-bottom: 2px solid #000; /* Black bottom border */
+  margin: 3px 0; /* Reduced margin to decrease space between text and borders */
+}
+
+
+
+.sidebarImg {
+  width: 80%;
+  height: auto;
+  border-radius: 10px;
+  margin: 10px 0;
 }
   
 .sidebarItem p {
-
   margin: 0; 
   padding: 10px; 
-  color: #333; 
+  color: #555; /* Darker text for readability */
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.6;
   text-align: center;
   box-sizing: border-box;
 }
-  

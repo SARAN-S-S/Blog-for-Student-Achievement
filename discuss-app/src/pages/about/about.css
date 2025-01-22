@@ -129,7 +129,7 @@ the end */
 
 /* About Page Styles */
 .about {
-  background: linear-gradient(135deg, #95b697 0%, #89b08b 50%, #95b697 100%);
+  background: linear-gradient(135deg, #f0e4d7 0%, #fae1dd 50%, #f0e4d7 100%);
   min-height: 100vh; /* Ensure it covers the full page height */
   display: flex;
   justify-content: center;
@@ -138,7 +138,7 @@ the end */
 }
 
 .aboutItem {
-  background: linear-gradient(135deg, hsl(195, 28%, 36%) 0%, #d59685 100%);
+  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
   border-radius: 10px;
   padding: 20px;
   margin: 20px auto;
@@ -149,15 +149,14 @@ the end */
 }
 
 .aboutItem:hover {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
-
 .aboutTitle {
   display: block;
-  border-top: 2px solid #020000;
-  border-bottom: 2px solid #030000;
+  border-top: 2px solid #4a4a4a;
+  border-bottom: 2px solid #4a4a4a;
   font-size: 2em;
   font-weight: bold;
   color: #333;
@@ -175,33 +174,31 @@ the end */
 .aboutItem p {
   font-size: 1.1em;
   line-height: 1.6;
-  color: #ffffff;
+  color: #333;
   text-align: justify;
   text-indent: 2em;
-  
 }
 
-
 /* Styles for mainpoints section */
-.mainpoitns {
+.mainpoints {
   margin-top: 20px;
 }
 
-.mainpoitns h1 {
+.mainpoints h1 {
   font-size: 1.8em;
-  color: #180509; /* Updated color */
+  color: #4a4a4a;
   margin-bottom: 10px;
 }
 
-.mainpoitns p {
+.mainpoints p {
   font-size: 1.1em;
-  color: #ffffff;
+  color: #333;
 }
 
 .mainpoints p:first-letter {
-  font-size: em;
+  font-size: 1.5em;
   font-weight: bold;
-  color: #333;
+  color: #4a4a4a;
 }
 
 /* Styles for subpoints section */
@@ -211,13 +208,13 @@ the end */
 }
 
 .subpoints h3, .subpoints h4 {
-  color: #020005; /* Updated color */
+  color: #4a4a4a;
   margin-bottom: 10px;
 }
 
 .subpoints p {
   font-size: 1em;
-  color: #ffffff;
+  color: #333;
   margin-bottom: 15px;
 }
 
@@ -237,10 +234,10 @@ the end */
   }
 
   .aboutItem p {
-      font-size: 2em; 
+      font-size: 1em; 
   }
 
-  .mainpoitns h1, .subpoints h3, .subpoints h4 {
-      font-size: 2.5em; 
+  .mainpoints h1, .subpoints h3, .subpoints h4 {
+      font-size: 1.2em; 
   }
 }

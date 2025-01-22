@@ -1,3 +1,4 @@
+/*
 .singlePost  {
     margin-top: 5px;
     margin-left: 10px;
@@ -78,12 +79,12 @@
     font-family: "Lora", serif;
     font-size: 28px;
     color: gray;
-    border: 2px solid #ccc; /* Increased border width */
-    border-radius: 8px; /* More rounded corners */
-    padding: 15px; /* Increased padding for better spacing */
-    width: 90%; /* Set a width to make it more responsive */
-    max-width: 900px; /* Ensure it doesn't get too wide */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Add box-shadow transition */
+    border: 2px solid #ccc; 
+    border-radius: 8px; 
+    padding: 15px; 
+    width: 90%; 
+    max-width: 900px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; 
 }
 
 .singlePostTitleInput:focus {
@@ -93,19 +94,19 @@
 }
 
 .singlePostDescInput {
-    border: 2px solid #ccc; /* Increased border width */
-    border-radius: 8px; /* More rounded corners */
+    border: 2px solid #ccc; 
+    border-radius: 8px;
     color: #666;
     font-size: 18px;
     line-height: 25px;
-    padding: 15px; /* Increased padding for better spacing */
-    width: 90%; /* Set a width to make it more responsive */
-    max-width: 900px; /* Ensure it doesn't get too wide */
-    height: 800px; /* Increased height */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Add box-shadow transition */
-    margin: 20px auto; /* Center the textarea and add space below */
-    display: block; /* Ensure the margin auto works */
-    resize: vertical; /* Allow vertical resizing only */
+    padding: 15px; 
+    width: 90%; 
+    max-width: 900px; 
+    height: 800px; 
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; 
+    margin: 20px auto;
+    display: block; 
+    resize: vertical; 
 }
 
 
@@ -133,4 +134,153 @@
     background-color: white;
     color: teal;
     border-color: teal;
+}
+
+
+*/
+
+.singlePost {
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: -10px;
+    flex: 9;
+    background: #f7f9fc; /* Light background color */
+    border-radius: 10px;
+    border: 2px solid #e0e0e0; /* Subtle border color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
+}
+
+.singlePost:hover {
+    border-color: #3498db; /* Light blue on hover */
+}
+
+.singlePostWrapper {
+    padding: 20px;
+    padding-right: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.singlePostImg {
+    width: 100%;
+    height: 300px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.siglePostTitle {
+    text-align: center;
+    margin: 10px;
+    font-family: 'Lora', serif;
+    font-size: 30px;
+    color: #2c3e50; /* Darker text color for contrast */
+}
+
+.singlePostEdit {
+    float: right;
+    font-size: 16px;
+}
+
+.singlePostIcon {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.singlePostIcon:first-child {
+    color: #2980b9; /* Subtle blue for edit */
+}
+
+.singlePostIcon:last-child {
+    color: #e74c3c; /* Red for delete */
+}
+
+.singlePostDate,
+.singlePostAuthor {
+    margin-right: 10px;
+    color: #8e44ad; /* Updated to a purple shade for better contrast */
+    font-weight: bold;
+    font-size: 14px; /* Slightly smaller font size for metadata */
+}
+
+.singlePostInfo {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    color: #7f8c8d; /* Neutral gray */
+    font-family: 'Varela Round', sans-serif;
+}
+
+.singlePostDesc {
+    color: #2c3e50; /* Darker text for better readability */
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 400;
+}
+
+.singlePostDesc:first-letter {
+    margin-left: 30px;
+}
+
+.singlePostTitleInput {
+    text-align: center;
+    margin: 10px auto;
+    font-family: "Lora", serif;
+    font-size: 28px;
+    color: #555; /* Neutral gray */
+    border: 2px solid #ddd; /* Subtle border */
+    border-radius: 8px;
+    padding: 15px;
+    width: 90%;
+    max-width: 900px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.singlePostTitleInput:focus {
+    outline: none;
+    border-color: #3498db; /* Light blue */
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+.singlePostDescInput {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    color: #555;
+    font-size: 18px;
+    line-height: 28px;
+    padding: 15px;
+    width: 90%;
+    max-width: 900px;
+    height: 800px;
+    margin: 20px auto;
+    display: block;
+    resize: vertical;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background: #fdfdfd; /* Light background for textarea */
+}
+
+.singlePostDescInput:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+.singlePostButton {
+    width: 120px;
+    border: 1px solid #3498db;
+    background-color: #3498db; /* Light blue */
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.singlePostButton:hover {
+    background-color: white;
+    color: #3498db;
+    border-color: #3498db;
 }

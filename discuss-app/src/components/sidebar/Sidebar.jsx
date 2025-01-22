@@ -1,19 +1,22 @@
-import { Link } from "react-router-dom"
-import "./sidebar.css"
+import { Link } from "react-router-dom";
+import "./sidebar.css";
 
 export default function Sidebar() {
   return (
     <div className="sidebar">
-        <div className="sidebarItem">
-        <Link className="link" to = "/about" >
-          <span className="sidebarTitle"><b><i>ABOUT DISCUSS</i></b></span>
+      <div className="sidebarItem">
+        <Link className="link" to="/about">
+          <span className="sidebarTitle"><b><i>ABOUT STUDENT ACHIEVEMENTS</i></b></span>
         </Link>
-            <img className="sidebarImg"
-            src="\side.jpg"
-            alt=""
-            />
-            <p>CareerTalk offers a comprehensive resource for freshers and juniors preparing for job interviews. Our platform provides detailed insights into interview processes, common questions, and real-world experiences from professionals. We also invite individuals to share their own interview experiences, contributing to a valuable knowledge base for others. Explore our discussions and expert advice to gain confidence and excel in your career journey. Join us in enhancing our collective understanding and preparation strategies.</p>
-        </div>
+        <img
+          className="sidebarImg"
+          src="\achievement.jpg"
+          alt=""
+        />
+        <p>
+          Welcome to our Student Achievement Blog, a space dedicated to celebrating the incredible accomplishments of students. Here, we showcase inspiring stories, milestones, and achievements that highlight their hard work and determination. Whether it's academic excellence, sports victories, or community contributions, this blog is a testament to the limitless potential of students. Explore these inspiring stories and join us in applauding the efforts and successes of young achievers.
+        </p>
+      </div>
     </div>
-  )
+  );
 }

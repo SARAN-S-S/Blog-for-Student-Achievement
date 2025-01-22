@@ -1,4 +1,4 @@
-/* contact.css */
+/* contact.css 
 .contactContainer {
     display: flex;
     flex-direction: column;
@@ -78,4 +78,85 @@
       margin: 10px 0;
     }
   }
-  
+
+*/
+
+.contactContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  background: linear-gradient(135deg, #e7f3fe 0%, #d0e6f5 50%, #cde2ff 100%); /* Light blue gradient */
+  height: 100vh; /* Increased page height */
+}
+
+.contactCard {
+  background: linear-gradient(135deg, #fff3e0 0%, #ffccbc 100%); /* Warm light orange gradient */
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  width: 80%;
+  max-width: 400px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.contactCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.contactName {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #4e342e; /* Dark brown */
+  margin-bottom: 10px;
+}
+
+.contactDepartment {
+  font-size: 1.2em;
+  color: #6d4c41; /* Medium brown */
+  margin-bottom: 10px;
+}
+
+.contactEmail {
+  display: block;
+  font-size: 1em;
+  color: #bf360c; /* Reddish brown */
+  background-color: #ffe0b2; /* Soft peach */
+  padding: 5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.contactEmail:hover {
+  background-color: #524946; /* Slightly darker peach */
+  color: white;
+}
+
+.contactLink {
+  font-size: 1em;
+  color: #ffffff;
+  background-color: #d84315; /* Deep orange */
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.contactLink:hover {
+  background-color: #f1f1f1; /* Darker orange */
+  color: black;
+}
+
+@media (max-width: 600px) {
+  .contactCard {
+      width: 100%;
+      margin: 10px 0;
+  }
+}

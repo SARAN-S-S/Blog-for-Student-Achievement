@@ -1,5 +1,27 @@
+/*
 .home  {
     display: flex;
     background: linear-gradient(135deg, #d4d5e1 0%, #ececec 50%,#d4d5e1 0%);
 
 }
+
+*/
+
+
+.home {
+    display: flex;
+    justify-content: space-between;
+    background: #f8f9fa;  /* Light background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    .home {
+      flex-direction: column;
+      padding: 15px;
+    }
+  }
+  
+  

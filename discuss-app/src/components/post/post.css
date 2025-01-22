@@ -2,8 +2,8 @@
     width: 385px;
     margin: 0px 25px 40px 25px;
     padding: 20px; /* Added padding for space inside the card */
-    background-color: #f9f9f9; /* Example background color */
-    border: 1px solid #ddd; /* Example border */
+    background-color: #e6f7ff; /* Example background color */
+    border: 1px solid #b49d9d; /* Example border */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Example box shadow */
   }
