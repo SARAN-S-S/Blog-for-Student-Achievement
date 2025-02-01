@@ -1,158 +1,18 @@
-/*
-.singlePost  {
-    margin-top: 5px;
-    margin-left: 10px;
-    margin-right: -10px;
-    flex: 9;
-    background: linear-gradient(135deg, #dcc8f9 0%, #379f98 50%, #aa979d 100%);
-    border-radius: 10px;
-}
-
-.singlePostWrapper  {
-    padding: 20px;
-    padding-right: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.singlePostImg {
-    width: 100%;
-    height: 300px;
-    border-radius: 5px;
-    object-fit: cover;
-}
-
-.siglePostTitle {
-    text-align: center;
-    margin: 10px;
-    font-family: 'Lora', serif;
-    font-size: 30px;
-}
-
-.singlePostEdit {
-    float: right;
-    font-size: 16px;
-}
-
-.singlePostIcon {
-    margin-left: 10px;
-    cursor: pointer;
-}
-
-.singlePostIcon:first-child {
-    color: black;
-}
-
-.singlePostIcon:last-child {
-    color: rgb(218, 45, 15);
-}
-
-.singlePostDate, .singlePostAuthor {
-    margin-right: 10px;
-    color: red;
-}
-
-.singlePostInfo {
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 16px;
-    color: #b39656;
-    font-family: 'Varela Round', sans-serif;
-}
-
-.singlePostDesc  {
-    color: black;
-    font-size: 18px;
-    line-height: 25px;
-    font-weight: 400;
-
-}
-
-.singlePostDesc:first-letter {
-    margin-left: 30px;
-}
-
-.singlePostTitleInput {
-    text-align: center;
-    margin: 10px auto;
-    font-family: "Lora", serif;
-    font-size: 28px;
-    color: gray;
-    border: 2px solid #ccc; 
-    border-radius: 8px; 
-    padding: 15px; 
-    width: 90%; 
-    max-width: 900px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; 
-}
-
-.singlePostTitleInput:focus {
-    outline: none;
-    border-color: teal;
-    box-shadow: 0 0 5px rgba(0, 128, 128, 0.5); 
-}
-
-.singlePostDescInput {
-    border: 2px solid #ccc; 
-    border-radius: 8px;
-    color: #666;
-    font-size: 18px;
-    line-height: 25px;
-    padding: 15px; 
-    width: 90%; 
-    max-width: 900px; 
-    height: 800px; 
-    transition: border-color 0.3s ease, box-shadow 0.3s ease; 
-    margin: 20px auto;
-    display: block; 
-    resize: vertical; 
-}
-
-
-.singlePostDescInput:focus {
-    outline: none;
-    border-color: teal;
-    box-shadow: 0 0 5px rgba(0, 128, 128, 0.5); 
-}
-
-
-.singlePostButton {
-    width: 120px;
-    border: 1px solid teal;
-    background-color: teal;
-    padding: 10px 20px;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    align-self: flex-end;
-    margin-top: 20px;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.singlePostButton:hover {
-    background-color: white;
-    color: teal;
-    border-color: teal;
-}
-
-
-*/
-
+/* General Styles */
 .singlePost {
     margin-top: 5px;
     margin-left: 10px;
     margin-right: -10px;
     flex: 9;
-    background: #f7f9fc; /* Light background color */
+    background: #f7f9fc;
     border-radius: 10px;
-    border: 2px solid #e0e0e0; /* Subtle border color */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    transition: border-color 0.3s ease; /* Smooth transition for border color */
+    border: 2px solid #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
 }
 
 .singlePost:hover {
-    border-color: #3498db; /* Light blue on hover */
+    border-color: #3498db;
 }
 
 .singlePostWrapper {
@@ -174,7 +34,7 @@
     margin: 10px;
     font-family: 'Lora', serif;
     font-size: 30px;
-    color: #2c3e50; /* Darker text color for contrast */
+    color: #2c3e50;
 }
 
 .singlePostEdit {
@@ -188,19 +48,19 @@
 }
 
 .singlePostIcon:first-child {
-    color: #2980b9; /* Subtle blue for edit */
+    color: #2980b9;
 }
 
 .singlePostIcon:last-child {
-    color: #e74c3c; /* Red for delete */
+    color: #e74c3c;
 }
 
 .singlePostDate,
 .singlePostAuthor {
     margin-right: 10px;
-    color: #8e44ad; /* Updated to a purple shade for better contrast */
+    color: #8e44ad;
     font-weight: bold;
-    font-size: 14px; /* Slightly smaller font size for metadata */
+    font-size: 14px;
 }
 
 .singlePostInfo {
@@ -208,12 +68,12 @@
     display: flex;
     justify-content: space-between;
     font-size: 16px;
-    color: #7f8c8d; /* Neutral gray */
+    color: #7f8c8d;
     font-family: 'Varela Round', sans-serif;
 }
 
 .singlePostDesc {
-    color: #2c3e50; /* Darker text for better readability */
+    color: #2c3e50;
     font-size: 18px;
     line-height: 28px;
     font-weight: 400;
@@ -228,8 +88,8 @@
     margin: 10px auto;
     font-family: "Lora", serif;
     font-size: 28px;
-    color: #555; /* Neutral gray */
-    border: 2px solid #ddd; /* Subtle border */
+    color: #555;
+    border: 2px solid #ddd;
     border-radius: 8px;
     padding: 15px;
     width: 90%;
@@ -239,7 +99,7 @@
 
 .singlePostTitleInput:focus {
     outline: none;
-    border-color: #3498db; /* Light blue */
+    border-color: #3498db;
     box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
 }
 
@@ -257,7 +117,7 @@
     display: block;
     resize: vertical;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    background: #fdfdfd; /* Light background for textarea */
+    background: #fdfdfd;
 }
 
 .singlePostDescInput:focus {
@@ -269,7 +129,7 @@
 .singlePostButton {
     width: 120px;
     border: 1px solid #3498db;
-    background-color: #3498db; /* Light blue */
+    background-color: #3498db;
     padding: 10px 20px;
     color: white;
     border-radius: 5px;
@@ -283,4 +143,267 @@
     background-color: white;
     color: #3498db;
     border-color: #3498db;
+}
+
+
+/* Comments Section */
+.comments {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.comments h3 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.comment {
+    border: 2px solid #3498db; /* Blue border for parent comments */
+    margin-bottom: 10px;
+    padding: 15px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reply {
+    border: 2px solid #27ae60; /* Green border for replies */
+    margin-left: 30px;
+    margin-top: 5px;
+    padding: 10px;
+    background-color: #f0f8ff; /* Light blue background for replies */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.commentInfo {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+    color: #777;
+}
+
+.comment p {
+    margin-bottom: 10px;
+    color: #444;
+    font-size: 1em;
+}
+
+.reply .commentInfo {
+    margin-bottom: 5px;
+}
+
+.reply p {
+    font-size: 0.95em;
+}
+
+
+.comment-controls, .reply-control {
+    display: flex;
+    align-items: center;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+    opacity: 0;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.comment:hover .comment-controls, .reply:hover .comment-controls,
+.comment:hover .reply-control, .reply:hover .reply-control {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.commentIcon {
+    margin: 0 5px;
+    font-size: 1.1em;
+    transition: color 0.2s, transform 0.2s;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.commentIcon:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.edit-icon {
+    color: #27ae60; /* Green for edit */
+}
+
+.delete-icon {
+    color: #e74c3c; /* Red for delete */
+}
+
+.reply-icon {
+    color: #2980b9; /* Blue for reply */
+}
+
+
+.reply-form {
+    margin-top: 10px;
+    padding-left: 0;
+}
+
+.reply-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    resize: vertical;
+    font-size: 0.95em;
+}
+
+/* Button Styles */
+.reply-form button,
+.commentForm button {
+    background-color: #2980b9; /* Blue for submit */
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 5px;
+}
+
+.reply-form button:hover,
+.commentForm button:hover {
+    background-color: #3498db; /* Lighter blue on hover */
+    transform: scale(1.05);
+}
+
+.reply-form button:active,
+.commentForm button:active {
+    transform: scale(0.95);
+}
+
+.update {
+    background-color: #f39c12; /* Orange for update */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.update:hover {
+    background-color: #e67e22; /* Darker orange on hover */
+    transform: scale(1.05);
+}
+
+.update:active {
+    transform: scale(0.95);
+}
+
+.cancel {
+    background-color: #95a5a6; /* Grey for cancel */
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.85em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cancel:hover {
+    background-color: #7f8c8d; /* Darker grey on hover */
+    transform: scale(1.05);
+}
+
+.cancel:active {
+    transform: scale(0.95);
+}
+
+.commentForm textarea,
+.reply-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    resize: vertical;
+    font-size: 1em;
+}
+
+
+/* Responsive Design adjustments */
+@media (max-width: 768px) {
+    .singlePostWrapper {
+        padding: 10px;
+    }
+
+    .siglePostTitle {
+        font-size: 24px;
+    }
+
+    .singlePostDesc {
+        font-size: 16px;
+    }
+
+    .comment {
+        padding: 10px;
+    }
+
+    .reply {
+        padding: 8px;
+        margin-left: 20px;
+    }
+
+    .commentInfo {
+        font-size: 0.8em;
+    }
+
+    .comment p {
+        font-size: 0.9em;
+    }
+
+    .comment-controls, .reply-control {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 5px;
+    }
+    .commentIcon {
+        margin: 5px 0;
+        font-size: 1em;
+    }
+
+    .reply-form {
+        padding-left: 0;
+    }
+
+    .commentForm textarea,
+    .reply-form textarea {
+        font-size: 0.9em;
+    }
+
+    .commentForm button,
+    .reply-form button,
+    .update,
+    .cancel {
+        font-size: 0.9em;
+        padding: 6px 12px;
+        margin: 5px 0;
+    }
 }

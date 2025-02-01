@@ -7,12 +7,14 @@ const userRoute = require("./routes/users");
 const postRoute = require("./routes/posts"); 
 const multer = require("multer"); 
 const path = require("path");
+const commentRoute = require("./routes/comments");
 var cors = require('cors')
 
 
 
 dotenv.config();
 app.use(express.json());
+app.use(cors()); 
 
 app.use("/images", express.static(path.join(__dirname, "/images")));
 
@@ -44,6 +46,7 @@ mongoose
     app.use("/api/auth", authRoute);
     app.use("/api/users", userRoute);
     app.use("/api/posts", postRoute);
+    app.use("/api/comments", commentRoute);
 
 app.listen("7733" || process.env.PORT, () => {
     console.log("Backend is running.");
