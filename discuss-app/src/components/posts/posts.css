@@ -9,4 +9,17 @@
 }
 
 
-  
+@media (max-width: 768px) { /* Tablet and smaller */
+    .posts {
+        flex: 1; /* Take full width */
+        margin: 10px; /* Reduced margin */
+        justify-content: center; /* Center the posts */
+
+    }
+}
+
+@media (max-width: 480px) { /* Mobile */
+    .posts {
+        margin: 5px; /* Further reduced margin */
+    }
+}

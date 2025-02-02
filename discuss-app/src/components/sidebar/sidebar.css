@@ -1,68 +1,195 @@
+/* Wrapper for Sidebar and Categories */
+.sidebarWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Sidebar Container */
 .sidebar {
-  width: 320px; 
+  width: 340px; /* Increased width */
   margin: 20px;
-  padding: 15px; 
-  background-color: #ffffff; /* Light background */
+  padding: 15px;
+  background-color: #b4e3ea; /* Light background */
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px solid #79beea; /* Lighter border color */
-  height: 610px;
-  box-sizing: border-box; 
+  border: 3px solid #004080; /* Darker outer border */
+  height: 480px;
+  box-sizing: border-box;
 }
-  
+
+/* About Section */
 .sidebarItem {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(135deg, #ffe6e6 0%, #ffcccc 100%); /* Light peach to light coral */
-  padding: 20px; 
-  width: 100%; 
-  box-sizing: border-box; 
+  background: linear-gradient(135deg, #ffe6e6 0%, #ffcccc 100%); /* Light peach to coral */
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  border: 2px solid #ff6666; /* Border for About section */
 }
-  
+
+/* Sidebar Title */
 .sidebarTitle {
-  margin: 0px; /* Reduced margin to decrease space at the top */
-  padding: 1px; /* Reduced padding for tighter spacing */
-  display: inline-block; /* Ensures the text stays on its own line */
+  margin: 0px;
+  padding: 1px;
+  display: inline-block;
   width: 100%;
   text-align: center;
   font-family: 'Varela Round', sans-serif;
-  font-size: 16px; /* Decreased font size */
-  color: #333; /* Dark color for the title */
+  font-size: 16px;
+  color: #333;
   font-weight: 700;
-  line-height: 22px; /* Slightly reduced line height for a more compact look */
+  line-height: 22px;
 }
 
 .sidebarTitle b, .sidebarTitle i {
-  display: block; /* Forces the text to appear on separate lines */
+  display: block;
 }
 
 .sidebarTitle::before,
 .sidebarTitle::after {
   content: "";
   display: block;
-  border-top: 2px solid #000; /* Black top border */
-  border-bottom: 2px solid #000; /* Black bottom border */
-  margin: 3px 0; /* Reduced margin to decrease space between text and borders */
+  border-top: 2px solid #000;
+  border-bottom: 2px solid #000;
+  margin: 3px 0;
 }
 
-
-
+/* Sidebar Image */
 .sidebarImg {
   width: 80%;
   height: auto;
   border-radius: 10px;
   margin: 10px 0;
 }
-  
+
+/* Sidebar Paragraph */
 .sidebarItem p {
-  margin: 0; 
-  padding: 10px; 
-  color: #555; /* Darker text for readability */
+  margin: 0;
+  padding: 10px;
+  color: #555;
   font-size: 14px;
   line-height: 1.6;
   text-align: center;
   box-sizing: border-box;
+}
+
+/* Category Container (Now Separate from Sidebar) */
+.categoryContainer {
+  width: 310px; /* Increased width */
+  margin-top: 10px;
+  padding: 15px;
+  background: linear-gradient(135deg, #e6f7ff 0%, #b3e0ff 100%); /* Light blue gradient */
+  border-radius: 10px;
+  border: 2px solid #0099cc; /* Category section border */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out; /* Transition for scaling */
+}
+
+/* Category Container Hover Effect */
+.categoryContainer:hover {
+  transform: scale(1.03); /* Slightly enlarge the entire container on hover */
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Add a stronger shadow effect */
+}
+
+/* Category Styling */
+.categoryItem {
+  background: #f2f2f2;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  border: 2px solid transparent;
+}
+
+/* Category Hover Effect */
+.categoryItem:hover {
+  background: #007acc;
+  color: white;
+  border: 2px solid #005599;
+  transform: scale(1.05);
+}
+
+
+@media (max-width: 768px) { /* Adjust breakpoint as needed */
+  .sidebarWrapper {
+      flex-direction: column; /* Stack sidebar and categories vertically */
+      align-items: center; /* Center horizontally */
+  }
+
+  .sidebar {
+      width: 90%; /* Make sidebar occupy most of the screen width */
+      margin: 10px 0; /* Adjust margin */
+      height: auto; /* Allow height to adjust to content */
+  }
+
+  .sidebarItem {
+      padding: 15px; /* Adjust padding */
+  }
+
+  .sidebarTitle {
+      font-size: 1.2rem; /* Slightly reduce title size */
+  }
+
+  .sidebarImg {
+      width: 90%; /* Make image responsive */
+  }
+
+  .sidebarItem p {
+      font-size: 1rem; /* Adjust font size */
+      text-align: justify; /* Justify text on smaller screens */
+  }
+
+  .categoryContainer {
+      width: 90%; /* Make category container responsive */
+      margin: 10px 0; /* Adjust margin */
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Reduce shadow */
+  }
+
+  .categoryContainer:hover {
+      transform: scale(1.01); /* Reduce scale on hover */
+      box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.15); /* Reduce shadow on hover */
+  }
+
+  .categoryItem {
+      font-size: 1rem; /* Adjust font size */
+      padding: 10px; /* Adjust padding */
+  }
+
+  .categoryItem:hover {
+      transform: scale(1.02); /* Reduce scale on hover */
+  }
+}
+
+
+@media (max-width: 480px) { /* Even smaller screens */
+  .sidebar {
+      width: 95%; /* Take up almost full width */
+  }
+
+  .sidebarTitle {
+      font-size: 1.1rem; /* Further reduce title size */
+  }
+
+  .sidebarItem p {
+      font-size: 0.9rem; /* Reduce font size further */
+  }
+
+  .categoryContainer {
+      width: 95%; /* Take up almost full width */
+  }
+
+  .categoryItem {
+      font-size: 0.9rem; /* Reduce font size further */
+  }
 }

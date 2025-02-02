@@ -4,15 +4,15 @@
     margin-left: 10px;
     margin-right: -10px;
     flex: 9;
-    background: #f7f9fc;
+    background: #c7edf9; /* Light blue background */
     border-radius: 10px;
-    border: 2px solid #e0e0e0;
+    border: 2px solid #a0c0ff; /* Slightly darker blue border */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease;
 }
 
 .singlePost:hover {
-    border-color: #3498db;
+    border-color: #2b7db3; /* Even darker blue on hover */
 }
 
 .singlePostWrapper {
@@ -35,6 +35,7 @@
     font-family: 'Lora', serif;
     font-size: 30px;
     color: #2c3e50;
+    text-transform: uppercase; /* Title in uppercase */
 }
 
 .singlePostEdit {
@@ -58,9 +59,9 @@
 .singlePostDate,
 .singlePostAuthor {
     margin-right: 10px;
-    color: #8e44ad;
+    color: #72099f;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .singlePostInfo {
@@ -74,13 +75,16 @@
 
 .singlePostDesc {
     color: #2c3e50;
-    font-size: 18px;
-    line-height: 28px;
+    font-size: 18px; /* Regular font size */
+    line-height: 28px; /* Regular line height */
     font-weight: 400;
 }
 
 .singlePostDesc:first-letter {
     margin-left: 30px;
+    font-weight: bold; /* First letter bold */
+    font-size: 1.8em; /* Larger first letter */
+    text-transform: uppercase; /* Uppercase first letter */
 }
 
 .singlePostTitleInput {
@@ -112,7 +116,7 @@
     padding: 15px;
     width: 90%;
     max-width: 900px;
-    height: 800px;
+    height: 200px; /* Adjusted Height */
     margin: 20px auto;
     display: block;
     resize: vertical;
@@ -149,10 +153,10 @@
 /* Comments Section */
 .comments {
     margin-top: 20px;
-    border: 1px solid #ddd;
+    border: 1.5px solid #935828; /* Warm orange border */
     padding: 15px;
     border-radius: 8px;
-    background-color: #f9f9f9;
+    background-color: #faf1e8; /* Soft peach background */
 }
 
 .comments h3 {
@@ -161,26 +165,28 @@
 }
 
 .comment {
-    border: 2px solid #3498db; /* Blue border for parent comments */
+    border: 2px solid #6fa8dc; /* Soft blue border */
     margin-bottom: 10px;
     padding: 15px;
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: #ffffff;
+    background-color: #e3f2fd; /* Very light blue background */
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+
 .reply {
-    border: 2px solid #27ae60; /* Green border for replies */
+    border: 2px solid #71a195; /* Dark teal border */
     margin-left: 30px;
     margin-top: 5px;
     padding: 10px;
-    background-color: #f0f8ff; /* Light blue background for replies */
+    background-color: #faf0ef; /* Soft muted green background */
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 
 .commentInfo {
     display: flex;
@@ -256,20 +262,21 @@
     padding-left: 0;
 }
 
-.reply-form textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
+.reply-form textarea, .commentForm textarea {
+    width: calc(100% - 70px); /* Slightly smaller width */
+    padding: 8px; /* Slightly smaller padding */
+    border: 1.5px solid #7eb296;
     border-radius: 5px;
     margin-bottom: 5px;
     resize: vertical;
     font-size: 0.95em;
 }
 
+
 /* Button Styles */
 .reply-form button,
 .commentForm button {
-    background-color: #2980b9; /* Blue for submit */
+    background-color: #27ae60; /* Green */
     border: none;
     color: white;
     padding: 8px 16px;
@@ -281,11 +288,16 @@
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     margin-top: 5px;
+    margin-right: 5px; /* Space between buttons */
+}
+
+.reply-form button {
+    padding: 6px 13px;
 }
 
 .reply-form button:hover,
 .commentForm button:hover {
-    background-color: #3498db; /* Lighter blue on hover */
+    background-color: #2ecc71; /* Lighter green on hover */
     transform: scale(1.05);
 }
 
@@ -295,11 +307,12 @@
 }
 
 .update {
-    background-color: #f39c12; /* Orange for update */
+    background-color: #2980b9; /* Blue */
     border: none;
     color: white;
-    padding: 5px 10px;
-    margin-right: 5px;
+    padding: 6px 13px;
+    margin-left: 5px;
+    margin-right: 5px; /* Space between buttons */
     border-radius: 3px;
     cursor: pointer;
     font-size: 0.85em;
@@ -307,7 +320,7 @@
 }
 
 .update:hover {
-    background-color: #e67e22; /* Darker orange on hover */
+    background-color: #3498db; /* Lighter blue on hover */
     transform: scale(1.05);
 }
 
@@ -316,11 +329,11 @@
 }
 
 .cancel {
-    background-color: #95a5a6; /* Grey for cancel */
+    background-color: #e74c3c; /* Red */
     border: none;
     color: white;
-    padding: 5px 10px;
-    margin-right: 5px;
+    padding: 6px 13px;
+    margin-right: 5px; /* Space between buttons */
     border-radius: 3px;
     cursor: pointer;
     font-size: 0.85em;
@@ -328,7 +341,7 @@
 }
 
 .cancel:hover {
-    background-color: #7f8c8d; /* Darker grey on hover */
+    background-color: #c0392b; /* Darker red on hover */
     transform: scale(1.05);
 }
 
@@ -336,16 +349,87 @@
     transform: scale(0.95);
 }
 
-.commentForm textarea,
-.reply-form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    resize: vertical;
-    font-size: 1em;
+
+.postTags {
+    margin-top: 10px;
 }
+
+.tag {
+    display: inline-block;
+    background-color: #3498db; /* Blue tag background */
+    color: white;
+    padding: 6px 12px; /* Adjusted padding */
+    border-radius: 8px; /* More rounded corners */
+    margin-right: 8px; /* Increased spacing */
+    margin-bottom: 5px; /* Add vertical margin for wrapping */
+    font-size: 15px; /* Slightly larger font size */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transitions */
+}
+
+.tag:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+    transform: scale(1.05); /* Scale up slightly on hover */
+}
+
+.writeFormGroup {
+    display: flex;
+    gap: 10px;
+    border: 2px solid #410707; /* Initial border */
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
+    padding: 5px; /* Add some padding around the selects */
+    border-radius: 5px; /* Rounded corners for the group*/
+}
+
+.writeFormGroup:hover {
+    border-color: #007bff; /* Change border color on hover */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Styles for the individual selects inside the group */
+.writeInput {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #fff;
+    /* Remove cursor pointer from the selects themselves */
+    cursor: default; /* Or 'text' if you want an I-beam cursor */
+    flex: 1; /* Allow selects to grow and fill available space */
+}
+
+.writeInput:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+  
+  /* Optional: Style the select dropdown arrow */
+  .writeInput::-ms-expand {
+    display: none; /* Hide default arrow for IE/Edge */
+  }
+  
+  .writeInput::after {  /* Create custom arrow */
+    content: '\279C'; /* Downwards arrow character */
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    pointer-events: none; /* Prevent clicking on the arrow */
+    font-size: 14px;
+    color: #555;
+  }
+  
+  /* Optional: Style the select when it's open */
+  .writeInput:hover::after {
+      color: #007bff;
+  }
+  
+  .writeInput:focus::after {
+      color: #007bff;
+  }
 
 
 /* Responsive Design adjustments */
@@ -384,6 +468,7 @@
         align-items: flex-start;
         margin-top: 5px;
     }
+
     .commentIcon {
         margin: 5px 0;
         font-size: 1em;
@@ -405,5 +490,23 @@
         font-size: 0.9em;
         padding: 6px 12px;
         margin: 5px 0;
+    }
+
+    .tag { /* Responsive styles for tags */
+        font-size: 14px;
+        padding: 5px 10px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
+
+    .writeFormGroup {
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px; /* Adjust padding for smaller screens */
+    }
+    
+    .writeInput {
+        width: 100%;
+        font-size: 14px; /* Adjust font size for smaller screens */
     }
 }

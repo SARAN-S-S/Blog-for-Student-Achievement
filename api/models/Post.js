@@ -17,7 +17,11 @@ const PostSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-    }
+    },
+    tags: {
+      type: [String], // Array of strings for event type and student year
+      default: [],
+    },
 }, 
     { timestamps: true }
 );

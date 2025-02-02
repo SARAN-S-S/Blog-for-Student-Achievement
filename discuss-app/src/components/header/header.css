@@ -1,6 +1,5 @@
-.header  {
+.header {
     margin-top: 30px;
-   
 }
 
 .headerTitle {
@@ -19,7 +18,6 @@
     margin-bottom: -15px;
     z-index: 1;
     margin-top: 10px;
-    
 }
 
 .headerTitleLg {
@@ -33,10 +31,44 @@
 }
 
 .headerImg {
-  width: 100%;
-  height: 450px;
-  margin-top: 40px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 20px;
+    width: 100%;
+    height: 450px;
+    margin-top: 40px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+    .headerTitleSm {
+        font-size: 1.5em;
+        margin-bottom: -10px;
+    }
+
+    .headerTitleLg {
+        font-size: 50px;
+        top: 15%;
+    }
+
+    .headerImg {
+        height: 300px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .headerTitleSm {
+        font-size: 1.2em;
+        margin-bottom: -8px;
+    }
+
+    .headerTitleLg {
+        font-size: 30px;
+        top: 10%;
+    }
+
+    .headerImg {
+        height: 200px;
+        margin-top: 15px;
+    }
 }

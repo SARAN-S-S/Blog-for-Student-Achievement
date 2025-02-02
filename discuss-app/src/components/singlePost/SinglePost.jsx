@@ -23,6 +23,12 @@ export default function SinglePost() {
     const [replyingToComment, setReplyingToComment] = useState(null);
     const [replyText, setReplyText] = useState("");
 
+    const [category, setCategory] = useState("");
+    const [year, setYear] = useState("");
+    const [tags, setTags] = useState([]);
+    
+    
+
     useEffect(() => {
         const getPost = async () => {
             try {
@@ -30,10 +36,15 @@ export default function SinglePost() {
                 setPost(res.data);
                 setTitle(res.data.title);
                 setDesc(res.data.desc);
+                
+                // Initialize all states from the fetched data
+                setCategory(res.data.category || "");
+                setYear(res.data.year || "");
+                setTags(res.data.tags || []);
+
 
                 const commentsRes = await axios.get(`/api/comments/${res.data._id}`);
                 setComments(commentsRes.data);
-
             } catch (err) {
                 console.error("Error fetching post or comments:", err);
             }
@@ -52,16 +63,26 @@ export default function SinglePost() {
 
     const handleUpdate = async () => {
         try {
-            await axios.put(`/api/posts/${post._id}`, {
+            const res = await axios.put(`/api/posts/${post._id}`, {
                 username: user.username,
                 title,
                 desc,
+                category,
+                year,
+                tags,
             });
+            setPost(res.data);
             setUpdateMode(false);
+
+            // Update initial values *after* successful update
+            setCategory(category);
+            setYear(year);
+
         } catch (err) {
             console.error("Error updating post:", err);
         }
     };
+
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault();
@@ -289,17 +310,37 @@ export default function SinglePost() {
         <div className="singlePost">
             <div className="singlePostWrapper">
                 {post.photo && (
-                    <img className="singlePostImg" src={PF + post.photo} alt="" />
+                    <img className="singlePostImg" src={PF + post.photo} alt=""/>
                 )}
 
                 {updateMode ? (
-                    <input
-                        type="text"
-                        value={title}
-                        className="singlePostTitleInput"
-                        autoFocus
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
+                    <>
+                        <input
+                            type="text"
+                            value={title}
+                            className="singlePostTitleInput"
+                            autoFocus
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
+
+                        <div className="writeFormGroup">
+                            <select className="writeInput" value={category} onChange={(e) => setCategory(e.target.value)} required>
+                                
+                                <option value="Project">Project</option>
+                                <option value="Patent">Patent</option>
+                                <option value="Paper">Paper</option>
+                                <option value="Journal">Journal</option>
+                                <option value="Competition">Competition</option>
+                            </select>
+
+                            <select className="writeInput" value={year} onChange={(e) => setYear(e.target.value)} required>
+                                <option value="First Year">First Year</option>
+                                <option value="Second Year">Second Year</option>
+                                <option value="Third Year">Third Year</option>
+                                <option value="Final Year">Final Year</option>
+                            </select>
+                        </div>
+                    </>
                 ) : (
                     <h1 className="siglePostTitle">
                         {title}
@@ -317,6 +358,13 @@ export default function SinglePost() {
                         )}
                     </h1>
                 )}
+
+                <div className="postTags">
+                <strong>Tags:</strong>
+                {post.tags && post.tags.map((tag, index) => (
+                    <span key={index} className="tag">{tag}</span>
+                ))}
+                </div>
 
                 <div className="singlePostInfo">
                     <span className="singlePostAuthor">

@@ -226,18 +226,83 @@ the end */
   margin-top: 20px;
 }
 
-/* Styles for smaller screens */
-@media (max-width: 600px) {
+
+@media (max-width: 768px) {
   .aboutItem {
-      padding: 15px; 
-      margin: 10px; 
+      padding: 15px;
+      margin: 10px;
+  }
+
+  .aboutTitle {
+      font-size: 1.5em;
+  }
+
+  .aboutImg {
+      margin-bottom: 15px;
   }
 
   .aboutItem p {
-      font-size: 1em; 
+      font-size: 1em;
+      text-indent: 1.5em;
   }
 
-  .mainpoints h1, .subpoints h3, .subpoints h4 {
-      font-size: 1.2em; 
+  .mainpoints h1 {
+      font-size: 1.5em;
+  }
+
+  .mainpoints p {
+      font-size: 1em;
+  }
+
+  .mainpoints p:first-letter {
+      font-size: 1.3em;
+  }
+
+  .subpoints h3, .subpoints h4 {
+      font-size: 1.2em;
+  }
+
+  .subpoints p {
+      font-size: 0.9em;
+  }
+}
+
+@media (max-width: 480px) {
+  .aboutItem {
+      padding: 10px;
+      margin: 5px;
+  }
+
+  .aboutTitle {
+      font-size: 1.2em;
+  }
+
+  .aboutImg {
+      margin-bottom: 10px;
+  }
+
+  .aboutItem p {
+      font-size: 0.9em;
+      text-indent: 1em;
+  }
+
+  .mainpoints h1 {
+      font-size: 1.3em;
+  }
+
+  .mainpoints p {
+      font-size: 0.9em;
+  }
+
+  .mainpoints p:first-letter {
+      font-size: 1.2em;
+  }
+
+  .subpoints h3, .subpoints h4 {
+      font-size: 1.1em;
+  }
+
+  .subpoints p {
+      font-size: 0.8em;
   }
 }

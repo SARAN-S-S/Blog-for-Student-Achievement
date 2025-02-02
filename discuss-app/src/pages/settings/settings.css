@@ -133,3 +133,93 @@
     color: #4a90e2;
     border-color: #4a90e2;
 }
+
+
+@media (max-width: 768px) {
+    .settings {
+        flex-direction: column;
+    }
+
+    .settingsWrapper {
+        flex: 1;
+        padding: 15px;
+        margin: 10px; /* Add some margin */
+        box-shadow: none; /* Remove or reduce shadow */
+        border-radius: 0; /* Remove or reduce border radius */
+    }
+
+    .settingsTitle {
+        flex-direction: column; /* Stack title and delete button */
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .settingsUpdateTitle {
+        font-size: 24px;
+        margin-bottom: 10px; /* Add space between title and button */
+    }
+
+    .settingsDeleteTitle {
+        width: 100%; /* Make delete button full width */
+        margin-top: 10px; /* Add space above button */
+        font-size: 14px;
+        padding: 8px; /* Adjust padding */
+    }
+
+    .settingsForm {
+        padding: 15px;
+    }
+
+    .settingsPP {
+        flex-direction: column; /* Stack image and icon */
+        align-items: center;
+    }
+
+    .settingsImg {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+
+    .settingsPPIcon {
+        margin-left: 0; /* Remove left margin */
+    }
+
+    .settingsForm > label {
+        font-size: 16px;
+        margin-top: 15px;
+    }
+
+    .settingsForm > input {
+        font-size: 14px; /* Adjust input font size */
+        height: 25px;
+        padding: 5px; /* Reduce padding */
+    }
+
+    .settingsSubmit {
+        width: 100%;
+        font-size: 14px;
+        padding: 8px; /* Adjust padding */
+    }
+}
+
+@media (max-width: 480px) {
+    .settingsWrapper {
+        padding: 10px;
+        margin: 5px; /* Further reduce margin */
+    }
+    .settingsUpdateTitle {
+        font-size: 20px;
+    }
+    .settingsForm > label {
+        font-size: 14px;
+    }
+
+    .settingsForm > input {
+        font-size: 12px;
+    }
+
+    .settingsSubmit {
+        font-size: 12px;
+    }
+}

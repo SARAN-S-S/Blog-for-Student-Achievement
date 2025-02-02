@@ -16,25 +16,47 @@ router.post("/", async (req, res) => {
 
 //UPDATE POST
 router.put("/:id", async (req, res) => {
-    try  {
+    try {
         const post = await Post.findById(req.params.id);
-        if(post.username === req.body.username)  {
-            try  {
-                const updatedPost = await Post.findByIdAndUpdate(req.params.id, {
-                    $set: req.body
-                }, { new: true });
+        if (!post) {
+            return res.status(404).json("Post not found");
+        }
+
+        if (post.username === req.body.username) {
+            try {
+                // Construct the update object.  We need to handle the tags array differently.
+                const updateObject = {
+                    title: req.body.title,
+                    desc: req.body.desc,
+                    // ... other fields
+                };
+
+                if (req.body.category && req.body.year) { //Check if both values are present
+                    updateObject.tags = [req.body.category, req.body.year]; // Directly set the tags array
+                } else if (req.body.category) {
+                    updateObject.tags = [req.body.category];
+                } else if (req.body.year) {
+                    updateObject.tags = [req.body.year];
+                }
+
+                const updatedPost = await Post.findByIdAndUpdate(
+                    req.params.id,
+                    { $set: updateObject }, // Use the constructed update object
+                    { new: true }
+                );
                 res.status(200).json(updatedPost);
-            }  catch(err)  {
+            } catch (err) {
+                console.error("Error updating post:", err);
                 res.status(500).json(err);
             }
+        } else {
+            res.status(401).json("You can update only your posts!");
         }
-        else {
-            res.status(401).json("You can update only your posts!")
-        }
-    }  catch(err)  {
+    } catch (err) {
         res.status(500).json(err);
     }
 });
+
 
 //DELETE POST
 router.delete("/:id", async (req, res) => {
@@ -72,22 +94,26 @@ router.get("/:id", async (req, res) => {
     }
 })
 
-//GET ALL POSTS
+
+// GET ALL POSTS (with optional tag filtering)
 router.get("/", async (req, res) => {
     const username = req.query.user;
-
+    const tag = req.query.tag; // New query parameter for tag filtering
+  
     try {
-        let posts;
-        if (username) {
-            posts = await Post.find({ username });
-        } else {
-            posts = await Post.find();
-        }
-        res.status(200).json(posts);
+      let posts;
+      if (username) {
+        posts = await Post.find({ username });
+      } else if (tag) {
+        posts = await Post.find({ tags: tag }); // Filter posts by tag
+      } else {
+        posts = await Post.find();
+      }
+      res.status(200).json(posts);
     } catch (err) {
-        res.status(500).json(err);
+      res.status(500).json(err);
     }
-});
+  });
 
 
 

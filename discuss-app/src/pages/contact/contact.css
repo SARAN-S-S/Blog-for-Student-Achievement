@@ -154,9 +154,70 @@
   color: black;
 }
 
-@media (max-width: 600px) {
+
+@media (max-width: 768px) {
+  .contactContainer {
+      gap: 15px;
+      padding: 15px;
+      height: auto; /* Adjust height as needed */
+  }
+
   .contactCard {
-      width: 100%;
+      width: 90%; /* Occupy more width on smaller screens */
+      padding: 15px;
+      margin: 15px 0;
+  }
+
+  .contactName {
+      font-size: 1.3em;
+      margin-bottom: 8px;
+  }
+
+  .contactDepartment {
+      font-size: 1.1em;
+      margin-bottom: 8px;
+  }
+
+  .contactEmail {
+      font-size: 0.9em;
+      margin-bottom: 15px;
+  }
+
+  .contactLink {
+      font-size: 0.9em;
+      padding: 8px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contactContainer {
+      gap: 10px;
+      padding: 10px;
+  }
+
+  .contactCard {
+      width: 95%; /* Occupy even more width on mobile */
+      padding: 10px;
       margin: 10px 0;
+  }
+
+  .contactName {
+      font-size: 1.2em;
+      margin-bottom: 5px;
+  }
+
+  .contactDepartment {
+      font-size: 1em;
+      margin-bottom: 5px;
+  }
+
+  .contactEmail {
+      font-size: 0.8em;
+      margin-bottom: 10px;
+  }
+
+  .contactLink {
+      font-size: 0.8em;
+      padding: 6px 12px;
   }
 }
