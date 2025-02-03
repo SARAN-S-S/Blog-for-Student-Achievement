@@ -1,82 +1,123 @@
+/* login.css */
+
 .login {
-    height: calc(100vh - 50px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(124, 181, 152, 0.7);
-    background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+  min-height: 91.3vh;
+  width: 100vw; 
+  overflow: hidden; 
+  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 50%, #e3f2fd 100%);
 }
 
-
-.loginContainer {
-    background-color: rgba(111, 154, 132, 0.7);
-    padding: 50px; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-    border: 1px solid #d1c4c4; 
-    display: flex;
-    flex-direction: column;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-    align-items: center;
+.loginContainer  {
+  background-color: #ffffff;
+  padding: 70px 20px; 
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 400px; 
+  max-height: 90vh; 
+  overflow: hidden;
+  text-align: center;
 }
 
-.loginTitle {
-    font-size: 50px;
+.loginImageContainer {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
 }
 
-.loginForm  {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
+.loginImage {
+  max-width: 250px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.loginForm > label  {
-    margin: 10px 0;
+.loginContainer h1 {
+  color: #2196f3;
+  margin-bottom: 15px;
 }
 
-.loginInput {
-    padding: 10px;
-    background-color: white;
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
-    width: 100%;
+.loginContainer h2 {
+  color: #0c8e39;
+  margin-bottom: 20px;
 }
 
-.loginSubmit  {
-    margin-top: 20px;
-    cursor: pointer;
-    background-color: rgb(126, 101, 41);
-    border: none;
-    color: white;
-    border-radius: 10px;
-    padding: 10px;
+.signupSubmit {
+  background-color: #2196f3;
+  color: white;
+  border: 1px solid #1f0606;
+  padding: 8px 30px; 
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 300;
+  font-size: 1rem; 
+  transition: background-color 0.3s ease;
+  display: block;
+  margin: 20px auto 0; 
 }
 
-.loginSubmit:hover  {
-    background-color: rgb(61, 58, 51);
-    color: white;
+.signupSubmit:hover {
+  background-color: #ced5dc;
+  border: 1.5px solid #bb2121;
+  color: black;
 }
 
-.loginSubmit:disabled {
-    cursor: not-allowed;
-    background-color: rgb(194, 65, 18);
+/* Responsive Design */
+@media (max-width: 768px) {
+  .loginContainer {
+      width: 90%;
+      padding: 20px;
+  }
+
+  .loginImage {
+      max-width: 200px;
+  }
+
+  .loginContainer h1 {
+      font-size: 1.8rem;
+  }
+
+  .loginContainer h2 {
+      font-size: 1.5rem;
+  }
+
+  .loginContainer .google-login-button {
+      font-size: 0.9rem;
+      padding: 8px 16px;
+  }
+
+  .signupButton {
+      font-size: 0.9rem;
+      padding: 8px 16px;
+  }
 }
 
-.loginRegisterSubmit  {
-    position: absolute;
-    top: 80px;
-    right: 40px;
-    background-color: rgb(90, 27, 67);
-    cursor: pointer;
-    border: none;
-    padding: 10px;
-    color: white;
-    border-radius: 5px;
-    width: 100px;
-}
+@media (max-width: 480px) {
+  .loginContainer {
+      padding: 15px;
+  }
 
-.loginRegisterSubmit:hover {
-    background-color: rgb(194, 65, 18);
-    color: white;
+  .loginImage {
+      max-width: 150px;
+  }
+
+  .loginContainer h1 {
+      font-size: 1.5rem;
+  }
+
+  .loginContainer h2 {
+      font-size: 1.2rem;
+  }
+
+  .loginContainer .google-login-button {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+  }
+
+  .signupButton {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+  }
 }

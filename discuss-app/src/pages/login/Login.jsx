@@ -1,51 +1,61 @@
-import { Link } from "react-router-dom";
-import "./login.css";
-import { Context } from "../../context/Context";
-import { useRef, useContext } from "react";
+import React from "react";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "../../context/Context";
+import "./login.css";
 
 export default function Login() {
+  const { dispatch } = useContext(Context);
+  const navigate = useNavigate();
 
-  const userRef = useRef();
-  const passwordRef = useRef();
-  const { dispatch, isFetching } = useContext(Context)
-  
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    dispatch({type: "LOGIN_START"});
-    
-    try{
-      const res = await axios.post("/api/auth/login", {
-        username: userRef.current.value,
-        password: passwordRef.current.value,
+  const handleGoogleLogin = async (credentialResponse) => {
+    try {
+      const res = await axios.post("/api/auth/google", {
+        token: credentialResponse.credential,
       });
-      dispatch({type: "LOGIN_SUCCESS", payload: res.data});
-      
-    }
-    catch(err) {
-      dispatch({type: "LOGIN_FAILURE"});
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+      navigate("/");
+    } catch (err) {
+      dispatch({ type: "LOGIN_FAILURE" });
+      alert(err.response?.data || "Google login failed.");
     }
   };
 
-  
   return (
     <div className="login">
-        <div className="loginContainer">
-            <span className="loginTitle">Login</span>
-            
-            <form className="loginForm" onSubmit={handleSubmit}>
-                <label>Username</label>
-                <input type="text" className="loginInput" placeholder="Enter your Username.." ref={userRef} required />
-                <label>Password</label>
-                <input type="password" className="loginInput" placeholder="Enter your password.." ref={passwordRef} required />
-                <button className="loginSubmit" type="submit" disabled={isFetching}>Login</button>
-            </form>
+
+      <div className="loginContainer">
+        <h1>Welcomes</h1>
+        <div className="loginImageContainer">
+          <img
+            src="/bit.png" 
+            alt="Login"
+            className="loginImage"
+          />
         </div>
-        <button className="loginRegisterSubmit">
-          <Link className="link" to = "/register">Register</Link>
+        <h1>AchieveHub</h1>
+        <h2>Login Students</h2>
+        <br></br>
+        
+        <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
+          <GoogleLogin
+            onSuccess={handleGoogleLogin}
+            onError={() => {
+              console.log("Google Login Failed");
+            }}
+            theme="filled_black"
+            shape="circle"
+            size="medium"
+            useOneTap={true}
+          />
+        </GoogleOAuthProvider>
+        <br></br>
+        <button className="signupSubmit" onClick={() => navigate("/signup")}>
+          Admin Sign In
         </button>
+      </div>
     </div>
   );
 }

@@ -67,7 +67,7 @@ export default function TopBar() {
                 <Link className="link" to = "/login" >LOGIN</Link>
               </li>
               <li className="topListItem">
-                <Link className="link" to = "/register" >REGISTER</Link>
+                <Link className="link" to = "/signup" >SIGN In</Link>
               </li>
                 
             </ul>

@@ -2,31 +2,28 @@ const router = require("express").Router();
 const User = require("../models/User");  
 //const Post = require("../models/Post"); 
 
-// UPDATE
+// Update User
 router.put("/:id", async (req, res) => {
     if (req.body.userId === req.params.id) {
-        if (req.body.password) {
-            req.body.password = req.body.password; // No operation needed here for plain text
-        }
-        try {
-            // Fix typo: req.body.params.id to req.params.id
-            const updatedUser = await User.findByIdAndUpdate(req.params.id, {
-                $set: req.body,
-            }, { new: true }); // Add { new: true } to return the updated document
-
-            // Check if the user exists
-            if (!updatedUser) {
-                return res.status(404).json("User not found!");
-            }
-
-            res.status(200).json(updatedUser);
-        } catch (err) {
-            res.status(500).json(err);
-        }
+      if (req.body.password) {
+        req.body.password = req.body.password;
+      }
+      try {
+        const updatedUser = await User.findByIdAndUpdate(
+          req.params.id,
+          {
+            $set: req.body,
+          },
+          { new: true }
+        );
+        res.status(200).json(updatedUser);
+      } catch (err) {
+        res.status(500).json(err);
+      }
     } else {
-        res.status(401).json("Unauthorized");
+      res.status(401).json("You can update only your account!");
     }
-});
+  });
 
 //DELETE
 router.delete("/:id", async (req, res) => {
