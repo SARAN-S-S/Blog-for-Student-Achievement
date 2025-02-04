@@ -1,8 +1,12 @@
 .header {
     margin-top: 30px;
     background-color: #FFF5E1;
-    border: 2px solid rgb(35, 172, 115);
+    border: 2.5px solid rgb(35, 172, 115);
     border-radius: 20px;
+}
+
+.header:hover  {
+    border-color: #423434;
 }
 
 .headerTitle {

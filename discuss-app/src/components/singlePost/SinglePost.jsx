@@ -26,8 +26,10 @@ export default function SinglePost() {
     const [category, setCategory] = useState("");
     const [year, setYear] = useState("");
     const [tags, setTags] = useState([]);
-    
-    
+
+    const [file, setFile] = useState(null);
+    const [newPhoto, setNewPhoto] = useState(null);
+    const [initialPhoto, setInitialPhoto] = useState(null); // Store initial photo filename
 
     useEffect(() => {
         const getPost = async () => {
@@ -36,12 +38,10 @@ export default function SinglePost() {
                 setPost(res.data);
                 setTitle(res.data.title);
                 setDesc(res.data.desc);
-                
-                // Initialize all states from the fetched data
                 setCategory(res.data.category || "");
                 setYear(res.data.year || "");
                 setTags(res.data.tags || []);
-
+                setInitialPhoto(res.data.photo || null); // Initialize initialPhoto
 
                 const commentsRes = await axios.get(`/api/comments/${res.data._id}`);
                 setComments(commentsRes.data);
@@ -61,22 +61,37 @@ export default function SinglePost() {
         }
     };
 
-    const handleUpdate = async () => {
+    const handleUpdate = async (e) => {
+        e.preventDefault();
         try {
-            const res = await axios.put(`/api/posts/${post._id}`, {
+            const updatedPost = {
                 username: user.username,
                 title,
                 desc,
                 category,
                 year,
                 tags,
-            });
+            };
+
+            if (file) {
+                const data = new FormData();
+                const filename = Date.now() + file.name;
+                data.append("name", filename);
+                data.append("file", file);
+                updatedPost.photo = filename;
+                try {
+                    await axios.post("/api/upload", data);
+                } catch (err) {
+                    console.error("Error uploading file:", err);
+                }
+            }
+
+            const res = await axios.put(`/api/posts/${post._id}`, updatedPost);
             setPost(res.data);
             setUpdateMode(false);
-
-            // Update initial values *after* successful update
-            setCategory(category);
-            setYear(year);
+            setFile(null);
+            setNewPhoto(null);
+            setInitialPhoto(res.data.photo); // Update initialPhoto after successful update
 
         } catch (err) {
             console.error("Error updating post:", err);
@@ -309,12 +324,38 @@ export default function SinglePost() {
     return (
         <div className="singlePost">
             <div className="singlePostWrapper">
-                {post.photo && (
-                    <img className="singlePostImg" src={PF + post.photo} alt=""/>
-                )}
-
+    
                 {updateMode ? (
-                    <>
+                    <form onSubmit={handleUpdate}>
+                        {/* Image Section (Above Title) */}
+                        <div className="image-edit-section">
+                            {newPhoto ? (
+                                <img className="writeImg" src={newPhoto} alt="New Post Preview" />
+                            ) : initialPhoto ? (
+                                <img className="singlePostImg" src={PF + initialPhoto} alt={post.title} />
+                            ) : null}
+    
+                            <div className="writeFormGroup">
+                                <label htmlFor="fileInput">
+                                    <i className="writeIcon fa-solid fa-plus"></i>
+                                </label>
+                                <input
+                                    type="file"
+                                    id="fileInput"
+                                    className="writeFile"
+                                    onChange={(e) => {
+                                        setFile(e.target.files[0]);
+                                        if (e.target.files && e.target.files.length > 0) {
+                                            setNewPhoto(URL.createObjectURL(e.target.files[0]));
+                                        } else {
+                                            setNewPhoto(null);
+                                        }
+                                    }}
+                                />
+                            </div>
+                        </div>
+    
+                        {/* Title Input */}
                         <input
                             type="text"
                             value={title}
@@ -322,17 +363,17 @@ export default function SinglePost() {
                             autoFocus
                             onChange={(e) => setTitle(e.target.value)}
                         />
-
+    
+                        {/* Category and Year Selects */}
                         <div className="writeFormGroup">
                             <select className="writeInput" value={category} onChange={(e) => setCategory(e.target.value)} required>
-                                
                                 <option value="Project">Project</option>
                                 <option value="Patent">Patent</option>
                                 <option value="Paper">Paper</option>
                                 <option value="Journal">Journal</option>
                                 <option value="Competition">Competition</option>
                             </select>
-
+    
                             <select className="writeInput" value={year} onChange={(e) => setYear(e.target.value)} required>
                                 <option value="First Year">First Year</option>
                                 <option value="Second Year">Second Year</option>
@@ -340,61 +381,65 @@ export default function SinglePost() {
                                 <option value="Final Year">Final Year</option>
                             </select>
                         </div>
-                    </>
+    
+                        {/* Description Textarea */}
+                        <textarea className="singlePostDescInput" value={desc} onChange={(e) => setDesc(e.target.value)} />
+    
+                        <button className="singlePostButton" type="submit">
+                            Update
+                        </button>
+                    </form>
                 ) : (
-                    <h1 className="siglePostTitle">
-                        {title}
-                        {post.username === user?.username && (
-                            <div className="singlePostEdit">
-                                <i
-                                    className="singlePostIcon fa-regular fa-pen-to-square"
-                                    onClick={() => setUpdateMode(true)}
-                                ></i>
-                                <i
-                                    className="singlePostIcon fa-regular fa-trash-can"
-                                    onClick={handleDelete}
-                                ></i>
-                            </div>
+                    <div> {/* Wrapped with a div */}
+                        {/* Image Display (Above Title) */}
+                        {post.photo && (
+                            <img className="singlePostImg" src={PF + post.photo} alt={post.title} />
                         )}
-                    </h1>
+    
+                        <h1 className="siglePostTitle">
+                            {title}
+                            {post.username === user?.username && (
+                                <div className="singlePostEdit">
+                                    <i
+                                        className="singlePostIcon fa-regular fa-pen-to-square"
+                                        onClick={() => setUpdateMode(true)}
+                                    ></i>
+                                    <i
+                                        className="singlePostIcon fa-regular fa-trash-can"
+                                        onClick={handleDelete}
+                                    ></i>
+                                </div>
+                            )}
+                        </h1>
+    
+                        <div className="postTags">
+                            <strong>Tags:</strong>
+                            {post.tags && post.tags.map((tag, index) => (
+                                <span key={index} className="tag">{tag}</span>
+                            ))}
+                        </div>
+    
+                        <div className="singlePostInfo">
+                            <span className="singlePostAuthor">
+                                Author:
+                                <Link to={`/?user=${post.username}`} className="link">
+                                    <b>{post.username}</b>
+                                </Link>
+                            </span>
+    
+                            <span className="singlePostDate">
+                                {new Date(post.createdAt).toDateString()}
+                            </span>
+                        </div>
+    
+                        <p className="singlePostDesc">{desc}</p>
+                    </div>
                 )}
-
-                <div className="postTags">
-                <strong>Tags:</strong>
-                {post.tags && post.tags.map((tag, index) => (
-                    <span key={index} className="tag">{tag}</span>
-                ))}
-                </div>
-
-                <div className="singlePostInfo">
-                    <span className="singlePostAuthor">
-                        Author:
-                        <Link to={`/?user=${post.username}`} className="link">
-                            <b>{post.username}</b>
-                        </Link>
-                    </span>
-
-                    <span className="singlePostDate">
-                        {new Date(post.createdAt).toDateString()}
-                    </span>
-                </div>
-
-                {updateMode && (
-                    <button className="singlePostButton" onClick={handleUpdate}>
-                        Update
-                    </button>
-                )}
-
-                {updateMode ? (
-                    <textarea className="singlePostDescInput" value={desc} onChange={(e) => setDesc(e.target.value)} />
-                ) : (
-                    <p className="singlePostDesc">{desc}</p>
-                )}
-
+    
                 <div className="comments">
                     <h3>Comments</h3>
                     {comments.map(comment => renderComment(comment))}
-
+    
                     {user && (
                         <form className="commentForm" onSubmit={handleCommentSubmit}>
                             <textarea

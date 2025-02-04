@@ -23,7 +23,7 @@
 }
 
 .singlePostImg {
-    width: 100%;
+    width: 99%;
     height: 300px;
     border-radius: 5px;
     object-fit: cover;
@@ -140,6 +140,9 @@
     cursor: pointer;
     align-self: flex-end;
     margin-top: 20px;
+    margin-left: auto;
+    display: block;
+    margin-right: 10px;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
@@ -157,6 +160,7 @@
     padding: 15px;
     border-radius: 8px;
     background-color: #faf1e8; /* Soft peach background */
+    margin-right: 20px;
 }
 
 .comments h3 {
@@ -371,18 +375,45 @@
     transform: scale(1.05); /* Scale up slightly on hover */
 }
 
-.writeFormGroup {
+.image-edit-section { /* Style for the image edit section */
     display: flex;
-    gap: 10px;
-    border: 2px solid #410707; /* Initial border */
-    transition: border-color 0.3s ease; /* Smooth transition for border color */
-    padding: 5px; /* Add some padding around the selects */
-    border-radius: 5px; /* Rounded corners for the group*/
+    flex-direction: column; /* Stack image and upload field vertically */
+    align-items: center;  /* Center horizontally */
+    margin-bottom: 15px; /* Space below the image section */
 }
+
+.writeFormGroup {  /* Styles for category/year selects AND image upload */
+    display: flex;
+    gap: 10px; /* Space between elements */
+    border: 2px solid #410707;
+    transition: border-color 0.3s ease;
+    padding: 5px;
+    border-radius: 5px;
+    margin-top: 10px; /* Space above the upload field */
+    align-items: center; /* Align items vertically (important for image upload) */
+}
+
 
 .writeFormGroup:hover {
     border-color: #007bff; /* Change border color on hover */
     cursor: pointer; /* Change cursor to pointer on hover */
+}
+.writeIcon { /* Style for the plus icon */
+    font-size: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.writeFile { /* Hide the actual file input */
+    display: none;
+}
+
+.writeImg {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+    object-fit: cover;
 }
 
 /* Styles for the individual selects inside the group */
