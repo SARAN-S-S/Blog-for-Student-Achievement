@@ -1,5 +1,8 @@
 .header {
     margin-top: 30px;
+    background-color: #FFF5E1;
+    border: 2px solid rgb(35, 172, 115);
+    border-radius: 20px;
 }
 
 .headerTitle {
@@ -35,7 +38,7 @@
     height: 450px;
     margin-top: 40px;
     object-fit: cover;
-    border-radius: 10px;
+    border-radius: 25px;
     margin-bottom: 20px;
 }
 

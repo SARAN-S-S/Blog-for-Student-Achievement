@@ -36,7 +36,7 @@ export default function Login() {
           />
         </div>
         <h1>AchieveHub</h1>
-        <h2>Login Students</h2>
+        <h2>Students Login</h2>
         <br></br>
         
         <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>

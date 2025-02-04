@@ -101,6 +101,7 @@ export default function Settings() {
             type="text"
             placeholder={user.username}
             onChange={(e) => setUsername(e.target.value)}
+            autoFocus
             required
           />
           {user.role === "admin" && (

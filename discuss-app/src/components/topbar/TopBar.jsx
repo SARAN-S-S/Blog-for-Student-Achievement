@@ -1,88 +1,72 @@
-import { Link } from "react-router-dom";
-import "./topbar.css"
-import { useContext } from "react";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../context/Context";
+import "./topbar.css";
 
 export default function TopBar() {
   const { user, dispatch } = useContext(Context);
-  const PF = "http://localhost:7733/images/";
-  const defaultProfilePic = "/profile.jpg"; // Path to the default image
+  const navigate = useNavigate();
 
-  
   const handleLogout = () => {
-    dispatch({type:"LOGOUT"});
+    dispatch({ type: "LOGOUT" });
+    navigate("/login"); // Redirect to login after logout
   };
 
-  
-
-  
-
-    
+  if (!user) return null; // If no user is logged in, return nothing
 
   return (
     <div className="top">
-      
-            <Link className="link" to="/about" >
-              <div className="topLeft">
-                <i  className="fa-solid fa-graduation-cap"></i>
-                <p className="profile-text"><b>AchieveHub</b></p>
-              </div>
+      <div className="topLeft">
+        <Link className="link" to="/about">
+          <i className="fa-solid fa-graduation-cap"></i>
+          <span className="profile-text"><b>AchieveHub</b></span>
+        </Link>
+        <ul className="topList"> {/* Moved topCenter contents here */}
+          <li className="topListItem">
+            <Link className="link" to="/">
+              Home
             </Link>
-
-      <div className="topCorner">
-        <ul className="topList">
-            <li className="topListItem">
-              <Link className="link" to = "/" >HOME</Link>
-            </li>
-            <li className="topListItem">
-              <Link className="link" to = "/about" >ABOUT</Link>
-            </li>
-            <li className="topListItem">
-              <Link className="link" to = "/contact" >CONTACT</Link>
-            </li>
-            <li className="topListItem">
-              <Link className="link" to = "/write" >WRITE</Link>
-            </li>
-            <li className="topListItem" onClick={handleLogout}>
-              {user && "LOGOUT"}
-            </li>  
+          </li>
+          <li className="topListItem">
+            <Link className="link" to="/about">
+              About
+            </Link>
+          </li>
+          <li className="topListItem">
+            <Link className="link" to="/contact">
+              Contact
+            </Link>
+          </li>
+          <li className="topListItem">
+            <Link className="link" to="/write">
+              Post
+            </Link>
+          </li>
         </ul>
       </div>
       <div className="topRight">
-
-        
-        {
-          user ? (
-            <Link to="/settings" className="link" >
-              <img className="topImg"
-              src={user.profilePic ? PF + user.profilePic : defaultProfilePic}   alt="profile" />
-              <p className="profile-text">profile</p>
-              
+        <ul>
+          <li>
+            <Link to="/settings">
+              <img
+                className="topImg"
+                src={user.profilePic ? `/images/${user.profilePic}` : "/profile.jpg"}
+                alt="Profile"
+              />
             </Link>
-            
-            
-          ) :  (
-            <ul className="topList">
-              <li className="topListItem">
-                <Link className="link" to = "/login" >LOGIN</Link>
-              </li>
-              <li className="topListItem">
-                <Link className="link" to = "/signup" >SIGN In</Link>
-              </li>
-                
-            </ul>
-          )
-
-        }
-        
-        
-
-        {/* <i className ="topSearchIcon fa-solid fa-magnifying-glass"></i>*/}
-        
-
-
+          </li>
+          <li className="topListItem">
+            <Link className="link" to="/settings">
+              {user.username}
+            </Link>
+          </li>
+          <li className="topListItem">
+            <span className="link" onClick={handleLogout} style={{ cursor: "pointer" }}>
+              Logout
+            </span>
+          </li>
+        </ul>
       </div>
-
     </div>
-  )
+  );
 }

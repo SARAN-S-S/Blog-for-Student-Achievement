@@ -1,78 +1,212 @@
-.top{
-    width: 100%;
-    height: 60px;
-    background-color: white;
-    position: sticky;
-    top: 0;
-    display: flex;
-    align-items: center;
-    font-family: 'Josefin Sans', sans-serif;
-    z-index: 999;
-}
-
-.topLeft, .topRight  {
-    flex: 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.top {
+  width: 100%;
+  height: 60px;
+  background-color: #f5f5f5;
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  font-family: 'Josefin Sans', sans-serif;
+  z-index: 999;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
 .topLeft {
-    
-    margin-left: 170px;
-    margin-right: 60px;
-
-    overflow: hidden; /* Ensure image stays within bounds */
-    object-fit: cover;
-    cursor: pointer;
+  flex: 1.5; /* Increased width to accommodate navigation */
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
 }
 
-.profile-text {
-    color: blue; /* Sets the text color to blue */
+.topLeft .link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  margin-right: 20px;
 }
 
-
-.topCorner  {
-    flex: 6;
+.topLeft i {
+  font-size: 24px;
+  margin-left: 40px;
+  margin-right: 3px;
+  color: #ff5733;
+  transition: transform 0.3s ease;
 }
 
-.topIcon {
-    font-size: 20px;
-    margin-right: 10px;
-    color: #444;
-    cursor: pointer;
+.topLeft i:hover {
+  transform: scale(1.1);
 }
 
-.topImg {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    cursor: pointer;
+.topLeft .profile-text {
+  color: #444;
+  font-weight: bold;
+  font-size: 20px;
+  transition: color 0.3s ease; 
 }
 
+.topLeft .profile-text:hover {
+  color: #007bff; 
+}
+
+/* Moved from .topCenter */
 .topList {
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
 }
 
 .topListItem {
-    margin-right: 20px;
-    font-size: 18px;
-    font-weight: 300;
-    cursor: pointer;
+  margin: 0px 10px;
+  font-size: 18px;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 8px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-
-/*
-.topSearchIcon  {
-    font-size: 18px;
-    color: #666;
-    cursor: pointer;
-    margin-left: 15px;
+.topListItem:hover {
+  background-color: #b9a7a3;
+  color: #fff;
 }
-*/
 
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.topRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.topRight ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.topRight li {
+  margin-left: 20px;
+}
+
+.topRight .topImg {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.topRight .topImg:hover {
+  transform: scale(1.1);
+}
+
+.topRight .topListItem {
+  font-size: 16px;
+  font-weight: 350;
+  cursor: pointer;
+  color: #444;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.topRight .topListItem:hover {
+  background-color: #b9a7a3;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .topLeft {
+      margin-left: 10px;
+  }
+
+  .topLeft i {
+      font-size: 20px;
+      margin-right: 5px;
+  }
+
+  .topLeft .profile-text {
+      font-size: 18px;
+  }
+
+  .topList {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .topListItem {
+      margin: 5px 0;
+  }
+
+  .topRight {
+      margin-right: 10px;
+      justify-content: center;
+  }
+
+  .topRight ul {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .topRight li {
+      margin: 5px 0;
+      margin-left: 0;
+  }
+
+  .topRight .topImg {
+      margin-bottom: 5px;
+  }
+
+  .topImg {
+      margin-right: 0;
+      margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topLeft {
+      flex: 1;
+      margin-left: 10px;
+      flex-direction: column; /* Stack items */
+  }
+
+  .topLeft i {
+      font-size: 18px;
+      margin-right: 3px;
+  }
+
+  .topLeft .profile-text {
+      font-size: 16px;
+  }
+
+  .topList {
+      flex-direction: column; /* Stack links for better mobile view */
+  }
+
+  .topListItem {
+      font-size: 16px;
+      padding: 5px 8px;
+  }
+
+  .topRight {
+      margin-right: 10px;
+  }
+
+  .topRight .topListItem {
+      font-size: 14px;
+      padding: 3px 8px;
+  }
+}
