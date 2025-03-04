@@ -1,0 +1,166 @@
+.managePosts {
+  padding: 20px;
+  background: #f8f9fa;
+  min-height: 100vh;
+  font-family: 'Arial', sans-serif;
+}
+
+.managePosts h1 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #343a40;
+  font-size: 28px;
+}
+
+/* Updated container styling with border and shadow */
+.container {
+  display: grid;
+  grid-template-rows: auto auto;
+  gap: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd; /* Added border */
+}
+
+.searchContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchContainer input {
+  padding: 10px 8px 10px 30px; /* Add space for the icon */
+  border: 2px solid #4d6f8d;
+  border-radius: 30px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.searchContainer input:focus {
+  border-color: #007bff;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 10px;  /* Place the icon inside the left side */
+  color: #4d6f8d;
+  pointer-events: none;  /* Prevent icon from being clicked */
+  transition: color 0.3s;
+}
+
+.searchIcon:hover {
+  color: #111b24; /* Darker icon color on hover */
+}
+
+.searchContainer .bulkDeleteButton {
+  padding: 10px 20px;
+  background: #dc3545;
+  color: white;
+  border: 2px solid black;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.bulkDeleteButton:hover {
+  background: white;
+  color: black;
+  border-color: 2px solid #007bff;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  /* Removed any animations that could cause shaking */
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+  font-size: 14px;
+}
+
+th {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #eef5ff;
+}
+
+td a {
+  color: #ff5733;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+}
+
+td a::before {
+  content: '\270E'; /* Unicode for edit pencil icon */
+  font-size: 16px;
+  color: #ff5733;
+  margin-right: 5px;
+}
+
+/* Increased checkbox size and hand cursor on hover */
+td input[type="checkbox"] {
+  transform: scale(1.3); /* Increase the size of the checkbox */
+  cursor: pointer; /* Change the cursor to a hand when hovering over the checkbox */
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+
+}
+
+.pagination button {
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.pagination button:hover {
+  background: #72b04f;
+}
+
+.pagination button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 18px;
+  font-weight: bold;
+}

@@ -1,6 +1,9 @@
 const  router = require("express").Router();
 const User = require("../models/User");  
 const Post = require("../models/Post");  
+const express = require("express");
+
+
 
 // CREATE POST
 router.post("/", async (req, res) => {
@@ -97,23 +100,174 @@ router.get("/:id", async (req, res) => {
 
 // GET ALL POSTS (with optional tag filtering)
 router.get("/", async (req, res) => {
-    const username = req.query.user;
-    const tag = req.query.tag; // New query parameter for tag filtering
+    const { category, year, search, user: username, tag } = req.query;
   
     try {
       let posts;
-      if (username) {
-        posts = await Post.find({ username });
+  
+      if (search) {
+        // Search by title, username, or email
+        posts = await Post.aggregate([
+          {
+            $lookup: {
+              from: "users",
+              localField: "username",
+              foreignField: "username",
+              as: "user",
+            },
+          },
+          { $unwind: "$user" },
+          {
+            $match: {
+              $or: [
+                { title: { $regex: search, $options: "i" } },
+                { username: { $regex: search, $options: "i" } },
+                { "user.email": { $regex: search, $options: "i" } },
+              ],
+            },
+          },
+          {
+            $addFields: {
+              email: "$user.email", // Add email to the response
+            },
+          },
+        ]);
+      } else if (username) {
+        // Filter by username
+        posts = await Post.aggregate([
+          {
+            $lookup: {
+              from: "users",
+              localField: "username",
+              foreignField: "username",
+              as: "user",
+            },
+          },
+          { $unwind: "$user" },
+          {
+            $match: { username },
+          },
+          {
+            $addFields: {
+              email: "$user.email", // Add email to the response
+            },
+          },
+        ]);
       } else if (tag) {
-        posts = await Post.find({ tags: tag }); // Filter posts by tag
+        // Filter by tag
+        posts = await Post.aggregate([
+          {
+            $lookup: {
+              from: "users",
+              localField: "username",
+              foreignField: "username",
+              as: "user",
+            },
+          },
+          { $unwind: "$user" },
+          {
+            $match: { tags: tag },
+          },
+          {
+            $addFields: {
+              email: "$user.email", // Add email to the response
+            },
+          },
+        ]);
+      } else if (category && year) {
+        // Filter by both category and year
+        posts = await Post.find({ tags: { $all: [category, year] } });
+      } else if (category) {
+        // Filter by category only
+        posts = await Post.find({ tags: category });
+      } else if (year) {
+        // Filter by year only
+        posts = await Post.find({ tags: year });
       } else {
-        posts = await Post.find();
+        // Fetch all posts with user details
+        posts = await Post.aggregate([
+          {
+            $lookup: {
+              from: "users",
+              localField: "username",
+              foreignField: "username",
+              as: "user",
+            },
+          },
+          { $unwind: "$user" },
+          {
+            $addFields: {
+              email: "$user.email", // Add email to the response
+            },
+          },
+        ]);
       }
+  
       res.status(200).json(posts);
     } catch (err) {
       res.status(500).json(err);
     }
   });
+  
+//like a post
+  router.post("/:id/like", async (req, res) => {
+    try {
+      const postId = req.params.id;
+  
+      // Find the post and increment likes
+      const updatedPost = await Post.findByIdAndUpdate(
+        postId,
+        { $inc: { likes: 1 } }, // Increment likes by 1
+        { new: true } // Return the updated document
+      );
+  
+      if (!updatedPost) {
+        return res.status(404).json({ message: "Post not found" });
+      }
+  
+      res.json({ message: "Post liked", likes: updatedPost.likes });
+    } catch (error) {
+      console.error("Error liking post:", error);
+      res.status(500).json({ message: "Server error" });
+    }
+  });
+
+//unlike a post
+router.post("/:id/unlike", async (req, res) => {
+  try {
+    const postId = req.params.id;
+
+    // Find the post and decrement likes (ensure likes don't go below 0)
+    const updatedPost = await Post.findByIdAndUpdate(
+      postId,
+      { $inc: { likes: -1 } }, // Decrement likes by 1
+      { new: true } // Return the updated document
+    );
+
+    if (!updatedPost) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    res.json({ message: "Post unliked", likes: updatedPost.likes });
+  } catch (error) {
+    console.error("Error unliking post:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+
+
+// Bulk delete posts
+router.post("/bulk-delete", async (req, res) => {
+  const { postIds } = req.body;
+  try {
+    await Post.deleteMany({ _id: { $in: postIds } });
+    res.status(200).json("Posts deleted successfully");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 

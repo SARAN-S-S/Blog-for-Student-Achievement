@@ -1,0 +1,117 @@
+/* General Styling */
+.statisticsPage {
+  font-family: Arial, sans-serif;
+  background-color: #f7f7f7;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Filters Section */
+.filters {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.filters select {
+  padding: 12px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  background-color: #fff;
+  transition: border-color 0.3s;
+  width: 150px; /* Set a fixed width for consistency */
+}
+
+.filters select:focus {
+  border-color: #36a2eb;
+  outline: none;
+}
+
+/* Stats Section */
+.statsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.statItem {
+  background-color: #f0d4e3;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  flex: 1 1 250px;
+  min-width: 250px;
+  max-width: 300px;
+  border: 2px solid #ac3aa6;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.statItem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+.statItem h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.statItem p {
+  font-size: 1rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+/* Charts Section */
+.charts {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center;     /* Centers vertically */
+  width: 80%;
+  height: 300px;
+  margin: 20px auto;
+}
+
+.charts canvas {
+  max-width: 100% !important;
+  height: 100% !important;
+  border-radius: 8px;
+  border: 2px solid #2e71af;
+}
+
+
+/* Total Posts Section */
+.totalPosts {
+  background: #b1dfe1;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 100%;
+  max-width: 350px;
+  border: 2px solid #1d8083;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.totalPosts h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.totalPosts p {
+  font-size: 1.2rem;
+  color: #100101;
+  margin: 5px 0;
+}

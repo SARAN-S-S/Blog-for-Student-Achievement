@@ -53,7 +53,7 @@ export default function Signup() {
 
         if (res.data) {
           dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-          navigate("/");        }
+          navigate("/dashboard");       }
       } catch (err) {
         setError(true); // Show error if backend request fails
       }

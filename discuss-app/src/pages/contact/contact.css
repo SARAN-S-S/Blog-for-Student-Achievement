@@ -88,7 +88,7 @@
   justify-content: center;
   gap: 20px;
   padding: 20px;
-  background: linear-gradient(135deg, #e7f3fe 0%, #d0e6f5 50%, #cde2ff 100%); /* Light blue gradient */
+  background-color: #d7edd7;
   height: 100vh; /* Increased page height */
 }
 

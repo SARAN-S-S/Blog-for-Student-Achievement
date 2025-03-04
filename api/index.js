@@ -10,6 +10,9 @@ const path = require("path");
 const commentRoute = require("./routes/comments");
 var cors = require('cors')
 
+//stats
+const statsRoute = require("./routes/stats");
+app.use("/api/stats", statsRoute);
 
 dotenv.config();
 app.use(express.json());

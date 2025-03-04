@@ -22,6 +22,10 @@ const PostSchema = new mongoose.Schema({
       type: [String], // Array of strings for event type and student year
       default: [],
     },
+    likes: {
+        type: Number,
+        default: 0,
+    },
 }, 
     { timestamps: true }
 );

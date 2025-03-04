@@ -4,15 +4,15 @@
     margin-left: 10px;
     margin-right: -10px;
     flex: 9;
-    background: #c7edf9; /* Light blue background */
+    background: #c8c8c8;
     border-radius: 10px;
-    border: 2px solid #a0c0ff; /* Slightly darker blue border */
+    border: 2px solid #a0c0ff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease;
 }
 
 .singlePost:hover {
-    border-color: #2b7db3; /* Even darker blue on hover */
+    border-color: #2b7db3;
 }
 
 .singlePostWrapper {
@@ -22,11 +22,18 @@
     flex-direction: column;
 }
 
-.singlePostImg {
-    width: 99%;
-    height: 300px;
-    border-radius: 5px;
+.singlePostImg, .writeImg {
+    width: 600px;
+    height: 400px;
     object-fit: cover;
+    border-radius: 10px;
+    border: 3px solid black;
+    display: block;
+    margin: 0 auto;
+}
+
+.singlePostImg:hover {
+    border-color: #8ab32b;
 }
 
 .siglePostTitle {
@@ -35,7 +42,7 @@
     font-family: 'Lora', serif;
     font-size: 30px;
     color: #2c3e50;
-    text-transform: uppercase; /* Title in uppercase */
+    text-transform: uppercase;
 }
 
 .singlePostEdit {
@@ -75,36 +82,43 @@
 
 .singlePostDesc {
     color: #2c3e50;
-    font-size: 18px; /* Regular font size */
-    line-height: 28px; /* Regular line height */
+    font-size: 18px;
+    line-height: 28px;
     font-weight: 400;
 }
 
 .singlePostDesc:first-letter {
     margin-left: 30px;
-    font-weight: bold; /* First letter bold */
-    font-size: 1.8em; /* Larger first letter */
-    text-transform: uppercase; /* Uppercase first letter */
+    font-weight: bold;
+    font-size: 1.8em;
+    text-transform: uppercase;
 }
 
 .singlePostTitleInput {
-    text-align: center;
-    margin: 10px auto;
+    text-align: left;
+    margin: 5px auto; /* Decreased top and bottom margins */
     font-family: "Lora", serif;
     font-size: 28px;
     color: #555;
     border: 2px solid #ddd;
     border-radius: 8px;
-    padding: 15px;
-    width: 90%;
-    max-width: 900px;
+    padding: 10px 15px;
+    width: 95%;
+    max-width: none;
+    margin-left: -70px;
+    margin-right: 10px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    resize: vertical;
+    min-height: 56px;
+    line-height: 1.2;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    height: auto;
 }
 
 .singlePostTitleInput:focus {
     outline: none;
-    border-color: #3498db;
-    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    box-shadow: 0 0 4px rgba(0, 77, 77, 0.4);
 }
 
 .singlePostDescInput {
@@ -116,7 +130,7 @@
     padding: 15px;
     width: 90%;
     max-width: 900px;
-    height: 200px; /* Adjusted Height */
+    height: 200px;
     margin: 20px auto;
     display: block;
     resize: vertical;
@@ -152,14 +166,13 @@
     border-color: #3498db;
 }
 
-
 /* Comments Section */
 .comments {
     margin-top: 20px;
-    border: 1.5px solid #935828; /* Warm orange border */
+    border: 1.5px solid #935828;
     padding: 15px;
     border-radius: 8px;
-    background-color: #faf1e8; /* Soft peach background */
+    background-color: #faf1e8;
     margin-right: 20px;
 }
 
@@ -169,28 +182,26 @@
 }
 
 .comment {
-    border: 2px solid #6fa8dc; /* Soft blue border */
+    border: 2px solid #6fa8dc;
     margin-bottom: 10px;
     padding: 15px;
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: #e3f2fd; /* Very light blue background */
+    background-color: #e3f2fd;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-
 .reply {
-    border: 2px solid #71a195; /* Dark teal border */
+    border: 2px solid #71a195;
     margin-left: 30px;
     margin-top: 5px;
     padding: 10px;
-    background-color: #faf0ef; /* Soft muted green background */
+    background-color: #faf0ef;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
 
 .commentInfo {
     display: flex;
@@ -213,7 +224,6 @@
 .reply p {
     font-size: 0.95em;
 }
-
 
 .comment-controls, .reply-control {
     display: flex;
@@ -249,17 +259,16 @@
 }
 
 .edit-icon {
-    color: #27ae60; /* Green for edit */
+    color: #27ae60;
 }
 
 .delete-icon {
-    color: #e74c3c; /* Red for delete */
+    color: #e74c3c;
 }
 
-.reply-icon {
-    color: #2980b9; /* Blue for reply */
+reply-icon {
+    color: #2980b9;
 }
-
 
 .reply-form {
     margin-top: 10px;
@@ -267,8 +276,8 @@
 }
 
 .reply-form textarea, .commentForm textarea {
-    width: calc(100% - 70px); /* Slightly smaller width */
-    padding: 8px; /* Slightly smaller padding */
+    width: calc(100% - 70px);
+    padding: 8px;
     border: 1.5px solid #7eb296;
     border-radius: 5px;
     margin-bottom: 5px;
@@ -276,11 +285,9 @@
     font-size: 0.95em;
 }
 
-
-/* Button Styles */
 .reply-form button,
 .commentForm button {
-    background-color: #27ae60; /* Green */
+    background-color: #27ae60;
     border: none;
     color: white;
     padding: 8px 16px;
@@ -292,7 +299,7 @@
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     margin-top: 5px;
-    margin-right: 5px; /* Space between buttons */
+    margin-right: 5px;
 }
 
 .reply-form button {
@@ -301,7 +308,7 @@
 
 .reply-form button:hover,
 .commentForm button:hover {
-    background-color: #2ecc71; /* Lighter green on hover */
+    background-color: #2ecc71;
     transform: scale(1.05);
 }
 
@@ -311,12 +318,12 @@
 }
 
 .update {
-    background-color: #2980b9; /* Blue */
+    background-color: #2980b9;
     border: none;
     color: white;
     padding: 6px 13px;
     margin-left: 5px;
-    margin-right: 5px; /* Space between buttons */
+    margin-right: 5px;
     border-radius: 3px;
     cursor: pointer;
     font-size: 0.85em;
@@ -324,7 +331,7 @@
 }
 
 .update:hover {
-    background-color: #3498db; /* Lighter blue on hover */
+    background-color: #3498db;
     transform: scale(1.05);
 }
 
@@ -333,11 +340,11 @@
 }
 
 .cancel {
-    background-color: #e74c3c; /* Red */
+    background-color: #e74c3c;
     border: none;
     color: white;
     padding: 6px 13px;
-    margin-right: 5px; /* Space between buttons */
+    margin-right: 5px;
     border-radius: 3px;
     cursor: pointer;
     font-size: 0.85em;
@@ -345,7 +352,7 @@
 }
 
 .cancel:hover {
-    background-color: #c0392b; /* Darker red on hover */
+    background-color: #c0392b;
     transform: scale(1.05);
 }
 
@@ -353,70 +360,70 @@
     transform: scale(0.95);
 }
 
-
 .postTags {
     margin-top: 10px;
 }
 
 .tag {
     display: inline-block;
-    background-color: #3498db; /* Blue tag background */
+    background-color: #3498db;
     color: white;
-    padding: 6px 12px; /* Adjusted padding */
-    border-radius: 8px; /* More rounded corners */
-    margin-right: 8px; /* Increased spacing */
-    margin-bottom: 5px; /* Add vertical margin for wrapping */
-    font-size: 15px; /* Slightly larger font size */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Add transitions */
+    padding: 6px 12px;
+    border-radius: 8px;
+    margin-right: 8px;
+    margin-bottom: 5px;
+    font-size: 15px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .tag:hover {
-    background-color: #2980b9; /* Darker blue on hover */
-    transform: scale(1.05); /* Scale up slightly on hover */
+    background-color: #2980b9;
+    transform: scale(1.05);
 }
 
-.image-edit-section { /* Style for the image edit section */
+.image-edit-section {
     display: flex;
-    flex-direction: column; /* Stack image and upload field vertically */
-    align-items: center;  /* Center horizontally */
-    margin-bottom: 15px; /* Space below the image section */
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
-.writeFormGroup {  /* Styles for category/year selects AND image upload */
+.writeFormGroup {
     display: flex;
-    gap: 10px; /* Space between elements */
+    gap: 5px;
     border: 2px solid #410707;
     transition: border-color 0.3s ease;
     padding: 5px;
     border-radius: 5px;
-    margin-top: 10px; /* Space above the upload field */
-    align-items: center; /* Align items vertically (important for image upload) */
+    margin-top: 20px; /* Decreased margin-top */
+    margin-bottom: 10px;
+    align-items: center;
 }
 
 
 .writeFormGroup:hover {
-    border-color: #007bff; /* Change border color on hover */
-    cursor: pointer; /* Change cursor to pointer on hover */
-}
-.writeIcon { /* Style for the plus icon */
-    font-size: 20px;
-    margin-right: 10px;
+    border-color: #007bff;
     cursor: pointer;
 }
 
-.writeFile { /* Hide the actual file input */
+.writeIcon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: #004d4d;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.writeFile {
     display: none;
 }
 
-.writeImg {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-top: 10px;
-    object-fit: cover;
-}
-
-/* Styles for the individual selects inside the group */
 .writeInput {
     padding: 8px;
     border: 1px solid #ccc;
@@ -426,9 +433,8 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     background-color: #fff;
-    /* Remove cursor pointer from the selects themselves */
-    cursor: default; /* Or 'text' if you want an I-beam cursor */
-    flex: 1; /* Allow selects to grow and fill available space */
+    cursor: default;
+    flex: 1;
 }
 
 .writeInput:focus {
@@ -436,32 +442,98 @@
     border-color: #007bff;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
 }
-  
-  /* Optional: Style the select dropdown arrow */
-  .writeInput::-ms-expand {
-    display: none; /* Hide default arrow for IE/Edge */
-  }
-  
-  .writeInput::after {  /* Create custom arrow */
-    content: '\279C'; /* Downwards arrow character */
+
+.writeInput::-ms-expand {
+    display: none;
+}
+
+.writeInput::after {
+    content: '\279C';
     position: absolute;
     top: 50%;
     right: 10px;
     transform: translateY(-50%);
-    pointer-events: none; /* Prevent clicking on the arrow */
+    pointer-events: none;
     font-size: 14px;
     color: #555;
-  }
-  
-  /* Optional: Style the select when it's open */
-  .writeInput:hover::after {
-      color: #007bff;
-  }
-  
-  .writeInput:focus::after {
-      color: #007bff;
-  }
+}
 
+.writeInput:hover::after {
+    color: #007bff;
+}
+
+.writeInput:focus::after {
+    color: #007bff;
+}
+
+.like-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: #f4f4f4;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    width: fit-content;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.like-section:hover {
+    background: #e0e0e0;
+    transform: scale(1.05);
+}
+
+.like-icon {
+    font-size: 20px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.like-section:active {
+    transform: scale(0.95);
+}
+
+.liked {
+    color: #ff0015;
+}
+
+.like-icon:not(.liked) {
+    color: #ab9d9d;
+}
+
+.like-count {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.like-container {
+    display: grid;
+    place-items: center;
+    margin-top: 15px;
+}
+
+.postContainer {
+    margin-left: 50px; /* Reduced left margin */
+    margin-right: 50px; /* Reduced right margin */
+    display: flex;
+    align-items: center;
+    border: 2px solid #919597;
+    border-radius: 8px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    background: #dfe2e4;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+    width: calc(100% - 100px); /* Adjust width to fill more space */
+    max-width: none; /* Remove max-width restriction */
+}
+
+.postContainer:focus-within {
+    border-color: rgba(0, 77, 77, 0.8);
+    box-shadow: 0 0 5px rgba(0, 77, 77, 0.3);
+}
 
 /* Responsive Design adjustments */
 @media (max-width: 768px) {
@@ -523,7 +595,7 @@
         margin: 5px 0;
     }
 
-    .tag { /* Responsive styles for tags */
+    .tag {
         font-size: 14px;
         padding: 5px 10px;
         margin-right: 5px;
@@ -533,11 +605,11 @@
     .writeFormGroup {
         flex-direction: column;
         gap: 8px;
-        padding: 8px; /* Adjust padding for smaller screens */
+        padding: 8px;
     }
-    
+
     .writeInput {
         width: 100%;
-        font-size: 14px; /* Adjust font size for smaller screens */
+        font-size: 14px;
     }
 }

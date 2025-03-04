@@ -9,10 +9,10 @@ export default function TopBar() {
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
-    navigate("/login"); // Redirect to login after logout
+    navigate("/login");
   };
 
-  if (!user) return null; // If no user is logged in, return nothing
+  if (!user) return null;
 
   return (
     <div className="top">
@@ -21,9 +21,9 @@ export default function TopBar() {
           <i className="fa-solid fa-graduation-cap"></i>
           <span className="profile-text"><b>AchieveHub</b></span>
         </Link>
-        <ul className="topList"> {/* Moved topCenter contents here */}
+        <ul className="topList">
           <li className="topListItem">
-            <Link className="link" to="/">
+            <Link className="link" to={user.role === "admin" ? "/dashboard" : "/"}>
               Home
             </Link>
           </li>

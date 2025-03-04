@@ -4,7 +4,7 @@ import "./singlePost.css";
 import axios from "axios";
 import { Context } from "../../context/Context";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faTrashCan, faPaperPlane, faReply } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faTrashCan, faPaperPlane, faReply, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 export default function SinglePost() {
     const location = useLocation();
@@ -29,7 +29,10 @@ export default function SinglePost() {
 
     const [file, setFile] = useState(null);
     const [newPhoto, setNewPhoto] = useState(null);
-    const [initialPhoto, setInitialPhoto] = useState(null); // Store initial photo filename
+    const [initialPhoto, setInitialPhoto] = useState(null);
+
+    const [likes, setLikes] = useState(0);
+    const [liked, setLiked] = useState(false);
 
     useEffect(() => {
         const getPost = async () => {
@@ -41,16 +44,58 @@ export default function SinglePost() {
                 setCategory(res.data.category || "");
                 setYear(res.data.year || "");
                 setTags(res.data.tags || []);
-                setInitialPhoto(res.data.photo || null); // Initialize initialPhoto
+                setInitialPhoto(res.data.photo || null);
+                setLikes(res.data.likes || 0);
 
                 const commentsRes = await axios.get(`/api/comments/${res.data._id}`);
                 setComments(commentsRes.data);
+
+                // Check if the user has liked the post
+                if (user) {
+                    const likedPosts = JSON.parse(localStorage.getItem("likedPosts")) || [];
+                    if (likedPosts.includes(res.data._id)) {
+                      setLiked(true);
+                    }
+                }
             } catch (err) {
                 console.error("Error fetching post or comments:", err);
             }
         };
         getPost();
-    }, [path]);
+    }, [path, user]);
+
+    const handleLike = async () => {
+        try {
+          if (!user) {
+            alert("You must be logged in to like a post.");
+            return;
+          }
+    
+          if (liked) {
+            // Unlike the post
+            await axios.post(`/api/posts/${post._id}/unlike`);
+            setLikes(prevLikes => prevLikes - 1);
+            setLiked(false);
+    
+            // Remove post ID from liked posts in localStorage
+            const likedPosts = JSON.parse(localStorage.getItem("likedPosts")) || [];
+            localStorage.setItem("likedPosts", JSON.stringify(likedPosts.filter(id => id !== post._id)));
+          } else {
+            // Like the post
+            await axios.post(`/api/posts/${post._id}/like`);
+            setLikes(prevLikes => prevLikes + 1);
+            setLiked(true);
+    
+            // Add post ID to liked posts in localStorage
+            const likedPosts = JSON.parse(localStorage.getItem("likedPosts")) || [];
+            localStorage.setItem("likedPosts", JSON.stringify([...likedPosts, post._id]));
+          }
+        } catch (error) {
+          console.error("Error toggling like:", error);
+        }
+      };
+    
+    
 
     const handleDelete = async () => {
         try {
@@ -91,13 +136,11 @@ export default function SinglePost() {
             setUpdateMode(false);
             setFile(null);
             setNewPhoto(null);
-            setInitialPhoto(res.data.photo); // Update initialPhoto after successful update
-
+            setInitialPhoto(res.data.photo);
         } catch (err) {
             console.error("Error updating post:", err);
         }
     };
-
 
     const handleCommentSubmit = async (e) => {
         e.preventDefault();
@@ -141,14 +184,13 @@ export default function SinglePost() {
         try {
             const comment = findCommentById(comments, commentId);
 
-            if (user._id === comment.userId) {
+            // Allow admin or comment author to delete
+            if (user._id === comment.userId || user.role === "admin") {
                 await axios.delete(`/api/comments/${commentId}`, { data: { userId: user._id } });
 
-                // Update the state to remove the deleted comment
                 setComments(prevComments => {
                     return removeCommentFromState(prevComments, commentId);
                 });
-
             } else {
                 alert("You can only delete your own comments.");
             }
@@ -157,7 +199,6 @@ export default function SinglePost() {
         }
     };
 
-    // Helper function to find a comment by ID
     const findCommentById = (commentsArray, commentId) => {
         for (const comment of commentsArray) {
             if (comment._id === commentId) {
@@ -171,21 +212,21 @@ export default function SinglePost() {
         return null;
     };
 
-    // Helper function to remove a comment from the state
     const removeCommentFromState = (commentsArray, commentId) => {
         return commentsArray.filter(comment => {
             if (comment._id === commentId) {
-                return false; // Remove the comment
+                return false;
             }
             if (comment.replies && comment.replies.length > 0) {
-                comment.replies = removeCommentFromState(comment.replies, commentId); // Recursively remove from replies
+                comment.replies = removeCommentFromState(comment.replies, commentId);
             }
-            return true; // Keep the comment
+            return true;
         });
     };
 
     const handleEditComment = (comment) => {
-        if (user._id === comment.userId) {
+        // Allow admin or comment author to edit
+        if (user._id === comment.userId || user.role === "admin") {
             setEditingComment(comment._id);
             setEditedCommentText(comment.text);
         } else {
@@ -196,7 +237,7 @@ export default function SinglePost() {
     const handleUpdateComment = async (commentId) => {
         try {
             const comment = findCommentById(comments, commentId);
-            if (user._id === comment.userId) {
+            if (user._id === comment.userId || user.role === "admin") {
                 const res = await axios.put(`/api/comments/${commentId}`, {
                     userId: user._id,
                     text: editedCommentText,
@@ -275,7 +316,7 @@ export default function SinglePost() {
     };
 
     const renderComment = (comment, level = 0) => {
-        const isAuthor = user && comment.userId === user._id;
+        const isAuthor = user && (comment.userId === user._id || user.role === "admin");
         return (
             <div className={`comment ${level > 0 ? 'reply' : ''}`} key={comment._id}>
                 <div className="commentInfo">
@@ -324,47 +365,45 @@ export default function SinglePost() {
     return (
         <div className="singlePost">
             <div className="singlePostWrapper">
-    
                 {updateMode ? (
                     <form onSubmit={handleUpdate}>
-                        {/* Image Section (Above Title) */}
                         <div className="image-edit-section">
                             {newPhoto ? (
                                 <img className="writeImg" src={newPhoto} alt="New Post Preview" />
                             ) : initialPhoto ? (
                                 <img className="singlePostImg" src={PF + initialPhoto} alt={post.title} />
                             ) : null}
-    
-                            <div className="writeFormGroup">
-                                <label htmlFor="fileInput">
-                                    <i className="writeIcon fa-solid fa-plus"></i>
-                                </label>
+
+
+                            <div className="postContainer">
+                                <div className="writeFormGroup">
+                                    <label htmlFor="fileInput">
+                                        <i className="writeIcon fa-solid fa-plus"></i>
+                                    </label>
+                                    <input
+                                        type="file"
+                                        id="fileInput"
+                                        className="writeFile"
+                                        onChange={(e) => {
+                                            setFile(e.target.files[0]);
+                                            if (e.target.files && e.target.files.length > 0) {
+                                                setNewPhoto(URL.createObjectURL(e.target.files[0]));
+                                            } else {
+                                                setNewPhoto(null);
+                                            }
+                                        }}
+                                    />
+                                </div>
                                 <input
-                                    type="file"
-                                    id="fileInput"
-                                    className="writeFile"
-                                    onChange={(e) => {
-                                        setFile(e.target.files[0]);
-                                        if (e.target.files && e.target.files.length > 0) {
-                                            setNewPhoto(URL.createObjectURL(e.target.files[0]));
-                                        } else {
-                                            setNewPhoto(null);
-                                        }
-                                    }}
+                                    type="text"
+                                    value={title}
+                                    className="singlePostTitleInput"
+                                    autoFocus
+                                    onChange={(e) => setTitle(e.target.value)}
                                 />
                             </div>
                         </div>
-    
-                        {/* Title Input */}
-                        <input
-                            type="text"
-                            value={title}
-                            className="singlePostTitleInput"
-                            autoFocus
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-    
-                        {/* Category and Year Selects */}
+                        
                         <div className="writeFormGroup">
                             <select className="writeInput" value={category} onChange={(e) => setCategory(e.target.value)} required>
                                 <option value="Project">Project</option>
@@ -373,7 +412,6 @@ export default function SinglePost() {
                                 <option value="Journal">Journal</option>
                                 <option value="Competition">Competition</option>
                             </select>
-    
                             <select className="writeInput" value={year} onChange={(e) => setYear(e.target.value)} required>
                                 <option value="First Year">First Year</option>
                                 <option value="Second Year">Second Year</option>
@@ -381,24 +419,17 @@ export default function SinglePost() {
                                 <option value="Final Year">Final Year</option>
                             </select>
                         </div>
-    
-                        {/* Description Textarea */}
                         <textarea className="singlePostDescInput" value={desc} onChange={(e) => setDesc(e.target.value)} />
-    
-                        <button className="singlePostButton" type="submit">
-                            Update
-                        </button>
+                        <button className="singlePostButton" type="submit">Update</button>
                     </form>
                 ) : (
-                    <div> {/* Wrapped with a div */}
-                        {/* Image Display (Above Title) */}
+                    <div>
                         {post.photo && (
                             <img className="singlePostImg" src={PF + post.photo} alt={post.title} />
                         )}
-    
                         <h1 className="siglePostTitle">
                             {title}
-                            {post.username === user?.username && (
+                            {(post.username === user?.username || user?.role === "admin") && (
                                 <div className="singlePostEdit">
                                     <i
                                         className="singlePostIcon fa-regular fa-pen-to-square"
@@ -411,14 +442,12 @@ export default function SinglePost() {
                                 </div>
                             )}
                         </h1>
-    
                         <div className="postTags">
                             <strong>Tags:</strong>
                             {post.tags && post.tags.map((tag, index) => (
                                 <span key={index} className="tag">{tag}</span>
                             ))}
                         </div>
-    
                         <div className="singlePostInfo">
                             <span className="singlePostAuthor">
                                 Author:
@@ -426,20 +455,23 @@ export default function SinglePost() {
                                     <b>{post.username}</b>
                                 </Link>
                             </span>
-    
                             <span className="singlePostDate">
                                 {new Date(post.createdAt).toDateString()}
                             </span>
                         </div>
-    
+                        <div className="like-container">
+                            <div className="like-section" onClick={handleLike}>
+                                <FontAwesomeIcon icon={faThumbsUp} className={`like-icon ${liked ? "liked" : ""}`} />
+                                <span className="like-count">{likes}</span>
+                            </div>
+                        </div>
+                        <br></br>
                         <p className="singlePostDesc">{desc}</p>
                     </div>
                 )}
-    
                 <div className="comments">
                     <h3>Comments</h3>
                     {comments.map(comment => renderComment(comment))}
-    
                     {user && (
                         <form className="commentForm" onSubmit={handleCommentSubmit}>
                             <textarea

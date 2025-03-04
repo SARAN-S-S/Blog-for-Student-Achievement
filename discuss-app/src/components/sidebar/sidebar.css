@@ -25,7 +25,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: linear-gradient(135deg, #ffe6e6 0%, #ffcccc 100%); /* Light peach to coral */
+  background-color: #e6fbff; 
   padding: 20px;
   width: 100%;
   box-sizing: border-box;
@@ -66,6 +66,7 @@
   height: auto;
   border-radius: 10px;
   margin: 10px 0;
+  border: 3px solid #005566;
 }
 
 /* Sidebar Paragraph */

@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User");  
-//const Post = require("../models/Post"); 
+const Post = require("../models/Post");
+const express = require("express"); 
 
 // Update User
 router.put("/:id", async (req, res) => {
@@ -57,6 +58,35 @@ router.get("/:id", async (req, res) => {
     }
 })
 
+
+// Get list of users with pagination and search
+router.get("/", async (req, res) => {
+  const { page = 1, search = "" } = req.query;
+  const limit = 10;
+  const skip = (page - 1) * limit;
+
+  try {
+    const query = {
+      role: "student",
+      $or: [
+        { username: { $regex: search, $options: "i" } },
+        { email: { $regex: search, $options: "i" } },
+      ],
+    };
+
+    const users = await User.find(query)
+      .select("username email postCount")
+      .skip(skip)
+      .limit(limit);
+
+    const totalUsers = await User.countDocuments(query);
+    const totalPages = Math.ceil(totalUsers / limit);
+
+    res.status(200).json({ users, totalPages });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 
 module.exports = router;

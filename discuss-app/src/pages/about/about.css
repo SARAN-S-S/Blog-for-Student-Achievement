@@ -129,7 +129,7 @@ the end */
 
 /* About Page Styles */
 .about {
-  background: linear-gradient(135deg, #f0e4d7 0%, #fae1dd 50%, #f0e4d7 100%);
+  background-color: #d7edd7;
   min-height: 100vh; /* Ensure it covers the full page height */
   display: flex;
   justify-content: center;

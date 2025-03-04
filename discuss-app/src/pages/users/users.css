@@ -1,0 +1,196 @@
+/* Users Page Container */
+.usersPage {
+  padding: 20px;
+  font-family: sans-serif;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.usersPage h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #343a40;
+}
+
+.usersPage span {
+  display: block;
+  width: fit-content;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #b5c2c5;
+  color: #212121;
+  border-radius: 8px;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Count Grid Section */
+.chartInfo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.chartInfo .countContainer {
+  background-color: #f0d4e3;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid #ac3aa6;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.countContainer:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.countContainer h3 {
+  font-size: 1.2rem;
+  color: #495057;
+}
+
+.countContainer .countValue {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.countContainer .percentage {
+  font-size: 1.1rem;
+  color: #28a745;
+}
+
+/* BarChart Section */
+.barChartContainer {
+  width: 80%;
+  height: 300px;
+  margin: 20px auto;
+}
+
+.barChartContainer canvas {
+  max-width: 100% !important;
+  height: 100% !important;
+  border-radius: 8px;
+  border: 2px solid #2e71af;
+}
+
+/* Box Grid and Search */
+.boxgrid {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #4d6f8d;
+  border-radius: 30px;
+  padding: 4px 8px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  position: relative; /* Ensure proper positioning of the icon inside */
+}
+
+.searchBar input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  padding: 4px;
+  font-size: 0.9rem;
+  background-color: transparent;
+  padding-left: 30px; /* Add padding to the left to avoid text overlap with the icon */
+}
+
+.searchIcon {
+  position: absolute;
+  left: 8px;  /* Place the icon correctly inside the left side */
+  color: #4d6f8d;
+  pointer-events: none;  /* Prevent icon from being clicked */
+  transition: color 0.3s;
+}
+
+.searchIcon:hover {
+  color: #111b24; /* Darker icon color on hover */
+}
+
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  margin: 0 10px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 1rem;
+  margin: 0 10px;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+  background-color: white;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  table {
+    font-size: 0.9rem;
+  }
+
+  th,
+  td {
+    padding: 8px;
+  }
+
+  .chartInfo {
+    grid-template-columns: 1fr;
+  }
+}
