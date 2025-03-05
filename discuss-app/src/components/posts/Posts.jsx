@@ -1,12 +1,16 @@
 import React from "react";
-import Post from '../post/Post';
+import Post from "../post/Post";
 import "./posts.css";
 
-export default function Posts({ posts }) {
+export default function Posts({ posts = [] }) {  // Default value to prevent undefined error
+  if (posts.length === 0) {
+    return <div className="no-posts">No posts available.</div>;
+  }
+
   return (
     <div className="posts">
-      {posts.map((p, index) => (
-        <Post key={index} post={p} />
+      {posts.map((post) => (
+        <Post key={post._id} post={post} />
       ))}
     </div>
   );

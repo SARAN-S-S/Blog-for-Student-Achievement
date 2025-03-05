@@ -1,164 +1,174 @@
-.postCard {
-    width: 385px;
-    margin: 0px 25px 40px 25px;
+/* Parent container for uniform grid layout */
+.postContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); /* Ensures uniform card width */
+    gap: 30px 25px; /* Increased horizontal and vertical spacing between cards */
+    justify-content: center;
     padding: 20px;
-    background-color: #f0fbff; /* Lighter background for a softer look */
-    border: 2.5px solid #9bbcd4; /* Softer blue border */
-    border-radius: 12px;
+    background-color: #f8f9fa; /* Light background for better contrast */
+}
+
+/* Post card with increased width and consistent size */
+.postCard {
+    display: grid;
+    grid-template-columns: 120px 1fr; /* Adjusted image column for new width */
+    gap: 15px; /* Consistent gap between image and content */
+    width: 380px; /* Slightly expanded width for a spacious layout */
+    margin: 0px 20px 30px 20px; 
+    padding: 15px;
+    background-color: #f0fbff;
+    border: 2px solid #9bbcd4;
+    border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
+    align-items: center; /* Center image vertically */
+    height: 180px; /* Fixed height for uniform size across rows */
 }
+
+
+
 
 .postCard:hover {
     transform: scale(1.02);
     border-color: #578fb7;
 }
 
+/* Image with increased size and centered alignment */
 .postImg {
-    width: 100%;
-    height: 280px;
+    width: 100px; /* Increased width for larger images */
+    height: 100px; /* Increased height for larger images */
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: 6px;
+    align-self: center; /* Center image vertically */
 }
 
-.postInfo {
+/* Post content with increased size */
+.postContent {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 6px; /* More spacing between content elements */
+    justify-content: center; /* Center content vertically */
 }
 
-.postTitle {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    margin-top: 15px;
-    cursor: pointer;
-    transition: color 0.3s ease-in-out;
-    text-transform: uppercase;
-}
-
-.postTitle:hover {
-    color: #0077b6; /* Attractive hover color */
-}
-
-.postDate {
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 13px;
-    color: red;
-    margin-top: 15px;
-}
-
-.postDescription {
-    font-family: 'Varela Round', sans-serif;
-    font-size: 14px;
-    color: #444;
-    line-height: 24px;
-    margin-top: 15px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-    overflow: hidden;
-}
-
-/* Post Tags */
+/* Tags container with larger size */
 .postTags {
     display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 10px;
-    justify-content: center;
+    gap: 6px;
+    margin-bottom: 4px;
 }
 
 .postTag {
     background: linear-gradient(135deg, #ff6f61 0%, #ff9966 100%);
-    padding: 6px 12px;
-    border-radius: 20px;
-    font-size: 13px;
+    padding: 3px 8px; /* Increased padding for tags */
+    border-radius: 10px;
+    font-size: 12px; /* Larger font for tags */
     color: white;
     font-weight: bold;
     text-transform: uppercase;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease-in-out;
 }
 
 .postTag:hover {
     background: linear-gradient(135deg, #ff4b3e 0%, #ff7b50 100%);
-    transform: scale(1.1);
+    transform: scale(1.05);
+}
+
+/* Title with increased size and controlled line wrapping */
+.postTitle {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 18px; /* Increased font size for title */
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+    text-transform: capitalize;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines for uniform height */
+    -webkit-box-orient: vertical;
+    line-height: 1.4em; /* Better line spacing for readability */
+    max-height: 2.8em; /* Limit height to fit 2 lines */
+}
+
+.postTitle:hover {
+    color: #0077b6;
+}
+
+/* Author and Date styling with larger size and bold author name */
+.postAuthorDate {
+    display: flex;
+    align-items: center;
+    font-family: 'Lora', serif;
+    font-size: 14px; /* Increased font size */
+    color: #333; /* Darker color for text */
+    margin-top: 2px;
+    gap: 8px; /* Space between author and date */
+}
+
+.authorName {
+    font-weight: bold;
+    color: #005073; /* Differentiated dark color for author name */
+}
+
+.postDate {
+    font-size: 13px;          /* Slightly smaller than author name for distinction */
+    color: #333;              /* Darker text color for better contrast */
+    background-color: #e6f2f5;/* Consistent soft background */
+    padding: 2px 6px;         /* Padding for better readability */
+    border-radius: 5px;       /* Rounded corners for a smoother look */
+    font-weight: bold;        /* Bold text for emphasis */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle box shadow for depth */
 }
 
 
-@media (max-width: 768px) { /* Tablet and smaller */
-    .postCard {
-        width: 90%; /* Occupy most of the screen width */
-        margin: 20px auto; /* Center the card */
-        padding: 15px;
-    }
+/* Description with increased size */
+.postDescription {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 14px; /* Increased font size */
+    color: #444;
+    line-height: 18px;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Show up to 2 lines */
+    -webkit-box-orient: vertical;
+    margin-top: 4px;
+}
 
-    .postImg {
-        height: 200px; /* Adjust image height */
+/* Responsive adjustments for compact view */
+@media (max-width: 768px) {
+    .postCard {
+        grid-template-columns: 90px 1fr; /* Adjusted for mobile */
+        width: 340px; /* Compact for mobile */
+        padding: 12px;
+        height: auto; /* Allow flexible height for mobile */
     }
 
     .postTitle {
-        font-size: 1.5rem; /* Adjust title size */
-        margin-top: 10px;
+        font-size: 16px; /* Slightly smaller title for mobile */
     }
 
-    .postDate {
-        font-size: 0.8rem; /* Adjust date size */
-        margin-top: 10px;
-    }
-
+    .postAuthorDate,
     .postDescription {
-        font-size: 1rem; /* Adjust description size */
-        -webkit-line-clamp: 3; /* Reduce number of lines */
-    }
-
-    .postTags {
-        gap: 5px; /* Reduce gap between tags */
-        margin-top: 8px;
-    }
-
-    .postTag {
-        font-size: 0.8rem; /* Adjust tag size */
-        padding: 5px 10px;
+        font-size: 13px; /* Adjusted for mobile */
     }
 }
 
-@media (max-width: 480px) { /* Mobile */
+@media (max-width: 480px) {
     .postCard {
-        width: 95%; /* Take up almost full width */
+        grid-template-columns: 80px 1fr;
+        width: 300px;
         padding: 10px;
     }
 
-    .postImg {
-        height: 150px; /* Further reduce image height */
-    }
-
     .postTitle {
-        font-size: 1.2rem; /* Further reduce title size */
-        margin-top: 8px;
+        font-size: 15px; /* Slightly smaller for small screens */
     }
 
-    .postDate {
-        font-size: 0.7rem; /* Further reduce date size */
-        margin-top: 8px;
-    }
-
+    .postAuthorDate,
     .postDescription {
-        font-size: 0.9rem; /* Further reduce description size */
-        -webkit-line-clamp: 2; /* Reduce number of lines even further */
-    }
-
-    .postTags {
-        gap: 3px; /* Further reduce gap between tags */
-        margin-top: 5px;
-    }
-
-    .postTag {
-        font-size: 0.7rem; /* Further reduce tag size */
-        padding: 4px 8px;
+        font-size: 12px; /* Adjusted for smaller devices */
     }
 }

@@ -1,33 +1,129 @@
-/*
-.home  {
-    display: flex;
-    background: linear-gradient(135deg, #d4d5e1 0%, #ececec 50%,#d4d5e1 0%);
-
-}
-
-*/
-
-
+/* Home Container */
 .home {
-    display: flex;
-    justify-content: space-between;
-    background-color: #d7edd7;  /* Light background */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  @media (max-width: 768px) {
-    .home {
-      flex-direction: column;
-      padding: 15px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .home {
-        padding: 10px; 
-    }
+  display: flex;
+  justify-content: space-between;
+  background-color: #f0f9f0;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
 }
-  
-  
+
+/* Posts Container */
+.posts-container {
+  flex: 9;
+  background-color: #fff7e6;
+  border: 2px solid #f0c27b;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-right: 20px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.posts-container:hover {
+  border: 3px solid #e6a157;
+}
+
+/* Pagination and Buttons */
+.pagination, .page-info-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Page Number Button Styles */
+.page-number-btn {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Highlighted Current Page */
+.active-page {
+  background-color: #ff6392;
+  color: #fff;
+  border: 2px solid #ff6392;
+}
+
+/* Adjacent Pages Style */
+.adjacent-page {
+  background-color: #ffd1dc;
+  color: #333;
+}
+
+/* Hover Effect for Page Numbers */
+.page-number-btn:hover {
+  background-color: #ffe4e1;
+  border-color: #ff6392;
+}
+
+/* Disabled Button Style */
+button:disabled {
+  background-color: #eee;
+  cursor: not-allowed;
+}
+
+/* First and Last Button Styles */
+.first-last-btn, .prev-next-btn {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.first-last-btn:hover, .prev-next-btn:hover {
+  background-color: #ddd;
+}
+
+/* Ellipsis Style */
+.pagination span {
+  cursor: default;
+  background-color: transparent;
+  border: none;
+  color: #666;
+  font-size: 18px;
+}
+
+/* Page Info Container */
+.page-info-container {
+  background-color: #f0f8ff;
+  border: 2px solid #b0c4de;
+  padding: 5px 15px;
+  border-radius: 8px;
+  color: #333;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .home {
+    flex-direction: column;
+    padding: 15px;
+  }
+  .posts-container {
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    padding: 10px;
+  }
+  .posts-container {
+    padding: 15px;
+  }
+  .pagination button {
+    padding: 6px 10px;
+    margin: 0 3px;
+  }
+}

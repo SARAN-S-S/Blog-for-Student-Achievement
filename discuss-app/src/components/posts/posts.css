@@ -8,6 +8,37 @@
 }
 
 
+.no-posts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f9f9; /* Light and clean background */
+    color: #333;               /* Dark text for readability */
+    font-size: 18px;
+    font-weight: bold;
+    padding: 20px;
+    border: 2px dashed #4CAF50; /* Dashed border for a friendly feel */
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.6s ease-in-out; /* Smooth fade-in effect */
+}
+
+/* Subtle fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Hover effect to make it interactive */
+.no-posts:hover {
+    background-color: #e0f7e0; /* Slight green tint on hover */
+    border-color: #45a049;     /* Darker green border */
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+
+
 @media (max-width: 768px) { /* Tablet and smaller */
     .posts {
         flex: 1; /* Take full width */
@@ -15,10 +46,22 @@
         justify-content: center; /* Center the posts */
 
     }
+
+    .no-posts {
+        padding: 15px;
+        margin: 10px;
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 480px) { /* Mobile */
     .posts {
         margin: 5px; /* Further reduced margin */
+    }
+
+    .no-posts {
+        padding: 10px;
+        margin: 5px;
+        font-size: 14px;
     }
 }
