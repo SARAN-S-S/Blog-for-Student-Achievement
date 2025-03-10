@@ -42,25 +42,27 @@
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
+  background-color: #ffd1dc;  /* Inactive background */
+  color: #333;  /* Inactive text color */
 }
 
-/* Highlighted Current Page */
+/* Highlighted Current Page - Darker Background */
 .active-page {
-  background-color: #ff6392;
+  background-color: #cc5073;  /* Darker shade for active */
   color: #fff;
-  border: 2px solid #ff6392;
+  border: 2px solid #cc5073;
 }
 
-/* Adjacent Pages Style */
+/* Adjacent Pages Style - Darker Text for Inactive */
 .adjacent-page {
-  background-color: #ffd1dc;
-  color: #333;
+  background-color: #ffd1dc;  /* Same as inactive background */
+  color: #993355;  /* Darker text color for inactive */
 }
 
 /* Hover Effect for Page Numbers */
 .page-number-btn:hover {
   background-color: #ffe4e1;
-  border-color: #ff6392;
+  border-color: #6e1630;
 }
 
 /* Disabled Button Style */
@@ -76,6 +78,7 @@ button:disabled {
   background-color: #f5f5f5;
   border-radius: 5px;
   transition: 0.3s;
+  color: #555;  /* Darker text for inactive */
 }
 
 .first-last-btn:hover, .prev-next-btn:hover {

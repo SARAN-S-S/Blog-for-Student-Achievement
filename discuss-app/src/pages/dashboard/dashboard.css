@@ -46,32 +46,3 @@
     font-size: 2rem; /* Adjusted font size */
 }
 
-.cardlast {
-    background: #b8ded7; /* Same background as other cards */
-    padding: 30px; 
-    border-radius: 15px; 
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1); 
-    text-align: center;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease; 
-    border: 2px solid #1d786e; 
-    height: 150px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    grid-column: span 2; /* Makes the card span across two columns */
-    width: 50%; /* Centers the card by controlling width */
-    margin: 0 auto; /* Centers it in the grid */
-}
-
-.cardlast:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.15);
-}
-
-.cardlast h2 {
-    margin-bottom: 15px; 
-    color: #2c179a; 
-    font-size: 2rem;
-}

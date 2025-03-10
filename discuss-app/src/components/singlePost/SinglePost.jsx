@@ -35,34 +35,34 @@ export default function SinglePost() {
     const [liked, setLiked] = useState(false);
 
     useEffect(() => {
-        const getPost = async () => {
+        const getPostData = async () => {
             try {
-                const res = await axios.get("/api/posts/" + path);
-                setPost(res.data);
-                setTitle(res.data.title);
-                setDesc(res.data.desc);
-                setCategory(res.data.category || "");
-                setYear(res.data.year || "");
-                setTags(res.data.tags || []);
-                setInitialPhoto(res.data.photo || null);
-                setLikes(res.data.likes || 0);
-
-                const commentsRes = await axios.get(`/api/comments/${res.data._id}`);
+                const [postRes, commentsRes] = await Promise.all([
+                    axios.get(`/api/posts/${path}`),
+                    axios.get(`/api/comments/${path}`)
+                ]);
+                const postData = postRes.data;
+                setPost(postData);
+                setTitle(postData.title);
+                setDesc(postData.desc);
+                setCategory(postData.category || "");
+                setYear(postData.year || "");
+                setTags(postData.tags || []);
+                setInitialPhoto(postData.photo || null);
+                setLikes(postData.likes || 0);
                 setComments(commentsRes.data);
-
-                // Check if the user has liked the post
+                
                 if (user) {
                     const likedPosts = JSON.parse(localStorage.getItem("likedPosts")) || [];
-                    if (likedPosts.includes(res.data._id)) {
-                      setLiked(true);
-                    }
+                    setLiked(likedPosts.includes(postData._id));
                 }
             } catch (err) {
                 console.error("Error fetching post or comments:", err);
             }
         };
-        getPost();
+        getPostData();
     }, [path, user]);
+    
 
     const handleLike = async () => {
         try {

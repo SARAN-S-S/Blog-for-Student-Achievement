@@ -1,0 +1,176 @@
+.postForReview {
+  padding: 20px;
+  background-color: #d7dde3;
+  min-height: 100vh;
+}
+
+.postForReviewWrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgb(213, 223, 214);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.singlePostImg {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.siglePostTitle {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+}
+
+.singlePostEdit {
+  float: right;
+  font-size: 16px;
+}
+
+.singlePostIcon {
+  margin-left: 10px;
+  cursor: pointer;
+  color: #333;
+}
+
+.postTags {
+  margin-bottom: 20px;
+}
+
+.tag {
+  display: inline-block;
+  background-color: #3498db;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  margin-right: 8px;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+
+.singlePostInfo {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  color: #7f8c8d;
+}
+
+.singlePostDesc {
+  color: #2c3e50;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+}
+
+.approvalSection {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.approvalSection select {
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  width: 30%;
+}
+
+.approvalSection textarea {
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  resize: vertical;
+}
+
+.approvalSection button {
+  padding: 10px 40px;         /* Reduced padding for a smaller button */
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;            /* Reduced font size */
+  font-weight: bold;
+  border: 2px solid #2bcb31;
+  width: fit-content;         /* Keeps the button compact based on its content */
+}
+
+.approvalSection button:hover {
+  background-color: #b0bdb1;
+  color: black;
+}
+
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.loadingMessage {
+  text-align: center;
+  color: #555;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.likeContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.likeIcon {
+  font-size: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+
+.like-icon.liked {
+  color: #007bff;
+  transform: scale(1.2);
+}
+
+.updateSuccessMessage {
+  color: #000000;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 18px; /* Increased font size */
+  text-align: center; /* Center the text */
+  animation: fadeOut 3s forwards;
+}
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}

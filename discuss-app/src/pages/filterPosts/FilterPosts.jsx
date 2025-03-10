@@ -9,6 +9,8 @@ export default function FilterPosts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 10;
 
   const fetchPosts = useCallback(async () => {
     setLoading(true);
@@ -26,6 +28,19 @@ export default function FilterPosts() {
   useEffect(() => {
     fetchPosts();
   }, [fetchPosts]);
+
+  // Pagination logic
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const totalPages = Math.ceil(posts.length / postsPerPage);
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setCurrentPage(newPage);
+    }
+  };
 
   return (
     <div className="filterPosts">
@@ -58,16 +73,36 @@ export default function FilterPosts() {
         <div className="message-container">
           <p className="error">{error}</p>
         </div>
-      ) : posts.length === 0 ? (
+      ) : currentPosts.length === 0 ? (
         <div className="message-container">
           <p className="no-posts">No posts found for this category and year.</p>
         </div>
       ) : (
-        <div className="postsContainer">
-          <Posts posts={posts} />
-        </div>
-      )}
+        <>
+          <div className="postsContainer">
+            <Posts posts={currentPosts} />
+          </div>
 
+          {/* Pagination */}
+          <div className="pagination">
+            <button
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </button>
+            <span>
+              Page {currentPage} of {totalPages}
+            </span>
+            <button
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </button>
+          </div>
+        </>
+      )}
     </div>
   );
 }

@@ -13,6 +13,11 @@ import AllPosts from "./pages/allPosts/AllPosts";
 import ManagePosts from "./pages/managePosts/ManagePosts";
 import Statistics from "./pages/statistics/Statistics";
 import FilterPosts from "./pages/filterPosts/FilterPosts";
+import ApprovalPending from "./pages/approvalPending/ApprovalPending";
+import PostForReview from "./components/postForReview/PostForReview";
+
+
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -49,6 +54,11 @@ function App() {
         <Route path="/manageposts" element={user?.role === "admin" ? <ManagePosts /> : <Navigate to="/login" />} />
         <Route path="/statistics" element={user?.role === "admin" ? <Statistics /> : <Navigate to="/login" />} />
         <Route path="/filter-posts" element={user?.role === "admin" ? <FilterPosts /> : <Navigate to="/login" />} />
+        <Route path="/approval-pending" element={user?.role === "admin" ? <ApprovalPending /> : <Navigate to="/login" />} />
+        <Route path="/approval-pending" element={<ApprovalPending />} />
+        <Route path="/review-post/:postId" element={<PostForReview />} />
+
+
         <Route path="/signup" element={user ? <Navigate to="/dashboard" /> : <Signup />} />
         <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
         <Route path="/write" element={user ? <Write /> : <Navigate to="/login" />} />

@@ -27,7 +27,7 @@
     height: 400px;
     object-fit: cover;
     border-radius: 10px;
-    border: 3px solid black;
+    border: 3.5px solid rgb(25, 19, 146);
     display: block;
     margin: 0 auto;
 }
@@ -259,11 +259,11 @@
 }
 
 .edit-icon {
-    color: #27ae60;
+    color: #651bee;
 }
 
 .delete-icon {
-    color: #e74c3c;
+    color: #f31c05;
 }
 
 reply-icon {
@@ -362,6 +362,10 @@ reply-icon {
 
 .postTags {
     margin-top: 10px;
+    text-align: center; /* Center the text */
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center tags horizontally */
+    flex-wrap: wrap; /* Allow tags to wrap to the next line */
 }
 
 .tag {
@@ -370,8 +374,7 @@ reply-icon {
     color: white;
     padding: 6px 12px;
     border-radius: 8px;
-    margin-right: 8px;
-    margin-bottom: 5px;
+    margin: 5px; /* Add margin for spacing between tags */
     font-size: 15px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }

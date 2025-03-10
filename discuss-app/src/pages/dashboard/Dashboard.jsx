@@ -23,13 +23,16 @@ export default function Dashboard() {
         <div className="card" onClick={() => navigate("/allposts")}>
           <h2>Total Posts</h2>
         </div>
+        <div className="card" onClick={() => navigate("/approval-pending")}>
+          <h2>Approval Pending</h2>
+        </div>
         <div className="card" onClick={() => navigate("/manageposts")}>
           <h2>Manage Posts</h2>
         </div>
         <div className="card" onClick={() => navigate("/statistics")}>
           <h2>Statistics</h2>
         </div>
-        <div className="cardlast" onClick={() => navigate("/filter-posts")}>
+        <div className="card" onClick={() => navigate("/filter-posts")}>
           <h2>Filter Posts</h2>
         </div>
       </div>

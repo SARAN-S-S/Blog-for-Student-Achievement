@@ -17,7 +17,8 @@ export default function Write() {
       username: user.username,
       title,
       desc,
-      tags: [category, year], // Add tags to the post
+      tags: [category, year], 
+      approved: false,
     };
     if (file) {
       const data = new FormData();
