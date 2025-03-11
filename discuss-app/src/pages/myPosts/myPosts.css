@@ -132,7 +132,10 @@
   background-color: #007bff;
   color: white;
   font-weight: bold;
+  text-align: center; /* Centers text horizontally */
+  vertical-align: middle; /* Centers text vertically */
 }
+
 
 .mypostTable tr:nth-child(even) {
   background-color: #eef5ff;
@@ -248,4 +251,66 @@
 .mypostRejectionReason {
   color: #7b00ff; /* Grey color for rejection reason */
   font-weight: bold;
+}
+
+/* Loading Spinner */
+.mypostLoading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  font-size: 1.2em;
+  color: #555;
+}
+
+.mypostSpinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: #09f;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* No Posts Available Style */
+.mypostNoPosts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.mypostNoPostsContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #fff9f0;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid #f0e0d0;
+}
+
+.mypostNoPostsEmoji {
+  font-size: 3em;
+  margin-bottom: 15px;
+  color: #e6a157;
+}
+
+.mypostNoPostsMessage {
+  font-size: 1.1em;
+  color: #777;
+  max-width: 300px;
 }

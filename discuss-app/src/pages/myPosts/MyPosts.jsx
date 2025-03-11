@@ -14,14 +14,18 @@ export default function MyPosts() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPosts, setTotalPosts] = useState(0);
   const postsPerPage = 10;
+  const [loading, setLoading] = useState(true);
 
   const fetchPosts = useCallback(async () => {
+    setLoading(true);
     try {
       const res = await axios.get(`/api/posts/my-posts?username=${user.username}&page=${currentPage}&limit=${postsPerPage}&search=${search}`);
       setPosts(res.data.posts);
       setTotalPosts(res.data.total);
     } catch (err) {
       console.error("Error fetching posts:", err);
+    } finally {
+      setLoading(false);
     }
   }, [user, currentPage, search]);
 
@@ -73,68 +77,90 @@ export default function MyPosts() {
         </div>
 
         <div className="mypostTableContainer">
-          <table className="mypostTable">
-            <thead>
-              <tr>
-                <th>Select</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Email</th>
-                <th>Date</th>
-                <th>Student Year</th>
-                <th>Event Type</th>
-                <th>Image</th>
-                <th>Status</th>
-                <th>Rejection Reason</th>
-                <th>Review</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {posts.map((post) => (
-                <tr key={post._id}>
-                  <td>
-                    <input
-                      type="checkbox"
-                      checked={selectedPosts.includes(post._id)}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setSelectedPosts([...selectedPosts, post._id]);
-                        } else {
-                          setSelectedPosts(selectedPosts.filter((id) => id !== post._id));
-                        }
-                      }}
-                    />
-                  </td>
-                  <td>{post.title}</td>
-                  <td>{post.username}</td>
-                  <td>{user.email}</td>
-                  <td>{new Date(post.createdAt).toDateString()}</td>
-                  <td>{post.tags[0]}</td>
-                  <td>{post.tags[1]}</td>
-                  <td>{post.photo ? "Image" : "No Image"}</td>
-                  <td className={`mypostStatus ${post.status}`}>{post.status}</td>
-                  <td className="mypostRejectionReason">{post.rejectionReason || "N/A"}</td>
-                  <td>
-                    {post.status === "rejected" ? (
-                      <Link className="writelink" to="/write">
-                        <FontAwesomeIcon icon={faPlusCircle} /> Post
-                      </Link>
-                    ) : (
-                      <Link to={`/post/${post._id}`} className="mypostActionLink">
-                        <FontAwesomeIcon icon={faEye} /> Review
-                      </Link>
-                    )}
-                  </td>
-                  <td>
-                    <button onClick={() => handleDelete(post._id)} className="mypostDeleteButton">
-                      <FontAwesomeIcon icon={faTrash} /> Delete
-                    </button>
-                  </td>
+          {loading ? (
+            <div className="mypostLoading">
+              <div className="mypostSpinner"></div>
+              Fetching Your Posts...
+            </div>
+          ) : posts.length === 0 ? (
+            <div className="mypostNoPosts">
+              <div className="mypostNoPostsContent">
+                <span className="mypostNoPostsEmoji">📝</span>
+                <p className="mypostNoPostsMessage">
+                  You have no posts yet. Start writing and share your Achievements!
+                </p>
+              </div>
+            </div>
+          ) : (
+            <table className="mypostTable">
+              <thead>
+                <tr>
+                  <th>Select</th>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>Email</th>
+                  <th>Date</th>
+                  
+                  <th>Event Type 1</th>
+                  <th>Event Type 2 (Optional)</th>
+                  <th>Student Year</th>
+                  <th>Image</th>
+                  <th>Status</th>
+                  <th>Rejection Reason</th>
+                  <th>Review</th>
+                  <th>Delete</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {posts.map((post) => (
+                  <tr key={post._id}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        checked={selectedPosts.includes(post._id)}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setSelectedPosts([...selectedPosts, post._id]);
+                          } else {
+                            setSelectedPosts(selectedPosts.filter((id) => id !== post._id));
+                          }
+                        }}
+                      />
+                    </td>
+                    <td>{post.title}</td>
+                    <td>{post.username}</td>
+                    <td>{user.email}</td>
+                    <td>{new Date(post.createdAt).toDateString()}</td>
+                    <td>{post.tags[0]}</td>
+                    
+                    <td style={{ textAlign: "center", verticalAlign: "middle" }}>
+                      {post.tags?.[2] ? post.tags[2] : "-"}
+                    </td>
+                    <td>{post.tags[1]}</td>
+                    <td>{post.photo ? "Image" : "No Image"}</td>
+                    <td className={`mypostStatus ${post.status}`}>{post.status}</td>
+                    <td className="mypostRejectionReason" style={{ textAlign: "center", verticalAlign: "middle" }}>{post.rejectionReason || "N/A"}</td>
+                    <td >
+                      {post.status === "rejected" ? (
+                        <Link className="writelink" to="/write">
+                          <FontAwesomeIcon icon={faPlusCircle} /> Post
+                        </Link>
+                      ) : (
+                        <Link to={`/post/${post._id}`} className="mypostActionLink">
+                          <FontAwesomeIcon icon={faEye} /> Review
+                        </Link>
+                      )}
+                    </td>
+                    <td>
+                      <button onClick={() => handleDelete(post._id)} className="mypostDeleteButton">
+                        <FontAwesomeIcon icon={faTrash} /> Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
 

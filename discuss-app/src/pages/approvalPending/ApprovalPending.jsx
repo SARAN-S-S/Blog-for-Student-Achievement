@@ -91,7 +91,9 @@ export default function ApprovalPendingCustom() {
 
   return (
     <div className="approvalPendingCustom">
-      <h1>Pending Posts</h1>
+      <div className="approvaltitle" >
+        <h1>Pending Posts</h1>
+      </div>
       <div className="containerApproval">
         <div className="searchContainerApproval">
           <div className="searchWrapperApproval">
@@ -117,6 +119,13 @@ export default function ApprovalPendingCustom() {
             <p className="loadingMessageApproval">Loading posts...</p>
             <div className="spinnerApproval"></div>
           </div>
+        ) : filteredPosts.length === 0 ? (
+          <div className="noPostsContainerApproval">
+            <div className="noPostsContentApproval">
+              <span className="noPostsEmojiApproval">📋</span>
+              <p className="noPostsMessageApproval">No pending posts to review.</p>
+            </div>
+          </div>
         ) : (
           <>
             <div className="tableContainerApproval">
@@ -128,8 +137,10 @@ export default function ApprovalPendingCustom() {
                     <th>Author</th>
                     <th>Email</th>
                     <th>Date</th>
+                    
+                    <th>Event Type 1</th>
+                    <th>Event Type 2 (Optional)</th>
                     <th>Student Year</th>
-                    <th>Event Type</th>
                     <th>Image</th>
                     <th>Review</th>
                     <th>Approve</th>
@@ -158,6 +169,9 @@ export default function ApprovalPendingCustom() {
                       <td>{post.email}</td>
                       <td>{new Date(post.createdAt).toDateString()}</td>
                       <td>{post.tags[0]}</td>
+                      <td style={{ textAlign: "center", verticalAlign: "middle" }}>
+                        {post.tags?.[2] ? post.tags[2] : "-"}
+                      </td>
                       <td>{post.tags[1]}</td>
                       <td>{post.photo ? "Image" : "No Image"}</td>
                       <td>

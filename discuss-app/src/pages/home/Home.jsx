@@ -51,58 +51,91 @@ export default function Home() {
   return (
     <>
       <Header />
-      <div className="home">
-        <div className="posts-container">
+      <div className="homeMainContainer">
+        <div className="homePostsContainer">
           {loading ? (
-            <div className="loading">Loading...</div>
+            <div className="homeLoading">
+              <div className="homeSpinner"></div>
+              Loading...
+            </div>
+          ) : posts.length === 0 ? (
+            <div className="homeNoPosts">
+              <div className="homeNoPostsContent">
+                <span className="homeNoPostsEmoji">📜</span>
+                <p className="homeNoPostsMessage">
+                  No posts available. Check back later or try a different search.
+                </p>
+              </div>
+            </div>
           ) : (
             <Posts posts={currentPosts} />
           )}
 
           {/* Pagination Controls */}
-          <div className="pagination">
-            <button onClick={handleFirstPage} disabled={currentPage === 1} className="first-last-btn">
-              First
-            </button>
-            <button onClick={handlePreviousPage} disabled={currentPage === 1} className="prev-next-btn">
-              Previous
-            </button>
+          {posts.length > 0 && (
+            <div className="homePagination">
+              <button
+                onClick={handleFirstPage}
+                disabled={currentPage === 1}
+                className="homeFirstLastBtn"
+              >
+                First
+              </button>
+              <button
+                onClick={handlePreviousPage}
+                disabled={currentPage === 1}
+                className="homePrevNextBtn"
+              >
+                Previous
+              </button>
 
-            {/* Display Only 3 Pages with Conditional Styling */}
-            {Array.from({ length: totalPages }, (_, index) => index + 1)
-              .filter(
-                (page) =>
-                  page === currentPage ||
-                  page === currentPage - 1 ||
-                  page === currentPage + 1
-              )
-              .map((page) => (
-                <button
-                  key={page}
-                  onClick={() => setCurrentPage(page)}
-                  className={`page-number-btn ${
-                    page === currentPage
-                      ? "active-page"    // Current page style
-                      : "adjacent-page"  // Adjacent pages style
-                  }`}
-                >
-                  {page}
-                </button>
-              ))}
+              {/* Display Only 3 Pages with Conditional Styling */}
+              {Array.from({ length: totalPages }, (_, index) => index + 1)
+                .filter(
+                  (page) =>
+                    page === currentPage ||
+                    page === currentPage - 1 ||
+                    page === currentPage + 1
+                )
+                .map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`homePageNumberBtn ${
+                      page === currentPage
+                        ? "homeActivePage" // Current page style
+                        : "homeAdjacentPage" // Adjacent pages style
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
 
-            <button onClick={handleNextPage} disabled={currentPage === totalPages} className="prev-next-btn">
-              Next
-            </button>
-            <button onClick={handleLastPage} disabled={currentPage === totalPages} className="first-last-btn">
-              Last
-            </button>
-          </div>
+              <button
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+                className="homePrevNextBtn"
+              >
+                Next
+              </button>
+              <button
+                onClick={handleLastPage}
+                disabled={currentPage === totalPages}
+                className="homeFirstLastBtn"
+              >
+                Last
+              </button>
+            </div>
+          )}
 
           {/* Page Info Container */}
-          <div className="page-info-container">
-            <span style={{ margin: "0 10px" }}>Page {currentPage} of {totalPages}</span>
-          </div>
-
+          {posts.length > 0 && (
+            <div className="homePageInfoContainer">
+              <span style={{ margin: "0 10px" }}>
+                Page {currentPage} of {totalPages}
+              </span>
+            </div>
+          )}
         </div>
         <Sidebar />
       </div>

@@ -54,6 +54,8 @@ export default function FilterPosts() {
           <option value="Paper">Paper</option>
           <option value="Journal">Journal</option>
           <option value="Competition">Competition</option>
+          <option value="Product">Product</option>
+          <option value="Placement">Placement</option>
         </select>
 
         <select value={year} onChange={(e) => setYear(e.target.value)}>
@@ -75,7 +77,10 @@ export default function FilterPosts() {
         </div>
       ) : currentPosts.length === 0 ? (
         <div className="filterMessageContainer">
-          <p className="filterNoPosts">No posts found for this category and year.</p>
+          <div className="filterNoPostsContent">
+            <span className="filterNoPostsEmoji">🔍</span>
+            <p className="filterNoPostsMessage">No posts found for this category / year.</p>
+          </div>
         </div>
       ) : (
         <>

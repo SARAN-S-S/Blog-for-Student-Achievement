@@ -73,41 +73,87 @@
 
 /* Loading Message */
 .filterLoading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   font-size: 1.5rem;
-  color: #ffffff;
-  font-weight: bold;
-  background: linear-gradient(45deg, #007bff, #00d4ff);
-  padding: 15px 25px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  animation: pulse 1.5s infinite alternate;
+  color: #3498db; /* A nice, vibrant blue */
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  animation: fadeInOut 2s infinite alternate; /* Smooth fade-in and fade-out */
+  position: relative; /* For positioning the spinner */
 }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  100% { transform: scale(1.05); }
+/* Spinner Animation */
+.filterLoading::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(52, 152, 219, 0.3); /* Lighter shade of the blue */
+  border-top-color: #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
 }
 
 /* Error Message */
 .filterError {
-  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem; /* Slightly reduced for better fit */
   color: #fff;
-  font-weight: bold;
-  background: linear-gradient(45deg, #ff4b4b, #ff8c8c);
-  padding: 15px 25px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  font-weight: 600; /* Adjusted for consistency */
+  background: linear-gradient(135deg, #e74c3c, #c0392b); /* More vibrant gradient */
+  padding: 18px 30px; /* Adjusted padding */
+  border-radius: 12px; /* Increased radius for a softer look */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Enhanced shadow */
+  text-align: center;
+  animation: errorPulse 1.5s infinite alternate; /* Added pulse animation */
 }
 
-/* No Posts Message */
-.filterNoPosts {
-  font-size: 1.5rem;
-  color: #fff;
-  font-weight: bold;
-  background: linear-gradient(45deg, #ff9800, #ffc107);
-  padding: 15px 25px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+@keyframes errorPulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.03); }
+}
+
+/* No Posts */
+.filterNoPostsContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #fff9f0;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid #f0e0d0;
+}
+
+.filterNoPostsEmoji {
+  font-size: 3em;
+  margin-bottom: 15px;
+  color: #e6a157;
+}
+
+.filterNoPostsMessage {
+  font-size: 1.1em;
+  color: #777;
+  max-width: 300px;
 }
 
 

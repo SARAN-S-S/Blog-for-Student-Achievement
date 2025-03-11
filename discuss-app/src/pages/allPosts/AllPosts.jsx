@@ -1,10 +1,10 @@
-// src/pages/PostsPage/PostsPage.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BarChart from "../../components/BarChart/BarChart";
 import "./allPosts.css";
 
-const eventTypes = ["Project", "Paper", "Competition", "Patent", "Journal"];
+// Updated eventTypes array to include "Product" and "Placement"
+const eventTypes = ["Project", "Paper", "Competition", "Patent", "Journal", "Product", "Placement"];
 const studentYears = ["First Year", "Second Year", "Third Year", "Final Year"];
 
 const PostsPage = () => {
@@ -56,7 +56,7 @@ const PostsPage = () => {
 
       {/* Total Posts Container */}
       <div className="allpostsTotalPostsContainer">
-        <p>Total Posts: {totalPosts}</p>
+        <p>Total Approved Posts: {totalPosts}</p>
       </div>
 
       {/* Event Type Counts */}
@@ -88,8 +88,24 @@ const PostsPage = () => {
           data={eventTypes.map((type) => calculatePercentage(postsByEventType[type]))}
           labels={eventTypes}
           title="Posts by Event Type"
-          backgroundColor={["#A5D6A7", "#90CAF9", "#CE93D8", "#FFE082", "#80CBC4"]} // Alternative colors
-          borderColor={["#4CAF50", "#2196F3", "#AB47BC", "#FFC107", "#009688"]} // Darker borders
+          backgroundColor={[
+            "#A5D6A7", // Project
+            "#90CAF9", // Paper
+            "#CE93D8", // Competition
+            "#FFE082", // Patent
+            "#E0E0E0", // Journal
+            "#FFAB91", // Product (New Color)
+            "#B39DDB", // Placement (New Color)
+          ]}
+          borderColor={[
+            "#4CAF50", // Project
+            "#2196F3", // Paper
+            "#AB47BC", // Competition
+            "#FFC107", // Patent
+            "#616161", // Journal
+            "#FF7043", // Product (Darker Border)
+            "#7E57C2", // Placement (Darker Border)
+          ]}
         />
 
         <span><h2>Student Year Percentage in Charts</h2></span>
@@ -97,10 +113,9 @@ const PostsPage = () => {
           data={studentYears.map((year) => calculatePercentage(postsByYear[year]))}
           labels={studentYears}
           title="Posts by Student Year"
-          backgroundColor={["#A1C4FD", "#81F7E5", "#E1BEE7", "#D7CCC8"]} // Unique colors
-          borderColor={["#3F51B5", "#00ACC1", "#9C27B0", "#5D4037"]} // Darker borders
+          backgroundColor={["#64B5F6", "#D1C4E9", "#FFD54F", "#D7CCC8"]} // Unique colors
+          borderColor={["#0D47A1", "#673AB7", "#F57F17", "#5D4037"]} // Darker borders
         />
-
       </div>
     </div>
   );

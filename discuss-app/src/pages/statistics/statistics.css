@@ -117,3 +117,81 @@
   color: #100101;
   margin: 5px 0;
 }
+
+/* No Posts Message Styling */
+.statisNoPostsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.statisNoPostsContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #fff9f0;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid #f0e0d0;
+}
+
+.statisNoPostsEmoji {
+  font-size: 3em;
+  margin-bottom: 15px;
+  color: #e6a157;
+}
+
+.statisNoPostsMessage {
+  font-size: 1.1em;
+  color: #777;
+  max-width: 300px;
+}
+
+/* Loading Message Styling */
+.statisLoadingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  background: linear-gradient(135deg, #e0f7fa, #b2ebf2); /* Gradient background */
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
+  padding: 30px; /* Add padding for better spacing */
+}
+
+.statisLoadingMessage {
+  font-size: 2em; /* Increase font size */
+  color: #2980b9; /* Darker, more professional blue */
+  font-weight: 700; /* Bold font weight */
+  margin-bottom: 25px; /* Increase margin */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Add text shadow */
+  animation: pulse 1.5s infinite ease-in-out alternate; /* Use pulse animation */
+  position: relative;
+  z-index: 1; /* Ensure text is above spinner */
+}
+
+/* Spinner Animation */
+.statisLoadingMessage::before {
+  content: '';
+  width: 60px; /* Increase spinner size */
+  height: 60px;
+  border: 6px solid rgba(41, 128, 185, 0.3); /* Adjust border color */
+  border-top-color: #2980b9;
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite; /* Adjust spin speed */
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}

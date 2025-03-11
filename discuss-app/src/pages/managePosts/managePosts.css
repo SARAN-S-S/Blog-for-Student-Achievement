@@ -209,3 +209,34 @@
 .actionLinkCustom:hover {
   color: #0056b3;
 }
+
+.noPostsContainerCustom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.noPostsContentCustom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #fff9f0;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 2px solid #f0e0d0;
+}
+
+.noPostsEmojiCustom {
+  font-size: 3em;
+  margin-bottom: 15px;
+  color: #e6a157;
+}
+
+.noPostsMessageCustom {
+  font-size: 1.1em;
+  color: #777;
+  max-width: 300px;
+}

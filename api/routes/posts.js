@@ -17,47 +17,41 @@ router.post("/", async (req, res) => {
     }
 });
 
-//UPDATE POST
+// UPDATE POST
 router.put("/:id", async (req, res) => {
-    try {
-        const post = await Post.findById(req.params.id);
-        if (!post) {
-            return res.status(404).json("Post not found");
-        }
-
-        if (post.username === req.body.username) {
-            try {
-                // Construct the update object.  We need to handle the tags array differently.
-                const updateObject = {
-                    title: req.body.title,
-                    desc: req.body.desc,
-                    // ... other fields
-                };
-
-                if (req.body.category && req.body.year) { //Check if both values are present
-                    updateObject.tags = [req.body.category, req.body.year]; // Directly set the tags array
-                } else if (req.body.category) {
-                    updateObject.tags = [req.body.category];
-                } else if (req.body.year) {
-                    updateObject.tags = [req.body.year];
-                }
-
-                const updatedPost = await Post.findByIdAndUpdate(
-                    req.params.id,
-                    { $set: updateObject }, // Use the constructed update object
-                    { new: true }
-                );
-                res.status(200).json(updatedPost);
-            } catch (err) {
-                console.error("Error updating post:", err);
-                res.status(500).json(err);
-            }
-        } else {
-            res.status(401).json("You can update only your posts!");
-        }
-    } catch (err) {
-        res.status(500).json(err);
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json("Post not found");
     }
+
+    if (post.username === req.body.username) {
+      try {
+        // Construct the update object
+        const updateObject = {
+          title: req.body.title,
+          desc: req.body.desc,
+          tags: [req.body.category, req.body.year, req.body.category2].filter(Boolean), // Ensure consistent order
+        };
+
+        // Update the post
+        const updatedPost = await Post.findByIdAndUpdate(
+          req.params.id,
+          { $set: updateObject },
+          { new: true }
+        );
+
+        res.status(200).json(updatedPost);
+      } catch (err) {
+        console.error("Error updating post:", err);
+        res.status(500).json(err);
+      }
+    } else {
+      res.status(401).json("You can update only your posts!");
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 
@@ -405,7 +399,6 @@ router.put("/edit/:id", async (req, res) => {
     res.status(500).json("Server error. Please try again later.");
   }
 });
-
 
 
 

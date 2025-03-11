@@ -95,7 +95,6 @@ const UsersPage = () => {
       <span><h2>Users Details</h2></span>
 
       <div className="usersBoxgrid">
-
         <div className="usersSearchBar">
           <FontAwesomeIcon icon={faSearch} className="usersSearchIcon" />
           <input
@@ -113,7 +112,9 @@ const UsersPage = () => {
               <tr>
                 <th>Email</th>
                 <th>Username</th>
-                <th>Posts</th>
+                <th>Approved Posts</th>
+                <th>Rejected Posts</th>
+                <th>Pending Posts</th>
                 <th>Role</th>
               </tr>
             </thead>
@@ -122,7 +123,9 @@ const UsersPage = () => {
                 <tr key={user.email}>
                   <td>{user.email}</td>
                   <td>{user.username}</td>
-                  <td>{user.postCount}</td>
+                  <td>{user.approvedPosts}</td>
+                  <td>{user.rejectedPosts}</td>
+                  <td>{user.pendingPosts}</td>
                   <td>{user.role === "admin" ? "Admin" : "Student"}</td>
                 </tr>
               ))}

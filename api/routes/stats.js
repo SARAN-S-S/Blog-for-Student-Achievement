@@ -11,16 +11,40 @@ router.get("/users", async (req, res) => {
     const students = await User.countDocuments({ role: "student" });
     const admins = await User.countDocuments({ role: "admin" });
 
-    // Get all users with their roles and post counts
+    // Get all users with their roles
     const users = await User.find({}, "username email role").lean();
+
+    // Get post counts for each user (approved, rejected, pending)
     const postsByUser = await Post.aggregate([
-      { $group: { _id: "$username", count: { $sum: 1 } } },
+      {
+        $group: {
+          _id: "$username",
+          approved: {
+            $sum: { $cond: [{ $eq: ["$status", "approved"] }, 1, 0] },
+          },
+          rejected: {
+            $sum: { $cond: [{ $eq: ["$status", "rejected"] }, 1, 0] },
+          },
+          pending: {
+            $sum: { $cond: [{ $eq: ["$status", "pending"] }, 1, 0] },
+          },
+        },
+      },
     ]);
 
     // Map users with their post counts
     const usersWithPosts = users.map((user) => {
-      const postCount = postsByUser.find((p) => p._id === user.username)?.count || 0;
-      return { ...user, postCount };
+      const userPosts = postsByUser.find((p) => p._id === user.username) || {
+        approved: 0,
+        rejected: 0,
+        pending: 0,
+      };
+      return {
+        ...user,
+        approvedPosts: userPosts.approved,
+        rejectedPosts: userPosts.rejected,
+        pendingPosts: userPosts.pending,
+      };
     });
 
     res.status(200).json({ students, admins, users: usersWithPosts });
@@ -32,20 +56,42 @@ router.get("/users", async (req, res) => {
 // Get post statistics
 router.get("/posts", async (req, res) => {
   try {
-    // Count total posts
-    const totalPosts = await Post.countDocuments();
+    // Count total approved posts
+    const totalPosts = await Post.countDocuments({ status: "approved" });
 
-    // Count posts by event type
+    // Count approved posts by event type
     const postsByEventType = await Post.aggregate([
+      { $match: { status: "approved" } }, // Filter by approved posts
       { $unwind: "$tags" },
-      { $match: { tags: { $in: ["Project", "Patent", "Paper", "Journal", "Competition"] } } },
+      {
+        $match: {
+          tags: {
+            $in: [
+              "Project",
+              "Patent",
+              "Paper",
+              "Journal",
+              "Competition",
+              "Product",
+              "Placement",
+            ],
+          },
+        },
+      },
       { $group: { _id: "$tags", count: { $sum: 1 } } },
     ]);
 
-    // Count posts by student year
+    // Count approved posts by student year
     const postsByYear = await Post.aggregate([
+      { $match: { status: "approved" } }, // Filter by approved posts
       { $unwind: "$tags" },
-      { $match: { tags: { $in: ["First Year", "Second Year", "Third Year", "Final Year"] } } },
+      {
+        $match: {
+          tags: {
+            $in: ["First Year", "Second Year", "Third Year", "Final Year"],
+          },
+        },
+      },
       { $group: { _id: "$tags", count: { $sum: 1 } } },
     ]);
 
@@ -55,16 +101,17 @@ router.get("/posts", async (req, res) => {
   }
 });
 
+
 // Get monthly post statistics
 router.get("/monthly-posts", async (req, res) => {
   const { month, year } = req.query;
   try {
-    const matchQuery = {};
+    const matchQuery = { status: "approved" }; // Filter by approved posts
     if (month) matchQuery.$expr = { $eq: [{ $month: "$createdAt" }, parseInt(month)] };
     if (year) matchQuery.$expr = { $eq: [{ $year: "$createdAt" }, parseInt(year)] };
 
     const monthlyPosts = await Post.aggregate([
-      { $match: matchQuery },
+      { $match: matchQuery }, // Apply the filter
       {
         $group: {
           _id: { $month: "$createdAt" },

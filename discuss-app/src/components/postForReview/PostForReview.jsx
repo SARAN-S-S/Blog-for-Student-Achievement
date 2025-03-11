@@ -11,7 +11,9 @@ export default function PostForReview() {
   const [post, setPost] = useState({});
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [tags, setTags] = useState([]);
+  const [category, setCategory] = useState("");
+  const [category2, setCategory2] = useState("");
+  const [year, setYear] = useState("");
   const [rejectionReason, setRejectionReason] = useState("");
   const [updateMode, setUpdateMode] = useState(false);
   const [file, setFile] = useState(null);
@@ -20,7 +22,6 @@ export default function PostForReview() {
   const [action, setAction] = useState("");
   const [loading, setLoading] = useState(true);
   const [updateSuccess, setUpdateSuccess] = useState(false);
-  
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
 
@@ -31,7 +32,9 @@ export default function PostForReview() {
         setPost(res.data);
         setTitle(res.data.title);
         setDesc(res.data.desc);
-        setTags(res.data.tags);
+        setCategory(res.data.tags[0] || "");
+        setYear(res.data.tags[1] || "");
+        setCategory2(res.data.tags[2] || "");
         setInitialPhoto(res.data.photo || null);
         setLikes(res.data.likes || 0);
         setLoading(false);
@@ -76,9 +79,9 @@ export default function PostForReview() {
       const updatedPost = {
         title,
         desc,
-        tags,
+        tags: [category, year, category2].filter(Boolean), // Ensure consistent order in tags array
       };
-  
+
       if (file) {
         const data = new FormData();
         const filename = Date.now() + file.name;
@@ -91,21 +94,19 @@ export default function PostForReview() {
           console.error("Error uploading file:", err);
         }
       }
-  
+
       await axios.put(`/api/posts/edit/${postId}`, updatedPost);
       setUpdateMode(false);
       setFile(null);
       setNewPhoto(null);
       setInitialPhoto(updatedPost.photo);
       setUpdateSuccess(true);  // Show success message
-  
-      setTimeout(() => setUpdateSuccess(false), 10000) // Hide message after 8 seconds
+
+      setTimeout(() => setUpdateSuccess(false), 10000) // Hide message after 10 seconds
     } catch (err) {
       console.error("Error updating post:", err);
     }
   };
-  
-  
 
   const handleActionSubmit = () => {
     if (action === "approve") {
@@ -150,75 +151,89 @@ export default function PostForReview() {
 
   return (
     <div className="postForReview">
-      <h1>Review the Post</h1>
+      <div className="postForReviewHeader">
+        <h1>Review the Post</h1>
+        <span className="postIdDisplay">Post ID: {postId}</span>
+      </div>
       <div className="postForReviewWrapper">
         {updateMode ? (
           <form onSubmit={handleSave}>
-          <div className="image-edit-section">
-            {newPhoto ? (
-              <img className="writeImg" src={newPhoto} alt="New Post Preview" />
-            ) : initialPhoto ? (
-              <img className="singlePostImg" src={`http://localhost:7733/images/${initialPhoto}`} alt={post.title} />
-            ) : null}
-        
-            <div className="postContainer">
-              <div className="writeFormGroup">
-                <label htmlFor="fileInput">
-                  <i className="writeIcon fa-solid fa-plus"></i>
-                </label>
+            <div className="image-edit-section">
+              {newPhoto ? (
+                <img className="writeImg" src={newPhoto} alt="New Post Preview" />
+              ) : initialPhoto ? (
+                <img className="singlePostImg" src={`http://localhost:7733/images/${initialPhoto}`} alt={post.title} />
+              ) : null}
+
+              <div className="postContainer">
+                <div className="writeFormGroup">
+                  <label htmlFor="fileInput">
+                    <i className="writeIcon fa-solid fa-plus"></i>
+                  </label>
+                  <input
+                    type="file"
+                    id="fileInput"
+                    className="writeFile"
+                    onChange={(e) => {
+                      setFile(e.target.files[0]);
+                      if (e.target.files && e.target.files.length > 0) {
+                        setNewPhoto(URL.createObjectURL(e.target.files[0]));
+                      } else {
+                        setNewPhoto(null);
+                      }
+                    }}
+                  />
+                </div>
                 <input
-                  type="file"
-                  id="fileInput"
-                  className="writeFile"
-                  onChange={(e) => {
-                    setFile(e.target.files[0]);
-                    if (e.target.files && e.target.files.length > 0) {
-                      setNewPhoto(URL.createObjectURL(e.target.files[0]));
-                    } else {
-                      setNewPhoto(null);
-                    }
-                  }}
+                  type="text"
+                  value={title}
+                  className="singlePostTitleInput"
+                  autoFocus
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Enter post title"
                 />
               </div>
-              <input
-                type="text"
-                value={title}
-                className="singlePostTitleInput"
-                autoFocus
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Enter post title"
-              />
             </div>
-          </div>
-        
-          <div className="writeFormGroup">
-            <select className="writeInput" value={tags[0] || ''} onChange={(e) => setTags([e.target.value, tags[1] || ''])}>
-              <option value="" disabled>Select Category</option>
-              <option value="Project">Project</option>
-              <option value="Patent">Patent</option>
-              <option value="Paper">Paper</option>
-              <option value="Journal">Journal</option>
-              <option value="Competition">Competition</option>
-            </select>
-            <select className="writeInput" value={tags[1] || ''} onChange={(e) => setTags([tags[0] || '', e.target.value])}>
-              <option value="" disabled>Select Year</option>
-              <option value="First Year">First Year</option>
-              <option value="Second Year">Second Year</option>
-              <option value="Third Year">Third Year</option>
-              <option value="Final Year">Final Year</option>
-            </select>
-          </div>
-          
-          <textarea
-            className="singlePostDescInput"
-            value={desc}
-            onChange={(e) => setDesc(e.target.value)}
-            placeholder="Write your post description here..."
-          />
-        
-          <button className="singlePostButton" type="submit">Update</button>
-        </form>
-        
+
+            <div className="writeFormGroup">
+              <select className="writeInput" value={category} onChange={(e) => setCategory(e.target.value)} required>
+                <option value="Project">Project</option>
+                <option value="Patent">Patent</option>
+                <option value="Paper">Paper</option>
+                <option value="Journal">Journal</option>
+                <option value="Competition">Competition</option>
+                <option value="Product">Product</option>
+                <option value="Placement">Placement</option>
+              </select>
+
+              <select className="writeInput" value={year} onChange={(e) => setYear(e.target.value)} required>
+                <option value="First Year">First Year</option>
+                <option value="Second Year">Second Year</option>
+                <option value="Third Year">Third Year</option>
+                <option value="Final Year">Final Year</option>
+              </select>
+
+              <select className="writeInput" value={category2} onChange={(e) => setCategory2(e.target.value)}>
+                <option value="">Select Category 2 (Optional)</option>
+                <option value="Project">Project</option>
+                <option value="Patent">Patent</option>
+                <option value="Paper">Paper</option>
+                <option value="Journal">Journal</option>
+                <option value="Competition">Competition</option>
+                <option value="Product">Product</option>
+                <option value="Placement">Placement</option>
+              </select>
+            </div>
+
+            <textarea
+              className="singlePostDescInput"
+              value={desc}
+              onChange={(e) => setDesc(e.target.value)}
+              placeholder="Write your post description here..."
+            />
+
+            <button className="singlePostButton" type="submit">Update</button>
+          </form>
         ) : (
           <div>
             {post.photo && (
@@ -235,15 +250,15 @@ export default function PostForReview() {
             </h1>
             <div className="postTags">
               <strong>Tags:</strong>
-              {tags.map((tag, index) => (
+              {[category, year, category2].filter(Boolean).map((tag, index) => (
                 <span key={index} className="tag">{tag}</span>
               ))}
             </div>
             <div className="like-container">
-                <div className="like-section" onClick={handleLike}>
-                  <FontAwesomeIcon icon={faThumbsUp} className={`like-icon ${liked ? "liked" : ""}`} />
-                  <span className="like-count">{likes}</span>
-                </div>
+              <div className="like-section" onClick={handleLike}>
+                <FontAwesomeIcon icon={faThumbsUp} className={`like-icon ${liked ? "liked" : ""}`} />
+                <span className="like-count">{likes}</span>
+              </div>
             </div>
             <div className="singlePostInfo">
               <span className="singlePostAuthor">
@@ -251,20 +266,17 @@ export default function PostForReview() {
                 <b>{post.username}</b>
               </span>
               <span className="singlePostDate">
-              {new Date(post.createdAt).toDateString()}
+                {new Date(post.createdAt).toDateString()}
               </span>
             </div>
-            
-            <p className="singlePostDesc">{desc}</p>
-            
-          </div>
 
-          
+            <p className="singlePostDesc">{desc}</p>
+          </div>
         )}
         {updateSuccess && (
-            <p className={`updateSuccessMessage ${updateSuccess ? '' : 'fade-out'}`}>
-              Post updated successfully!
-            </p>
+          <p className={`updateSuccessMessage ${updateSuccess ? '' : 'fade-out'}`}>
+            Post updated successfully!
+          </p>
         )}
 
         <div className="approvalSection">

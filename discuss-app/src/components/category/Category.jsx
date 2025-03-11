@@ -6,7 +6,7 @@ const Category = () => {
   const [activeType, setActiveType] = useState(null);
   const [activeYear, setActiveYear] = useState(null);
 
-  const eventTypes = ["Project", "Patent", "Paper", "Journal", "Competition"];
+  const eventTypes = ["Project", "Patent", "Paper", "Journal", "Competition", "Product", "Placement"];
   const studentYears = ["First Year", "Second Year", "Third Year", "Final Year"];
 
   return (
