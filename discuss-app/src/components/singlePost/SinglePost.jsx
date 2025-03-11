@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react"; // Import useRef
 import "./singlePost.css";
 import axios from "axios";
 import { Context } from "../../context/Context";
@@ -33,6 +33,19 @@ export default function SinglePost() {
 
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
+
+  // Create a ref for the textarea
+  const textareaRef = useRef(null);
+
+  // Auto-focus the textarea and set cursor position at the end when editingComment changes
+  useEffect(() => {
+    if (editingComment && textareaRef.current) {
+      textareaRef.current.focus();
+      // Set cursor position at the end of the text
+      const length = textareaRef.current.value.length;
+      textareaRef.current.setSelectionRange(length, length);
+    }
+  }, [editingComment]);
 
   useEffect(() => {
     const getPostData = async () => {
@@ -184,7 +197,9 @@ export default function SinglePost() {
 
       // Allow admin or comment author to delete
       if (user._id === comment.userId || user.role === "admin") {
-        await axios.delete(`/api/comments/${commentId}`, { data: { userId: user._id } });
+        await axios.delete(`/api/comments/${commentId}`, { 
+          data: { userId: user._id } // Include userId in the request body
+        });
 
         setComments(prevComments => {
           return removeCommentFromState(prevComments, commentId);
@@ -237,7 +252,7 @@ export default function SinglePost() {
       const comment = findCommentById(comments, commentId);
       if (user._id === comment.userId || user.role === "admin") {
         const res = await axios.put(`/api/comments/${commentId}`, {
-          userId: user._id,
+          userId: user._id, // Include userId in the request body
           text: editedCommentText,
         });
 
@@ -322,10 +337,27 @@ export default function SinglePost() {
           <span>{new Date(comment.createdAt).toLocaleString()}</span>
         </div>
         {editingComment === comment._id ? (
-          <div>
-            <textarea value={editedCommentText} onChange={e => setEditedCommentText(e.target.value)} />
-            <button className="update" onClick={() => handleUpdateComment(comment._id)}>Update</button>
-            <button className="cancel" onClick={handleCancelEdit}>Cancel</button>
+          <div className="comment-edit-form">
+            <textarea
+              ref={textareaRef} // Attach the ref to the textarea
+              className="comment-edit-textarea"
+              value={editedCommentText}
+              onChange={(e) => setEditedCommentText(e.target.value)}
+            />
+            <div className="comment-edit-buttons">
+              <button
+                className="comment-edit-update"
+                onClick={() => handleUpdateComment(comment._id)}
+              >
+                Update
+              </button>
+              <button
+                className="comment-edit-cancel"
+                onClick={handleCancelEdit}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         ) : (
           <p>{comment.text}</p>

@@ -317,48 +317,74 @@ reply-icon {
     transform: scale(0.95);
 }
 
-.update {
-    background-color: #2980b9;
+.comment-edit-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  
+  .comment-edit-textarea {
+    width: calc(70% - 20px); /* Decreased width */
+    padding: 8px; /* Slightly reduced padding */
+    border: 2px solid #4a90e2;
+    border-radius: 6px;
+    margin-bottom: 8px; /* Slightly reduced margin */
+    resize: vertical;
+    font-size: 0.95em; /* Slightly reduced font size */
+    color: #333;
+    background-color: #c5a7c6; /* Different background color */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .comment-edit-textarea:focus {
+    outline: none;
+    border-color: #2170c9;
+    box-shadow: 0 0 8px rgba(33, 112, 201, 0.5);
+  }
+  
+  .comment-edit-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px; /* Slightly reduced gap */
+  }
+  
+  .comment-edit-update,
+  .comment-edit-cancel {
+    padding: 8px 16px; /* Slightly reduced padding */
     border: none;
-    color: white;
-    padding: 6px 13px;
-    margin-left: 5px;
-    margin-right: 5px;
-    border-radius: 3px;
+    border-radius: 5px; /* Slightly reduced border radius */
+    font-size: 0.9em; /* Slightly reduced font size */
     cursor: pointer;
-    font-size: 0.85em;
     transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.update:hover {
-    background-color: #3498db;
-    transform: scale(1.05);
-}
-
-.update:active {
-    transform: scale(0.95);
-}
-
-.cancel {
-    background-color: #e74c3c;
-    border: none;
+    font-weight: 600;
+  }
+  
+  .comment-edit-update {
+    background-color: #4CAF50;
     color: white;
-    padding: 6px 13px;
-    margin-right: 5px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 0.85em;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
+  }
+  
+  .comment-edit-update:hover {
+    background-color: #45a049;
+    transform: scale(1.03);
+  }
+  
+  .comment-edit-cancel {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .comment-edit-cancel:hover {
+    background-color: #d32f2f;
+    transform: scale(1.03);
+  }
+  
+  .comment-edit-update:active,
+  .comment-edit-cancel:active {
+    transform: scale(0.98);
+  }
 
-.cancel:hover {
-    background-color: #c0392b;
-    transform: scale(1.05);
-}
 
-.cancel:active {
-    transform: scale(0.95);
-}
 
 .postTags {
     margin-top: 10px;
@@ -390,6 +416,8 @@ reply-icon {
     align-items: center;
     margin-bottom: 15px;
 }
+
+
 
 .writeFormGroup {
     display: flex;

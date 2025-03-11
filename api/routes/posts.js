@@ -17,7 +17,8 @@ router.post("/", async (req, res) => {
     }
 });
 
-// UPDATE POST
+
+// UPDATE POST (Allow admin to update any post)
 router.put("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
@@ -25,13 +26,25 @@ router.put("/:id", async (req, res) => {
       return res.status(404).json("Post not found");
     }
 
-    if (post.username === req.body.username) {
+    // Check if the user is the author or an admin
+    const user = await User.findOne({ username: req.body.username });
+    if (!user) {
+      return res.status(404).json("User not found");
+    }
+
+    if (post.username === req.body.username || user.role === "admin") {
       try {
+        // Validate required fields
+        if (!req.body.title || req.body.title.trim() === "") {
+          return res.status(400).json("Title is required");
+        }
+
         // Construct the update object
         const updateObject = {
-          title: req.body.title,
+          title: req.body.title, // Ensure title is included
           desc: req.body.desc,
           tags: [req.body.category, req.body.year, req.body.category2].filter(Boolean), // Ensure consistent order
+          photo: req.body.photo || post.photo, // Use the new photo if provided, otherwise keep the old one
         };
 
         // Update the post
@@ -55,27 +68,33 @@ router.put("/:id", async (req, res) => {
 });
 
 
-//DELETE POST
+// DELETE POST (Allow admin to delete any post)
 router.delete("/:id", async (req, res) => {
-    try {
-        const post = await Post.findById(req.params.id);
-        if (!post) {
-            res.status(404).json("Post not found");
-        }
-        
-        if (post.username === req.body.username) {
-            try {
-                await post.deleteOne();
-                res.status(200).json("Post has been deleted...");
-            } catch (err) {
-                res.status(500).json("npt");
-            }
-        } else {
-            res.status(401).json("You can delete only your posts!");
-        }
-    } catch (err) {
-        res.status(500).json("yes");
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json("Post not found");
     }
+
+    // Check if the user is the author or an admin
+    const user = await User.findOne({ username: req.body.username });
+    if (!user) {
+      return res.status(404).json("User not found");
+    }
+
+    if (post.username === req.body.username || user.role === "admin") {
+      try {
+        await post.deleteOne();
+        res.status(200).json("Post has been deleted...");
+      } catch (err) {
+        res.status(500).json("Error deleting post");
+      }
+    } else {
+      res.status(401).json("You can delete only your posts!");
+    }
+  } catch (err) {
+    res.status(500).json("Server error");
+  }
 });
 
 
