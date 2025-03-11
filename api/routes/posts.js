@@ -85,6 +85,27 @@ router.delete("/:id", async (req, res) => {
 });
 
 
+// Fetch posts by the logged-in user
+router.get("/my-posts", async (req, res) => {
+  const { username, page = 1, limit = 10, search = "" } = req.query;
+  try {
+    const query = { username };
+    if (search) {
+      query.title = { $regex: search, $options: "i" };
+    }
+    const posts = await Post.find(query)
+      .sort({ createdAt: -1 }) // Sort by newest first
+      .skip((page - 1) * limit)
+      .limit(limit);
+    const total = await Post.countDocuments(query);
+    res.status(200).json({ posts, total });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+
 // Fetch pending posts (with pagination)
 router.get("/pending", async (req, res) => {
   const { page = 1, limit = 10 } = req.query;
@@ -125,6 +146,7 @@ router.get("/:id", async (req, res) => {
 })
 
 
+
 // GET ALL POSTS (with optional tag filtering)
 router.get("/", async (req, res) => {
   const { category, year, search, user: username, tag } = req.query;
@@ -133,7 +155,6 @@ router.get("/", async (req, res) => {
     let posts;
 
     if (search) {
-      // Search by title, username, or email
       posts = await Post.aggregate([
         {
           $lookup: {
@@ -146,7 +167,7 @@ router.get("/", async (req, res) => {
         { $unwind: "$user" },
         {
           $match: {
-            status: "approved", // Only include approved posts
+            status: "approved",
             $or: [
               { title: { $regex: search, $options: "i" } },
               { username: { $regex: search, $options: "i" } },
@@ -155,13 +176,11 @@ router.get("/", async (req, res) => {
           },
         },
         {
-          $addFields: {
-            email: "$user.email", // Add email to the response
-          },
+          $addFields: { email: "$user.email" },
         },
+        { $sort: { createdAt: -1 } } // Sort by newest first
       ]);
     } else if (username) {
-      // Filter by username
       posts = await Post.aggregate([
         {
           $lookup: {
@@ -173,19 +192,14 @@ router.get("/", async (req, res) => {
         },
         { $unwind: "$user" },
         {
-          $match: { 
-            status: "approved", // Only include approved posts
-            username 
-          },
+          $match: { status: "approved", username },
         },
         {
-          $addFields: {
-            email: "$user.email", // Add email to the response
-          },
+          $addFields: { email: "$user.email" },
         },
+        { $sort: { createdAt: -1 } } // Sort by newest first
       ]);
     } else if (tag) {
-      // Filter by tag
       posts = await Post.aggregate([
         {
           $lookup: {
@@ -197,37 +211,29 @@ router.get("/", async (req, res) => {
         },
         { $unwind: "$user" },
         {
-          $match: { 
-            status: "approved", // Only include approved posts
-            tags: tag 
-          },
+          $match: { status: "approved", tags: tag },
         },
         {
-          $addFields: {
-            email: "$user.email", // Add email to the response
-          },
+          $addFields: { email: "$user.email" },
         },
+        { $sort: { createdAt: -1 } } // Sort by newest first
       ]);
     } else if (category && year) {
-      // Filter by both category and year
       posts = await Post.find({ 
-        status: "approved", // Only include approved posts
+        status: "approved", 
         tags: { $all: [category, year] } 
-      });
+      }).sort({ createdAt: -1 }); // Sort by newest first
     } else if (category) {
-      // Filter by category only
       posts = await Post.find({ 
-        status: "approved", // Only include approved posts
+        status: "approved", 
         tags: category 
-      });
+      }).sort({ createdAt: -1 }); // Sort by newest first
     } else if (year) {
-      // Filter by year only
       posts = await Post.find({ 
-        status: "approved", // Only include approved posts
+        status: "approved", 
         tags: year 
-      });
+      }).sort({ createdAt: -1 }); // Sort by newest first
     } else {
-      // Fetch all posts with user details
       posts = await Post.aggregate([
         {
           $lookup: {
@@ -239,15 +245,12 @@ router.get("/", async (req, res) => {
         },
         { $unwind: "$user" },
         {
-          $match: { 
-            status: "approved" // Only include approved posts
-          },
+          $match: { status: "approved" },
         },
         {
-          $addFields: {
-            email: "$user.email", // Add email to the response
-          },
+          $addFields: { email: "$user.email" },
         },
+        { $sort: { createdAt: -1 } } // Sort by newest first
       ]);
     }
 
@@ -256,6 +259,7 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
   
 //like a post
   router.post("/:id/like", async (req, res) => {
@@ -401,6 +405,10 @@ router.put("/edit/:id", async (req, res) => {
     res.status(500).json("Server error. Please try again later.");
   }
 });
+
+
+
+
 
 
 module.exports = router;

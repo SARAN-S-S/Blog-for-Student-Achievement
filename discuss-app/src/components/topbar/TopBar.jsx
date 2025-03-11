@@ -42,6 +42,11 @@ export default function TopBar() {
               Post
             </Link>
           </li>
+          <li className="topListItem">
+            <Link className="link" to="/my-posts">
+              My Posts
+            </Link>
+          </li>
         </ul>
       </div>
       <div className="topRight">

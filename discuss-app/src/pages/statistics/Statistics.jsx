@@ -24,9 +24,9 @@ const StatisticsPage = () => {
   }, [fetchData]);
 
   return (
-    <div className="statisticsPage">
+    <div className="statisStatisticsPage">
       <h1>Monthly Post Statistics</h1>
-      <div className="filters">
+      <div className="statisFilters">
         <select value={month} onChange={(e) => setMonth(e.target.value)}>
           <option value="">Select Month</option>
           {Array.from({ length: 12 }, (_, i) => (
@@ -44,27 +44,35 @@ const StatisticsPage = () => {
           ))}
         </select>
       </div>
-      <div className="statsContainer">
-        <div className="totalPosts">
+      <div className="statisStatsContainer">
+        <div className="statisTotalPosts">
           <h3>Total Posts in {year || "All Years"}</h3>
           <p>{totalPosts}</p>
         </div>
         {monthlyPosts.map((post) => (
-          <div key={post._id} className="statItem">
+          <div key={post._id} className="statisStatItem">
             <h3>{post.monthName}</h3>
             <p>Posts: {post.count}</p>
             <p>Percentage: {post.percentage}%</p>
           </div>
         ))}
       </div>
-      <div className="charts">
-        <BarChart
-          data={monthlyPosts.map((p) => p.percentage)}
-          labels={monthlyPosts.map((p) => p.monthName)}
-          title="Posts by Month (%)"
-          backgroundColor={["#36a2eb"]}
-          borderColor={["#36a2eb"]}
-        />
+      <div className="statisCharts">
+        {monthlyPosts.length > 0 && ( // Conditionally render the chart
+          <BarChart
+            data={monthlyPosts.map((p) => p.percentage)}
+            labels={monthlyPosts.map((p) => p.monthName)}
+            title="Posts by Month (%)"
+            backgroundColor={monthlyPosts.map((p, index) => {
+              const colors = ['#81D4FA', '#A5D6A7', '#CE93D8', '#FFE082', '#80CBC4', '#FFCC80', '#80DEEA', '#B39DDB', '#CFD8DC', '#A1C4FD', '#81F7E5', '#E1BEE7'];
+              return colors[index % colors.length];
+            })}
+            borderColor={monthlyPosts.map((p, index) => {
+                const colors = ['#29B6F6', '#4CAF50', '#AB47BC', '#FFC107', '#009688', '#FF9800', '#00BCD4', '#5E35B1', '#607D8B', '#3F51B5', '#00ACC1', '#9C27B0'];
+                return colors[index % colors.length];
+            })}
+          />
+        )}
       </div>
     </div>
   );

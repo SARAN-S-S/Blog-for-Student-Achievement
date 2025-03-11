@@ -1,23 +1,23 @@
-.approvalPending {
+.approvalPendingCustom {
   padding: 20px;
   background-color: #f8f9fa;
   min-height: 100vh;
 }
 
-.searchContainer {
+.searchContainerApproval {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
 }
 
-.searchWrapper {
+.searchWrapperApproval {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-.container {
+.containerApproval {
   display: grid;
   grid-template-rows: auto auto;
   gap: 20px;
@@ -25,10 +25,10 @@
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #ddd;
+  border: 3px solid #ddd;
 }
 
-.searchContainer input {
+.searchContainerApproval input {
   padding: 10px 8px 10px 30px;
   border: 1px solid #ced4da;
   border-radius: 30px;
@@ -38,11 +38,11 @@
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.searchContainer input:focus {
+.searchContainerApproval input:focus {
   border-color: #007bff;
 }
 
-.searchIcon {
+.searchIconApproval {
   position: absolute;
   left: 10px;
   color: #495057;
@@ -50,7 +50,7 @@
   transition: color 0.3s;
 }
 
-.searchContainer .bulkApproveButton {
+.searchContainerApproval .bulkApproveButtonApproval {
   padding: 10px 20px;
   background: #007bff;
   color: white;
@@ -64,18 +64,18 @@
   margin-bottom: 10px;
 }
 
-.bulkApproveButton:hover {
+.bulkApproveButtonApproval:hover {
   background: #e9ebed;
   color: #007bff;
   border: 2px solid #71787e;
 }
 
-.bulkApproveButton:disabled {
+.bulkApproveButtonApproval:disabled {
   background: #cccccc;
   cursor: not-allowed;
 }
 
-.loadingContainer {
+.loadingContainerApproval {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,44 +83,49 @@
   margin-top: 50px;
 }
 
-.loadingMessage {
+.loadingMessageApproval {
   text-align: center;
   color: #555;
   font-size: 1.5rem;
   margin-bottom: 20px;
 }
 
-.spinner {
+.spinnerApproval {
   border: 4px solid rgba(0, 0, 0, 0.1);
   border-left-color: #007bff;
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  animation: spin 1s linear infinite;
+  animation: spinApproval 1s linear infinite;
 }
 
-@keyframes spin {
+@keyframes spinApproval {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
-.tableContainer {
+.tableContainerApproval {
   overflow-x: auto;
   margin-bottom: 20px;
 }
 
-table {
+.approvalPendingTable  td input[type="checkbox"] {
+  transform: scale(1.3);
+  cursor: pointer;
+}
+
+.approvalPendingTable {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  background: rgb(179, 151, 151);
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 2px solid #886868;
+  border: 2.5px solid #a88383;
 }
 
-th, td {
-  padding: 2px 30px;
+.approvalPendingTable th, .approvalPendingTable td {
+  padding: 2px 40px;
   border-bottom: 1px solid #aa9292;
   border-right: 1px solid #aa9292;
   text-align: left;
@@ -129,21 +134,23 @@ th, td {
   height: 35px;
 }
 
-th {
+.approvalPendingTable th {
   background-color: #007bff;
   color: white;
   font-weight: 600;
 }
 
-tr:nth-child(even) {
-  background-color: #f9f9f9;
+.approvalPendingTable tr:nth-child(even) {
+  background-color: #f0f8fc; /* Soft white-blue */
 }
 
-tr:hover {
-    background-color: #5e1f1f;
+.approvalPendingTable tr:nth-child(odd) {
+  background-color: #d5dde8; /* Light desaturated blue */
 }
 
-.actionLink {
+
+
+.actionLinkApproval {
   cursor: pointer;
   color: #5f4892;
   text-decoration: none;
@@ -152,11 +159,11 @@ tr:hover {
   align-items: center;
 }
 
-.actionLink:hover {
+.actionLinkApproval:hover {
   color: #0674f2;
 }
 
-.actionButton {
+.actionButtonApproval {
   cursor: pointer;
   border: 1px solid transparent;
   background-color: transparent;
@@ -168,25 +175,25 @@ tr:hover {
   transition: background-color 0.3s, border-color 0.3s;
 }
 
-.approveButton {
+.approveButtonApproval {
   color: #28a745;
 }
 
-.approveButton:hover {
+.approveButtonApproval:hover {
   background-color: #e9faec;
   border-color: #28a745;
 }
 
-.rejectButton {
+.rejectButtonApproval {
   color: #dc3545;
 }
 
-.rejectButton:hover {
+.rejectButtonApproval:hover {
   background-color: #fae9e9;
   border-color: #dc3545;
 }
 
-.reasonTextarea {
+.reasonTextareaApproval {
   width: 200px;
   padding: 8px;
   border: 1px solid #ced4da;
@@ -194,15 +201,15 @@ tr:hover {
   resize: vertical;
 }
 
-.paginationContainer {
+.paginationContainerApproval {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
 }
 
-.paginationButton {
-  padding: 10px 20px;
+.paginationButtonApproval {
+  padding: 11px 24px;
   background: #007bff;
   color: white;
   border: none;
@@ -214,75 +221,80 @@ tr:hover {
   margin: 0 5px;
 }
 
-.paginationButton:hover {
+.paginationButtonApproval:hover {
   background: #0056b3;
 }
 
-.paginationButton:disabled {
+.paginationButtonApproval:disabled {
   background: #cccccc;
   cursor: not-allowed;
 }
 
-.pageInfo {
+.pageInfoApproval {
   font-size: 18px;
   font-weight: bold;
   margin: 0 10px;
+  padding: 12px 15px; /* Add padding for better visual appearance */
+  background-color: #ab9494; /* Light grey background */
+  color: #333; /* Dark grey text color */
+  border-radius: 5px; /* Optional: Rounded corners */
+
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .searchContainer {
+  .searchContainerApproval {
     flex-direction: column;
     align-items: stretch;
   }
 
-  .searchWrapper {
+  .searchWrapperApproval {
     margin-bottom: 10px;
   }
 
-  .searchContainer input {
+  .searchContainerApproval input {
     width: 100%;
   }
 
-  .bulkApproveButton {
+  .bulkApproveButtonApproval {
     width: 100%;
   }
 
-  table {
+  .approvalPendingTable {
     font-size: 12px;
   }
 
-  th, td {
+  .approvalPendingTable th, .approvalPendingTable td {
     padding: 6px 8px;
     height: 30px;
   }
 
-  .reasonTextarea {
+  .reasonTextareaApproval {
     width: 100%;
   }
 
-  .paginationButton {
+  .paginationButtonApproval {
     padding: 8px 15px;
   }
 
-  .pageInfo {
+  .pageInfoApproval {
     font-size: 16px;
   }
 }
 
 @media (max-width: 576px) {
-  th:nth-child(6),
-  td:nth-child(6),
-  th:nth-child(7),
-  td:nth-child(7),
-  th:nth-child(8),
-  td:nth-child(8),
-  th:nth-child(12),
-  td:nth-child(12){
+  .approvalPendingTable th:nth-child(6),
+  .approvalPendingTable td:nth-child(6),
+  .approvalPendingTable th:nth-child(7),
+  .approvalPendingTable td:nth-child(7),
+  .approvalPendingTable th:nth-child(8),
+  .approvalPendingTable td:nth-child(8),
+  .approvalPendingTable th:nth-child(12),
+  .approvalPendingTable td:nth-child(12) {
     display: none;
   }
 
-  .actionButton {
+  .actionButtonApproval {
     padding: 3px 5px;
     font-size: 14px;
   }

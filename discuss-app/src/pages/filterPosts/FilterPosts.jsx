@@ -43,10 +43,10 @@ export default function FilterPosts() {
   };
 
   return (
-    <div className="filterPosts">
-      <span className="head"><h2>FILTER POSTS</h2></span>
-      
-      <div className="filters">
+    <div className="filterFilterPosts">
+      <span className="filterHead"><h2>FILTER POSTS</h2></span>
+
+      <div className="filterFilters">
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="">Select Category</option>
           <option value="Project">Project</option>
@@ -55,7 +55,7 @@ export default function FilterPosts() {
           <option value="Journal">Journal</option>
           <option value="Competition">Competition</option>
         </select>
-        
+
         <select value={year} onChange={(e) => setYear(e.target.value)}>
           <option value="">Select Year</option>
           <option value="First Year">First Year</option>
@@ -66,25 +66,25 @@ export default function FilterPosts() {
       </div>
 
       {loading ? (
-        <div className="message-container">
-          <p className="loading">Loading posts...</p>
+        <div className="filterMessageContainer">
+          <p className="filterLoading">Loading posts...</p>
         </div>
       ) : error ? (
-        <div className="message-container">
-          <p className="error">{error}</p>
+        <div className="filterMessageContainer">
+          <p className="filterError">{error}</p>
         </div>
       ) : currentPosts.length === 0 ? (
-        <div className="message-container">
-          <p className="no-posts">No posts found for this category and year.</p>
+        <div className="filterMessageContainer">
+          <p className="filterNoPosts">No posts found for this category and year.</p>
         </div>
       ) : (
         <>
-          <div className="postsContainer">
+          <div className="filterPostsContainer">
             <Posts posts={currentPosts} />
           </div>
 
           {/* Pagination */}
-          <div className="pagination">
+          <div className="filterPagination">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}

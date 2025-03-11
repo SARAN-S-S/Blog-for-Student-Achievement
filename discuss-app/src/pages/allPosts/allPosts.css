@@ -1,6 +1,6 @@
 /* src/pages/PostsPage/allPosts.css */
 
-.postsPage {
+.allpostsPostsPage {
     text-align: center;
     padding: 20px;
     background-color: #f8f9fa;
@@ -9,9 +9,9 @@
     flex-direction: column;
     font-family: 'Arial', sans-serif; /* Modern font */
     min-height: 370vh;
-}
-
-.postsPage span {
+  }
+  
+  .allpostsPostsPage span {
     display: block;
     width: fit-content;
     margin: 20px auto;
@@ -22,17 +22,19 @@
     font-weight: 600;
     text-align: center;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.postsPage > * {
+    margin-bottom: 40px;
+    margin-top: 80px;
+  }
+  
+  .allpostsPostsPage > * {
     flex-shrink: 0;
-}
-
-.postsPage > *:not(:last-child) {
+  }
+  
+  .allpostsPostsPage > *:not(:last-child) {
     margin-bottom: 30px; /* Increased margin */
-}
-
-.totalPostsContainer {
+  }
+  
+  .allpostsTotalPostsContainer {
     background: linear-gradient(to right, #6a5acd, #483d8b); /* Gradient background */
     color: #ffffff;
     padding: 30px;
@@ -43,22 +45,22 @@
     font-weight: 600; /* Slightly less bold */
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Softer shadow */
     transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.totalPostsContainer:hover {
+  }
+  
+  .allpostsTotalPostsContainer:hover {
     transform: translateY(-8px); /* More pronounced hover effect */
     box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
-}
-
-.grid {
+  }
+  
+  .allpostsGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted minmax */
     gap: 30px;
     margin: 20px auto;
     max-width: 1000px;
-}
-
-.countContainer {
+  }
+  
+  .allpostsCountContainer {
     background: #ffffff;
     padding: 30px;
     border-radius: 15px;
@@ -70,61 +72,65 @@
     flex-direction: column;
     justify-content: center;
     border: 1px solid #eee; /* Subtle border */
-}
-
-.countContainer:hover {
+  }
+  
+  .allpostsCountContainer:hover {
     transform: translateY(-8px);
     box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2);
-}
-
-.countContainer p {
+  }
+  
+  .allpostsCountContainer p {
     margin: 10px 0;
     font-size: 1.3rem; /* Adjusted font size */
-}
-
-.countContainer p:first-of-type { /* Style for the label */
+  }
+  
+  .allpostsCountContainer p:first-of-type { /* Style for the label */
     color: #cf0e0e; /* Darker grey for labels */
     font-weight: 550;
-}
-
-.countContainer p:last-of-type { /* Style for the value */
+  }
+  
+  .allpostsCountContainer p:last-of-type { /* Style for the value */
     color: #2c179a; /* Your original color */
     font-weight: 700;
-}
-
-.barChartContainer {
+  }
+  
+  .allpostsBarChartContainer {
+    width: 80%;
+    max-width: 900px;
+    margin: 20px auto;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 50px;
-    margin-top: 60px; /* Increased margin above bar charts */
-    margin-bottom: 100px; /* Increased margin below bar charts */
-}
-
-.barChartContainer canvas {
-    max-width: 1000px !important;
-    height: 450px !important;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .grid {
-        grid-template-columns: 1fr;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center horizontally */
+    margin-bottom: 70px;
+  }
+  
+  .allpostsBarChartContainer canvas {
+    max-width: 100% !important;
+    height: 400px !important; /* Set a fixed height for the canvas */
+    border-radius: 8px;
+    border: 3px solid #335a72;
+    background-color: #f0f8ff;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .allpostsGrid {
+      grid-template-columns: 1fr;
     }
-
-    .barChartContainer canvas {
-        max-width: 95% !important;
-        height: 350px !important;
+  
+    .allpostsBarChartContainer canvas {
+      max-width: 95% !important;
+      height: 350px !important;
     }
-}
-
-/* Added styles for better text readability */
-h1 {
+  }
+  
+  /* Added styles for better text readability */
+  h1 {
     color: #333;
     margin-bottom: 20px;
     font-weight: 600;
-}
-
-.postsPage {
+  }
+  
+  .allpostsPostsPage {
     background-color: #f9f9f9; /* Softer background */
-}
+  }

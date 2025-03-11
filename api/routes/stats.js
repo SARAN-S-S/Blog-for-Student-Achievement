@@ -5,15 +5,14 @@ const User = require("../models/User");
 const Post = require("../models/Post");
 const moment = require("moment");
 
-// Get user statistics
 router.get("/users", async (req, res) => {
   try {
     // Count students and admins
     const students = await User.countDocuments({ role: "student" });
     const admins = await User.countDocuments({ role: "admin" });
 
-    // Get all users with their post counts
-    const users = await User.find({}, "username email").lean();
+    // Get all users with their roles and post counts
+    const users = await User.find({}, "username email role").lean();
     const postsByUser = await Post.aggregate([
       { $group: { _id: "$username", count: { $sum: 1 } } },
     ]);

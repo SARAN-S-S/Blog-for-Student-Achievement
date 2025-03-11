@@ -14,7 +14,8 @@
 }
 
 .singlePostImg {
-  width: 100%;
+  width: 600px;
+  height: 400px;
   height: 400px;
   object-fit: cover;
   border-radius: 10px;

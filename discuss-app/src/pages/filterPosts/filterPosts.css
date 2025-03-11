@@ -1,13 +1,14 @@
-.filterPosts {
+.filterFilterPosts {
   padding: 20px;
   font-family: Arial, sans-serif;
   background: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  
 }
 
-.head {
+.filterHead {
   display: block;
   width: fit-content;
   margin: 20px auto;
@@ -19,17 +20,18 @@
   font-weight: 600;
   text-align: center;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 80px;
 }
 
 /* Filters Section */
-.filters {
+.filterFilters {
   display: flex;
   gap: 15px;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
-.filters select {
+.filterFilters select {
   padding: 12px;
   border: 2px solid #ccc;
   border-radius: 8px;
@@ -42,14 +44,14 @@
   color: #333;
 }
 
-.filters select:focus {
+.filterFilters select:focus {
   border-color: #007bff;
   box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
   outline: none;
 }
 
 /* Posts Container */
-.postsContainer {
+.filterPostsContainer {
   display: grid;
   gap: 30px;
   padding: 50px;
@@ -61,8 +63,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-.message-container {
+.filterMessageContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,7 +72,7 @@
 }
 
 /* Loading Message */
-.loading {
+.filterLoading {
   font-size: 1.5rem;
   color: #ffffff;
   font-weight: bold;
@@ -88,7 +89,7 @@
 }
 
 /* Error Message */
-.error {
+.filterError {
   font-size: 1.5rem;
   color: #fff;
   font-weight: bold;
@@ -99,7 +100,7 @@
 }
 
 /* No Posts Message */
-.no-posts {
+.filterNoPosts {
   font-size: 1.5rem;
   color: #fff;
   font-weight: bold;
@@ -109,62 +110,64 @@
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-.pagination {
+
+.filterPagination {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
 }
 
-.pagination button {
-  padding: 10px 20px;
+.filterPagination button {
+  padding: 11px 24px;
   background: #007bff;
   color: white;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 16;
   font-weight: bold;
   transition: background 0.3s;
 }
 
-.pagination button:hover {
+.filterPagination button:hover {
   background: #72b04f;
 }
 
-.pagination button:disabled {
+.filterPagination button:disabled {
   background: #ccc;
   cursor: not-allowed;
 }
 
-.pagination span {
+.filterPagination span {
   font-size: 18px;
   font-weight: bold;
+  margin-left: 15px;
+  margin-right: 15px;
+  padding: 12px 15px; /* Add padding for better visual appearance */
+  background-color: #ab9494; /* Light grey background */
+  color: #333; /* Dark grey text color */
+  border-radius: 5px; /* Optional: Rounded corners */
 }
-
-
 
 /* Responsive Design */
 @media (max-width: 900px) {
-  .postsContainer {
+  .filterPostsContainer {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
-  .postsContainer {
+  .filterPostsContainer {
     grid-template-columns: repeat(1, 1fr);
   }
 
-  .filters {
+  .filterFilters {
     flex-direction: column;
     align-items: center;
   }
 
-  .filters select {
+  .filterFilters select {
     width: 100%;
   }
 }
-
-
-

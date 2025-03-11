@@ -2,12 +2,13 @@
 
 .dashboard {
     padding: 20px;
-    font-family: sans-serif; /* Added a default font */
+    font-family: sans-serif; 
+    margin-bottom: 50px;
 }
 
 .dashboard h1 {
     text-align: center;
-    margin-bottom: 30px; /* Increased margin */
+    margin-bottom: 70px; /* Increased margin */
     color: #333; /* Darker heading color */
 }
 
@@ -33,10 +34,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .card:hover {
-    transform: translateY(-5px); /* Move up slightly on hover */
+    transform: translateY(-10px); /* Move up slightly on hover */
     box-shadow: 0 8px 14px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
 }
 

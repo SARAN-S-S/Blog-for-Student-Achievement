@@ -51,19 +51,19 @@ const PostsPage = () => {
     totalPosts ? ((count / totalPosts) * 100).toFixed(2) : 0;
 
   return (
-    <div className="postsPage">
+    <div className="allpostsPostsPage">
       <h1>Post Statistics</h1>
 
       {/* Total Posts Container */}
-      <div className="totalPostsContainer">
+      <div className="allpostsTotalPostsContainer">
         <p>Total Posts: {totalPosts}</p>
       </div>
 
       {/* Event Type Counts */}
       <span><h2>Event Type Counts</h2></span>
-      <div className="grid">
+      <div className="allpostsGrid">
         {eventTypes.map((type) => (
-          <div key={type} className="countContainer">
+          <div key={type} className="allpostsCountContainer">
             <p>{type} Count: {postsByEventType[type]}</p>
             <p>Percentage: {calculatePercentage(postsByEventType[type])}%</p>
           </div>
@@ -72,9 +72,9 @@ const PostsPage = () => {
 
       {/* Student Year Counts */}
       <span><h2>Student Year Counts</h2></span>
-      <div className="grid">
+      <div className="allpostsGrid">
         {studentYears.map((year) => (
-          <div key={year} className="countContainer">
+          <div key={year} className="allpostsCountContainer">
             <p>{year} Count: {postsByYear[year]}</p>
             <p>Percentage: {calculatePercentage(postsByYear[year])}%</p>
           </div>
@@ -82,14 +82,14 @@ const PostsPage = () => {
       </div>
 
       {/* Bar Charts */}
-      <div className="barChartContainer">
+      <div className="allpostsBarChartContainer">
         <span><h2>Event Type Percentage in Charts</h2></span>
         <BarChart
           data={eventTypes.map((type) => calculatePercentage(postsByEventType[type]))}
           labels={eventTypes}
           title="Posts by Event Type"
-          backgroundColor={["#ff6384", "#36a2eb", "#cc65fe", "#ffce56", "#4bc0c0"]}
-          borderColor={["#ff6384", "#36a2eb", "#cc65fe", "#ffce56", "#4bc0c0"]}
+          backgroundColor={["#A5D6A7", "#90CAF9", "#CE93D8", "#FFE082", "#80CBC4"]} // Alternative colors
+          borderColor={["#4CAF50", "#2196F3", "#AB47BC", "#FFC107", "#009688"]} // Darker borders
         />
 
         <span><h2>Student Year Percentage in Charts</h2></span>
@@ -97,9 +97,10 @@ const PostsPage = () => {
           data={studentYears.map((year) => calculatePercentage(postsByYear[year]))}
           labels={studentYears}
           title="Posts by Student Year"
-          backgroundColor={["#ff6384", "#36a2eb", "#cc65fe", "#ffce56"]}
-          borderColor={["#ff6384", "#36a2eb", "#cc65fe", "#ffce56"]}
+          backgroundColor={["#A1C4FD", "#81F7E5", "#E1BEE7", "#D7CCC8"]} // Unique colors
+          borderColor={["#3F51B5", "#00ACC1", "#9C27B0", "#5D4037"]} // Darker borders
         />
+
       </div>
     </div>
   );

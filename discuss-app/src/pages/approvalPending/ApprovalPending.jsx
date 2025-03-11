@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faCheckCircle, faTimesCircle, faEye } from "@fortawesome/free-solid-svg-icons";
 import "./approvalPending.css";
 
-export default function ApprovalPending() {
+export default function ApprovalPendingCustom() {
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState("");
   const [selectedPosts, setSelectedPosts] = useState([]);
@@ -90,12 +90,12 @@ export default function ApprovalPending() {
   };
 
   return (
-    <div className="approvalPending">
+    <div className="approvalPendingCustom">
       <h1>Pending Posts</h1>
-      <div className="container">
-        <div className="searchContainer">
-          <div className="searchWrapper">
-            <FontAwesomeIcon icon={faSearch} className="searchIcon" />
+      <div className="containerApproval">
+        <div className="searchContainerApproval">
+          <div className="searchWrapperApproval">
+            <FontAwesomeIcon icon={faSearch} className="searchIconApproval" />
             <input
               type="text"
               placeholder="Search by title, username, or email"
@@ -104,7 +104,7 @@ export default function ApprovalPending() {
             />
           </div>
           <button
-            className="bulkApproveButton"
+            className="bulkApproveButtonApproval"
             onClick={handleBulkApprove}
             disabled={selectedPosts.length === 0}
           >
@@ -113,14 +113,14 @@ export default function ApprovalPending() {
         </div>
 
         {isLoading ? (
-          <div className="loadingContainer">
-            <p className="loadingMessage">Loading posts...</p>
-            <div className="spinner"></div>
+          <div className="loadingContainerApproval">
+            <p className="loadingMessageApproval">Loading posts...</p>
+            <div className="spinnerApproval"></div>
           </div>
         ) : (
           <>
-            <div className="tableContainer">
-              <table>
+            <div className="tableContainerApproval">
+              <table className="approvalPendingTable">
                 <thead>
                   <tr>
                     <th>Select</th>
@@ -161,17 +161,17 @@ export default function ApprovalPending() {
                       <td>{post.tags[1]}</td>
                       <td>{post.photo ? "Image" : "No Image"}</td>
                       <td>
-                        <Link to={`/review-post/${post._id}`} className="actionLink">
+                        <Link to={`/review-post/${post._id}`} className="actionLinkApproval">
                           <FontAwesomeIcon icon={faEye} /> Review
                         </Link>
                       </td>
                       <td>
-                        <span className="actionButton approveButton" onClick={() => handleApprove(post._id)}>
+                        <span className="actionButtonApproval approveButtonApproval" onClick={() => handleApprove(post._id)}>
                           <FontAwesomeIcon icon={faCheckCircle} /> Approve
                         </span>
                       </td>
                       <td>
-                        <span className="actionButton rejectButton" onClick={() => handleReject(post._id)}>
+                        <span className="actionButtonApproval rejectButtonApproval" onClick={() => handleReject(post._id)}>
                           <FontAwesomeIcon icon={faTimesCircle} /> Reject
                         </span>
                       </td>
@@ -182,7 +182,7 @@ export default function ApprovalPending() {
                           onChange={(e) =>
                             setRejectionReason({ ...rejectionReason, [post._id]: e.target.value })
                           }
-                          className="reasonTextarea" required
+                          className="reasonTextareaApproval" required
                         />
                       </td>
                     </tr>
@@ -191,19 +191,19 @@ export default function ApprovalPending() {
               </table>
             </div>
 
-            <div className="paginationContainer">
+            <div className="paginationContainerApproval">
               <button
-                className="paginationButton"
+                className="paginationButtonApproval"
                 onClick={() => handlePageChange(currentPage - 1)}
                 disabled={currentPage === 1}
               >
                 Previous
               </button>
-              <span className="pageInfo">
+              <span className="pageInfoApproval">
                 Page {currentPage} of {totalPages}
               </span>
               <button
-                className="paginationButton"
+                className="paginationButtonApproval"
                 onClick={() => handlePageChange(currentPage + 1)}
                 disabled={currentPage === totalPages}
               >

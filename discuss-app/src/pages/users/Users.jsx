@@ -53,49 +53,51 @@ const UsersPage = () => {
   };
 
   return (
-    <div className="usersPage">
+    <div className="usersUsersPage">
       <h1>User Statistics</h1>
 
       <span><h2>Users Counts</h2></span>
       {/* Count Grid Section */}
-      <div className="chartInfo">
+      <div className="usersChartInfo">
         {/* Total Users Count */}
-        <div className="countContainer">
+        <div className="usersCountContainer">
           <h3>Total Users</h3>
-          <div className="countValue">{totalUsers || 0}</div>
+          <div className="usersCountValue">{totalUsers || 0}</div>
         </div>
 
         {/* Students Count */}
-        <div className="countContainer">
+        <div className="usersCountContainer">
           <h3>Students</h3>
-          <div className="countValue">{studentsCount || 0}</div>
-          <div className="percentage">{studentsPercentage}%</div>
+          <div className="usersCountValue">{studentsCount || 0}</div>
+          <div className="usersPercentage">{studentsPercentage}%</div>
         </div>
 
         {/* Admins Count */}
-        <div className="countContainer">
+        <div className="usersCountContainer">
           <h3>Admins</h3>
-          <div className="countValue">{adminsCount || 0}</div>
-          <div className="percentage">{adminsPercentage}%</div>
+          <div className="usersCountValue">{adminsCount || 0}</div>
+          <div className="usersPercentage">{adminsPercentage}%</div>
         </div>
       </div>
 
       {/* BarChart Section */}
-      <div className="barChartContainer">
+      <div className="usersBarChartContainer">
         <span><h2>Users Percentage Charts</h2></span>
         <BarChart
           data={[studentsPercentage, adminsPercentage]}
           labels={["Students", "Admins"]}
           title="User Count"
-          backgroundColor={["#36a2eb", "#ff6384"]}
-          borderColor={["#36a2eb", "#ff6384"]}
+          backgroundColor={["#87CEEB", "#F08080"]}
+          borderColor={["#4682B4", "#CD5C5C"]}
         />
       </div>
 
-      <div className="boxgrid">
-        
-        <div className="searchBar">
-          <FontAwesomeIcon icon={faSearch} className="searchIcon" />
+      <span><h2>Users Details</h2></span>
+
+      <div className="usersBoxgrid">
+
+        <div className="usersSearchBar">
+          <FontAwesomeIcon icon={faSearch} className="usersSearchIcon" />
           <input
             type="text"
             placeholder="Search by username or email"
@@ -105,27 +107,31 @@ const UsersPage = () => {
         </div>
 
         {/* User Table */}
-        <table>
-          <thead>
-            <tr>
-              <th>Email</th>
-              <th>Username</th>
-              <th>Posts</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentUsers.map((user) => (
-              <tr key={user.email}>
-                <td>{user.email}</td>
-                <td>{user.username}</td>
-                <td>{user.postCount}</td>
+        <div className="usertableContainer">
+          <table className="usersTable">
+            <thead>
+              <tr>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Posts</th>
+                <th>Role</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {currentUsers.map((user) => (
+                <tr key={user.email}>
+                  <td>{user.email}</td>
+                  <td>{user.username}</td>
+                  <td>{user.postCount}</td>
+                  <td>{user.role === "admin" ? "Admin" : "Student"}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
         {/* Pagination */}
-        <div className="pagination">
+        <div className="usersPagination">
           <button onClick={handlePrevPage} disabled={currentPage === 1}>
             Previous
           </button>

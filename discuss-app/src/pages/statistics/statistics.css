@@ -1,26 +1,26 @@
 /* General Styling */
-.statisticsPage {
+.statisStatisticsPage {
   font-family: Arial, sans-serif;
   background-color: #f7f7f7;
   padding: 20px;
 }
 
-h1 {
+.statisStatisticsPage h1 {
   text-align: center;
   font-size: 2rem;
   color: #333;
-  margin-bottom: 30px;
+  margin-bottom: 80px;
 }
 
 /* Filters Section */
-.filters {
+.statisFilters {
   display: flex;
   gap: 20px;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 60px;
 }
 
-.filters select {
+.statisFilters select {
   padding: 12px;
   border: 2px solid #ccc;
   border-radius: 8px;
@@ -30,21 +30,21 @@ h1 {
   width: 150px; /* Set a fixed width for consistency */
 }
 
-.filters select:focus {
+.statisFilters select:focus {
   border-color: #36a2eb;
   outline: none;
 }
 
 /* Stats Section */
-.statsContainer {
+.statisStatsContainer {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
-  margin-bottom: 30px;
+  margin-bottom: 100px;
 }
 
-.statItem {
+.statisStatItem {
   background-color: #f0d4e3;
   padding: 20px;
   border-radius: 8px;
@@ -57,43 +57,45 @@ h1 {
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.statItem:hover {
+.statisStatItem:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
-.statItem h3 {
+.statisStatItem h3 {
   font-size: 1.5rem;
   color: #333;
   margin-bottom: 10px;
 }
 
-.statItem p {
+.statisStatItem p {
   font-size: 1rem;
   color: #555;
   margin: 5px 0;
 }
 
 /* Charts Section */
-.charts {
-  display: flex;
-  justify-content: center; /* Centers horizontally */
-  align-items: center;     /* Centers vertically */
+.statisCharts {
   width: 80%;
-  height: 300px;
+  max-width: 600px;
   margin: 20px auto;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Center horizontally */
+  margin-bottom: 70px;
 }
 
-.charts canvas {
+.statisCharts canvas {
   max-width: 100% !important;
-  height: 100% !important;
+  height: 300px !important; /* Set a fixed height for the canvas */
   border-radius: 8px;
-  border: 2px solid #2e71af;
+  border: 3px solid #5a8aa8;
+  background-color: #f0f8ff;
 }
 
 
 /* Total Posts Section */
-.totalPosts {
+.statisTotalPosts {
   background: #b1dfe1;
   padding: 20px;
   border-radius: 8px;
@@ -104,13 +106,13 @@ h1 {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.totalPosts h3 {
+.statisTotalPosts h3 {
   font-size: 1.3rem;
   color: #333;
   margin-bottom: 10px;
 }
 
-.totalPosts p {
+.statisTotalPosts p {
   font-size: 1.2rem;
   color: #100101;
   margin: 5px 0;

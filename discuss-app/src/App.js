@@ -15,6 +15,9 @@ import Statistics from "./pages/statistics/Statistics";
 import FilterPosts from "./pages/filterPosts/FilterPosts";
 import ApprovalPending from "./pages/approvalPending/ApprovalPending";
 import PostForReview from "./components/postForReview/PostForReview";
+import MyPosts from "./pages/myPosts/MyPosts";
+
+
 
 
 
@@ -66,6 +69,10 @@ function App() {
         <Route path="/post/:postId" element={user ? <Single /> : <Navigate to="/login" />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={user ? <Contact /> : <Navigate to="/login" />} />
+        <Route
+          path="/my-posts"
+          element={user ? <MyPosts /> : <Navigate to="/login" />}
+        />
       </Routes>
     </Router>
   );

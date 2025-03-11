@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faPenToSquare } from "@fortawesome/free-solid-svg-icons"; // Import faPenToSquare
+import { faSearch, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import "./managePosts.css";
 
-export default function ManagePosts() {
+export default function ManagePostsCustom() {
   const [posts, setPosts] = useState([]);
   const [search, setSearch] = useState("");
   const [selectedPosts, setSelectedPosts] = useState([]);
@@ -46,12 +46,12 @@ export default function ManagePosts() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="managePosts">
+    <div className="managePostsCustom">
       <h1>Manage Posts</h1>
-      <div className="container">
-        <div className="searchContainer">
-          <div className="searchWrapper">
-            <FontAwesomeIcon icon={faSearch} className="searchIcon" />
+      <div className="containerCustom">
+        <div className="searchContainerCustom">
+          <div className="searchWrapperCustom">
+            <FontAwesomeIcon icon={faSearch} className="searchIconCustom" />
             <input
               type="text"
               placeholder="Search by title, username, or email"
@@ -59,20 +59,20 @@ export default function ManagePosts() {
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <button className="bulkDeleteButton" onClick={handleBulkDelete}>
+          <button className="bulkDeleteButtonCustom" onClick={handleBulkDelete}>
             Bulk Delete
           </button>
         </div>
 
         {isLoading ? (
-          <div className="loadingContainer">
-            <p className="loadingMessage">Loading posts...</p>
-            <div className="spinner"></div>
+          <div className="loadingContainerCustom">
+            <p className="loadingMessageCustom">Loading posts...</p>
+            <div className="spinnerCustom"></div>
           </div>
         ) : (
           <>
-            <div className="tableContainer">
-              <table>
+            <div className="tableContainerCustom">
+              <table className="customPostsTable">
                 <thead>
                   <tr>
                     <th>Select</th>
@@ -110,7 +110,7 @@ export default function ManagePosts() {
                       <td>{post.tags[1]}</td>
                       <td>{post.photo ? "Image" : "No Image"}</td>
                       <td>
-                        <Link to={`/post/${post._id}`} className="actionLink">
+                        <Link to={`/post/${post._id}`} className="actionLinkCustom">
                           <FontAwesomeIcon icon={faPenToSquare} /> Edit
                         </Link>
                       </td>
@@ -119,7 +119,7 @@ export default function ManagePosts() {
                 </tbody>
               </table>
             </div>
-            <div className="pagination">
+            <div className="paginationCustom">
               <button
                 onClick={() => paginate(currentPage - 1)}
                 disabled={currentPage === 1}
