@@ -70,19 +70,14 @@ app.use("/api/posts", postRoute);
 app.use("/api/comments", commentRoute);
 app.use("/api/stats", statsRoute);
 
-// Redirect root URL to login page
-app.get("/", (req, res) => {
-    res.redirect("/login"); // Redirect to the login page
-});
-
-// Serve the login page
-app.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "login.html")); // Ensure login.html is in the "public" folder
-});
-
-// Serve static files (CSS, JS, etc.)
-app.use(express.static(path.join(__dirname, "public")));
 
 app.listen("7733" || process.env.PORT, () => {
     console.log("Backend is running.");
 });
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "index.html"));
+});
+
+
+

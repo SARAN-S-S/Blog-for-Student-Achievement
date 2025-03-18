@@ -37,29 +37,22 @@ function App() {
     <Router>
       <TopBar />
       <Routes>
-        <Route
+      <Route
           path="/"
-          element={
-            user?.role === "admin" ? (
-              <Navigate to="/dashboard" />
-            ) : (
-              <Home />
-            )
-          }
+          element={user ? <Home /> : <Navigate to="/login" />}
         />
-        
+
         <Route
           path="/dashboard"
           element={user?.role === "admin" ? <Dashboard /> : <Navigate to="/login" />}
         /> 
-        <Route path="/users" element={user?.role === "admin" ? <Users /> : <Navigate to="/login" />} />
-        <Route path="/allposts" element={user?.role === "admin" ? <AllPosts /> : <Navigate to="/login" />} />
-        <Route path="/manageposts" element={user?.role === "admin" ? <ManagePosts /> : <Navigate to="/login" />} />
-        <Route path="/statistics" element={user?.role === "admin" ? <Statistics /> : <Navigate to="/login" />} />
-        <Route path="/filter-posts" element={user?.role === "admin" ? <FilterPosts /> : <Navigate to="/login" />} />
-        <Route path="/approval-pending" element={user?.role === "admin" ? <ApprovalPending /> : <Navigate to="/login" />} />
-        <Route path="/approval-pending" element={<ApprovalPending />} />
-        <Route path="/review-post/:postId" element={<PostForReview />} />
+        <Route path="/users" element={user?.role === "admin" ? <Users /> : <Navigate to="/signup" />} />
+        <Route path="/allposts" element={user?.role === "admin" ? <AllPosts /> : <Navigate to="/signup" />} />
+        <Route path="/manageposts" element={user?.role === "admin" ? <ManagePosts /> : <Navigate to="/signup" />} />
+        <Route path="/statistics" element={user?.role === "admin" ? <Statistics /> : <Navigate to="/signup" />} />
+        <Route path="/filter-posts" element={user?.role === "admin" ? <FilterPosts /> : <Navigate to="/signup" />} />
+        <Route path="/approval-pending" element={user?.role === "admin" ? <ApprovalPending /> : <Navigate to="/signup" />} />
+        <Route path="/review-post/:postId" element={user?.role === "admin" ? <PostForReview  /> : <Navigate to="/signup" />} />
 
 
         <Route path="/signup" element={user ? <Navigate to="/dashboard" /> : <Signup />} />
@@ -67,7 +60,7 @@ function App() {
         <Route path="/write" element={user ? <Write /> : <Navigate to="/login" />} />
         <Route path="/settings" element={user ? <Settings /> : <Navigate to="/login" />} />
         <Route path="/post/:postId" element={user ? <Single /> : <Navigate to="/login" />} />
-        <Route path="/about" element={<About />} />
+        <Route path="/about" element={user ? <About /> : <Navigate to="/login" />} />
         <Route path="/contact" element={user ? <Contact /> : <Navigate to="/login" />} />
         <Route
           path="/my-posts"
