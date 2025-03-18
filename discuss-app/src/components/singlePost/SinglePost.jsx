@@ -85,6 +85,38 @@ export default function SinglePost() {
     getPostData();
   }, [path, user]);
 
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (!selectedFile) {
+      setError("Please upload an image.");
+      setFile(null);
+      setNewPhoto(null);
+      return;
+    }
+
+    // Check file format
+    const allowedFormats = ["image/png", "image/jpg", "image/jpeg"];
+    if (!allowedFormats.includes(selectedFile.type)) {
+      setError("Invalid file format. Only PNG, JPG, and JPEG are allowed.");
+      setFile(null);
+      setNewPhoto(null);
+      return;
+    }
+
+    // Check file size
+    if (selectedFile.size > 3 * 1024 * 1024) {
+      setError("Image size should be under 3MB only allowed...");
+      setFile(null);
+      setNewPhoto(null);
+    } else {
+      setError("");
+      setFile(selectedFile);
+      setNewPhoto(URL.createObjectURL(selectedFile));
+    }
+  };
+  
+
   const handleLike = async () => {
     try {
       if (!user) {
@@ -443,6 +475,8 @@ export default function SinglePost() {
                 <img className="singlePostImg" src={initialPhoto} alt={post.title} />
               ) : null}
 
+              {error && <p className="error-message">{error}</p>}
+
               <div className="postContainer">
                 <div className="writeFormGroup">
                   <label htmlFor="fileInput">
@@ -452,24 +486,9 @@ export default function SinglePost() {
                     type="file"
                     id="fileInput"
                     className="writeFile"
-                    onChange={(e) => {
-                      const selectedFile = e.target.files[0];
-                      if (selectedFile && selectedFile.size > 3 * 1024 * 1024) {
-                        setError("Image size should be under 3MB only allowed...");
-                        setFile(null);
-                        setNewPhoto(null);
-                      } else {
-                        setError("");
-                        setFile(selectedFile);
-                        if (selectedFile) {
-                          setNewPhoto(URL.createObjectURL(selectedFile));
-                        } else {
-                          setNewPhoto(null);
-                        }
-                      }
-                    }}
+                    onChange={handleFileChange}
                   />
-                  {error && <p className="error-message">{error}</p>}
+                  
                 </div>
                 <input
                   type="text"

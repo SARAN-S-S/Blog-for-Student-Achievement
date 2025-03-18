@@ -161,6 +161,15 @@
     text-align: center;
   }
 
+  .format-error-message {
+    color: darkred;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    text-shadow: 2px 2px 4px rgba(139, 0, 0, 0.5); 
+  }
+
 
 /* Responsive codes */
 @media (max-width: 768px) {

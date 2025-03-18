@@ -684,6 +684,24 @@ reply-icon {
 }
 
 
+.error-message {
+    color: darkred;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    text-shadow: 2px 2px 4px rgba(139, 0, 0, 0.5);
+    padding: 10px;
+    background-color: #ffe6e6; /* Light red background */
+    border: 1px solid #ff4d4d; /* Red border */
+    border-radius: 5px;
+    width: 100%;
+    max-width: 400px;
+    margin: 10px auto;
+  }
+
+
+
 /* Responsive Design adjustments */
 @media (max-width: 768px) {
     .singlePostWrapper {

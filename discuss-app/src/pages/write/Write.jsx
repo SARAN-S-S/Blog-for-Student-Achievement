@@ -12,6 +12,7 @@ export default function Write() {
   const [year, setYear] = useState("");
   const [error, setError] = useState(""); // Error message for file size
   const [imerror, setimError] = useState(""); // Error message for missing image
+  const [formatError, setFormatError] = useState(""); // Error message for invalid file format
   const [loading, setLoading] = useState(false); // Loading state
   const { user } = useContext(Context);
 
@@ -22,13 +23,25 @@ export default function Write() {
       return;
     }
 
+    // Check file format
+    const allowedFormats = ["image/png", "image/jpg", "image/jpeg"];
+    if (!allowedFormats.includes(selectedFile.type)) {
+      setFormatError("Invalid file format. Only PNG, JPG, and JPEG are allowed.");
+      setFile(null);
+      setimError(""); // Clear "missing image" error
+      setError(""); // Clear file size error
+      return;
+    }
+
     if (selectedFile.size > 3 * 1024 * 1024) {
       setError("Image size should be under 3MB.");
       setFile(null);
-      setimError(""); // Clear "missing image" error since the user tried to upload
+      setimError(""); // Clear "missing image" error
+      setFormatError(""); // Clear format error
     } else {
       setError("");
       setimError(""); // Clear any previous error
+      setFormatError(""); // Clear format error
       setFile(selectedFile);
     }
   };
@@ -82,6 +95,7 @@ export default function Write() {
       {file && <img className="writeImg" src={URL.createObjectURL(file)} alt="" />}
       {error && <p className="error-message">{error}</p>} {/* File size error */}
       {imerror && <p className="imerror-message">{imerror}</p>} {/* Image required error */}
+      {formatError && <p className="format-error-message">{formatError}</p>} {/* Invalid format error */}
 
       <form className="writeForm" onSubmit={handleSubmit}>
         <div className="writeFormGroup">

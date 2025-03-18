@@ -70,7 +70,13 @@ app.use("/api/posts", postRoute);
 app.use("/api/comments", commentRoute);
 app.use("/api/stats", statsRoute);
 
+// Serve index.html for all unknown routes (Fallback for React Router)
+app.use(express.static("build")); // Serve static files from the build folder
+app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "build", "index.html"));
+});
 
+// Start Server
 app.listen("7733" || process.env.PORT, () => {
     console.log("Backend is running.");
 });
@@ -78,6 +84,3 @@ app.listen("7733" || process.env.PORT, () => {
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
-
-
-
