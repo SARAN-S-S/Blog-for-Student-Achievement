@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: function () {
-      return this.role === "admin"; // Password required only for admins
+      return this.role === "admin"; 
     },
   },
   profilePic: {

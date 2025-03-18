@@ -2,7 +2,7 @@
 
 .settings {
     display: flex;
-    min-height: 100vh; /* Extend background to full viewport height */
+    min-height: 100vh; 
     padding: 30px;
     flex-wrap: wrap;
     box-sizing: border-box;
@@ -82,13 +82,13 @@
 }
 
 .settingsForm > input {
-    width: calc(100% - 22px); /* Occupy full width of the container, accounting for padding */
+    width: calc(100% - 22px); 
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #886363;
     border-radius: 5px;
     font-size: 16px;
-    box-sizing: border-box; /* Include padding in width calculation */
+    box-sizing: border-box; 
 }
 
 .settingsSubmit {
@@ -117,59 +117,123 @@
 }
 
 
+.updateSuccessMessageSet {
+    color: rgb(255, 0, 0);
+    text-align: center;
+    margin-top: 10px;
+    opacity: 1;
+    font-weight: 300;
+    transition: opacity 1s ease-out;
+  }
+  
+  .updateSuccessMessageSet.fade-out {
+    opacity: 0;
+  }
 
-@media (max-width: 768px) { /* Medium screens and smaller */
+
+  /* Responsive */
+  @media (max-width: 768px) { /* Medium screens and smaller */
     .settings {
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
     }
-
+  
     .settingsWrapper {
-        flex: 1;
-        margin-right: 0;
-        margin-bottom: 20px;
-        width: 90%;
+      flex: 1;
+      margin-right: 0;
+      margin-bottom: 20px;
+      width: 90%;
+      padding: 20px;
     }
-
+  
     .settingsForm > input {
-        width: calc(100% - 22px);
+      width: calc(100% - 22px);
     }
-
+  
     .sidebar {
-        flex: 1;
-        width: 90%;
+      width: 90%;
     }
-}
-
-@media (max-width: 480px) { /* Small screens and smaller */
-    .settings {
-        padding: 10px;
-    }
-
-    .settingsWrapper {
-        padding: 15px;
-        width: 95%;
-    }
-
-    .settingsForm > input {
-        width: calc(100% - 22px);
-    }
-
-    .sidebar {
-        width: 95%;
-    }
-
+  
     .settingsUpdateTitle {
-        font-size: 20px;
+      font-size: 22px;
     }
-
+  
     .settingsForm > label {
-        font-size: 16px;
+      font-size: 16px;
     }
-
+  
     .settingsForm > input,
     .settingsSubmit {
-        font-size: 14px;
+      font-size: 15px;
+      padding: 8px;
     }
-}
+  
+    .settingsPP > img {
+      width: 120px;
+      height: 120px;
+    }
+  
+    .settingsPPIcon {
+      width: 25px;
+      height: 25px;
+      font-size: 16px;
+    }
+  }
+  
+  @media (max-width: 480px) { /* Small screens and smaller */
+    .settings {
+      padding: 10px;
+    }
+  
+    .settingsWrapper {
+      padding: 15px;
+      width: 95%;
+    }
+  
+    .settingsForm > input {
+      width: calc(100% - 22px);
+      margin-bottom: 15px;
+    }
+  
+    .sidebar {
+      width: 95%;
+    }
+  
+    .settingsUpdateTitle {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+  
+    .settingsForm > label {
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+  
+    .settingsForm > input,
+    .settingsSubmit {
+      font-size: 14px;
+      padding: 8px 15px;
+    }
+  
+    .settingsPP {
+      margin-bottom: 15px;
+    }
+  
+    .settingsPP > img {
+      width: 100px;
+      height: 100px;
+    }
+  
+    .settingsPPIcon {
+      width: 20px;
+      height: 20px;
+      font-size: 14px;
+      margin-left: 8px;
+    }
+  
+    .updateSuccessMessageSet {
+      font-size: 12px;
+    }
+  }
+  

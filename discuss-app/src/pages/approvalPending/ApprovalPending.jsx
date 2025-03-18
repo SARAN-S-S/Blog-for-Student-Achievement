@@ -23,7 +23,7 @@ export default function ApprovalPendingCustom() {
 
       // Ensure total is a valid number and greater than 0
       const total = res.data.total || 0;
-      setTotalPages(Math.ceil(total / postsPerPage) || 1); // Default to 1 if total is 0
+      setTotalPages(Math.ceil(total / postsPerPage) || 1); 
     } catch (err) {
       console.error("Error fetching posts:", err);
     } finally {

@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import React, { useState, useEffect, useContext, useRef } from "react"; // Import useRef
+import React, { useState, useEffect, useContext, useRef } from "react";
 import "./singlePost.css";
 import axios from "axios";
 import { Context } from "../../context/Context";
@@ -10,7 +10,6 @@ export default function SinglePost() {
   const location = useLocation();
   const path = location.pathname.split("/")[2];
   const [post, setPost] = useState({});
-  const PF = "http://localhost:7733/images/";
   const { user } = useContext(Context);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
@@ -24,28 +23,36 @@ export default function SinglePost() {
   const [replyText, setReplyText] = useState("");
 
   const [category, setCategory] = useState("");
-  const [category2, setCategory2] = useState(""); // New state for additional optional category
+  const [category2, setCategory2] = useState("");
   const [year, setYear] = useState("");
 
   const [file, setFile] = useState(null);
   const [newPhoto, setNewPhoto] = useState(null);
   const [initialPhoto, setInitialPhoto] = useState(null);
+  const [error, setError] = useState("");
 
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
 
-  // Create a ref for the textarea
-  const textareaRef = useRef(null);
+  const [updateloading, setupdateLoading] = useState(false); // Loading state for updates
+  const [loading, setLoading] = useState(true);
 
-  // Auto-focus the textarea and set cursor position at the end when editingComment changes
+  const textareaRef = useRef(null);
+  const replyTextareaRef = useRef(null);
+
   useEffect(() => {
     if (editingComment && textareaRef.current) {
       textareaRef.current.focus();
-      // Set cursor position at the end of the text
       const length = textareaRef.current.value.length;
       textareaRef.current.setSelectionRange(length, length);
     }
   }, [editingComment]);
+
+  useEffect(() => {
+    if (replyingToComment && replyTextareaRef.current) {
+      replyTextareaRef.current.focus();
+    }
+  }, [replyingToComment]);
 
   useEffect(() => {
     const getPostData = async () => {
@@ -58,12 +65,13 @@ export default function SinglePost() {
         setPost(postData);
         setTitle(postData.title);
         setDesc(postData.desc);
-        setCategory(postData.tags[0] || ""); // Set initial category (Event Type 1)
-        setCategory2(postData.tags[2] || ""); // Set initial category2 (Event Type 2)
-        setYear(postData.tags[1] || ""); // Set initial year (Student Year)
+        setCategory(postData.tags[0] || "");
+        setCategory2(postData.tags[2] || "");
+        setYear(postData.tags[1] || "");
         setInitialPhoto(postData.photo || null);
         setLikes(postData.likes || 0);
         setComments(commentsRes.data);
+        setLoading(false);
 
         if (user) {
           const likedPosts = JSON.parse(localStorage.getItem("likedPosts")) || [];
@@ -71,6 +79,7 @@ export default function SinglePost() {
         }
       } catch (err) {
         console.error("Error fetching post or comments:", err);
+        setLoading(false);
       }
     };
     getPostData();
@@ -84,21 +93,17 @@ export default function SinglePost() {
       }
 
       if (liked) {
-        // Unlike the post
         await axios.post(`/api/posts/${post._id}/unlike`);
         setLikes(prevLikes => prevLikes - 1);
         setLiked(false);
 
-        // Remove post ID from liked posts in localStorage
         const likedPosts = JSON.parse(localStorage.getItem("likedPosts")) || [];
         localStorage.setItem("likedPosts", JSON.stringify(likedPosts.filter(id => id !== post._id)));
       } else {
-        // Like the post
         await axios.post(`/api/posts/${post._id}/like`);
         setLikes(prevLikes => prevLikes + 1);
         setLiked(true);
 
-        // Add post ID to liked posts in localStorage
         const likedPosts = JSON.parse(localStorage.getItem("likedPosts")) || [];
         localStorage.setItem("likedPosts", JSON.stringify([...likedPosts, post._id]));
       }
@@ -118,6 +123,12 @@ export default function SinglePost() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+    if (file && file.size > 3 * 1024 * 1024) {
+      setError("Image size should be under 3MB only allowed...");
+      return;
+    }
+
+    setupdateLoading(true); // Start loading
     try {
       const updatedPost = {
         username: user.username,
@@ -126,19 +137,19 @@ export default function SinglePost() {
         category,
         category2,
         year,
-        tags: [category, year, category2].filter(Boolean), // Ensure consistent order in tags array
+        tags: [category, year, category2].filter(Boolean),
       };
 
       if (file) {
         const data = new FormData();
-        const filename = Date.now() + file.name;
-        data.append("name", filename);
         data.append("file", file);
-        updatedPost.photo = filename;
         try {
-          await axios.post("/api/upload", data);
+          const uploadRes = await axios.post("/api/upload", data);
+          updatedPost.photo = uploadRes.data.url;
         } catch (err) {
           console.error("Error uploading file:", err);
+        } finally {
+          setupdateLoading(false); // Stop loading
         }
       }
 
@@ -150,6 +161,10 @@ export default function SinglePost() {
       setInitialPhoto(res.data.photo);
     } catch (err) {
       console.error("Error updating post:", err);
+    } finally {
+      setTimeout(() => {
+        setupdateLoading(false); // Stop loading after 3 seconds
+      }, 3000);
     }
   };
 
@@ -195,10 +210,9 @@ export default function SinglePost() {
     try {
       const comment = findCommentById(comments, commentId);
 
-      // Allow admin or comment author to delete
       if (user._id === comment.userId || user.role === "admin") {
         await axios.delete(`/api/comments/${commentId}`, { 
-          data: { userId: user._id } // Include userId in the request body
+          data: { userId: user._id }
         });
 
         setComments(prevComments => {
@@ -238,7 +252,6 @@ export default function SinglePost() {
   };
 
   const handleEditComment = (comment) => {
-    // Allow admin or comment author to edit
     if (user._id === comment.userId || user.role === "admin") {
       setEditingComment(comment._id);
       setEditedCommentText(comment.text);
@@ -252,7 +265,7 @@ export default function SinglePost() {
       const comment = findCommentById(comments, commentId);
       if (user._id === comment.userId || user.role === "admin") {
         const res = await axios.put(`/api/comments/${commentId}`, {
-          userId: user._id, // Include userId in the request body
+          userId: user._id,
           text: editedCommentText,
         });
 
@@ -339,10 +352,11 @@ export default function SinglePost() {
         {editingComment === comment._id ? (
           <div className="comment-edit-form">
             <textarea
-              ref={textareaRef} // Attach the ref to the textarea
+              ref={textareaRef}
               className="comment-edit-textarea"
               value={editedCommentText}
               onChange={(e) => setEditedCommentText(e.target.value)}
+              style={{ backgroundColor: "#f0f8ff" }} // Light blue background for edit textarea
             />
             <div className="comment-edit-buttons">
               <button
@@ -379,7 +393,13 @@ export default function SinglePost() {
 
         {replyingToComment === comment._id && (
           <div className="reply-form">
-            <textarea placeholder="Write a reply..." value={replyText} onChange={e => setReplyText(e.target.value)} />
+            <textarea
+              ref={replyTextareaRef}
+              placeholder="Write a reply..."
+              value={replyText}
+              onChange={(e) => setReplyText(e.target.value)}
+              style={{ fontSize: "1.1em" }} // Increase font size while typing
+            />
             <button onClick={() => handlePostReply(comment._id)}>Post Reply</button>
             <button onClick={() => setReplyingToComment(null)}>Cancel</button>
           </div>
@@ -392,8 +412,27 @@ export default function SinglePost() {
     );
   };
 
+  if (loading) {
+    return (
+      <div className="single-loading-overlay">
+        <div className="single-loading-message">
+          <div className="single-loading-spinner"></div>
+          Loading posts...
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="singlePost">
+      {updateloading && (
+        <div className="single-loading-overlay">
+          <div className="single-loading-message">
+            <div className="single-loading-spinner"></div>
+            Updating... Please wait
+          </div>
+        </div>
+      )}
       <div className="singlePostWrapper">
         {updateMode ? (
           <form onSubmit={handleUpdate}>
@@ -401,7 +440,7 @@ export default function SinglePost() {
               {newPhoto ? (
                 <img className="writeImg" src={newPhoto} alt="New Post Preview" />
               ) : initialPhoto ? (
-                <img className="singlePostImg" src={PF + initialPhoto} alt={post.title} />
+                <img className="singlePostImg" src={initialPhoto} alt={post.title} />
               ) : null}
 
               <div className="postContainer">
@@ -414,14 +453,23 @@ export default function SinglePost() {
                     id="fileInput"
                     className="writeFile"
                     onChange={(e) => {
-                      setFile(e.target.files[0]);
-                      if (e.target.files && e.target.files.length > 0) {
-                        setNewPhoto(URL.createObjectURL(e.target.files[0]));
-                      } else {
+                      const selectedFile = e.target.files[0];
+                      if (selectedFile && selectedFile.size > 3 * 1024 * 1024) {
+                        setError("Image size should be under 3MB only allowed...");
+                        setFile(null);
                         setNewPhoto(null);
+                      } else {
+                        setError("");
+                        setFile(selectedFile);
+                        if (selectedFile) {
+                          setNewPhoto(URL.createObjectURL(selectedFile));
+                        } else {
+                          setNewPhoto(null);
+                        }
                       }
                     }}
                   />
+                  {error && <p className="error-message">{error}</p>}
                 </div>
                 <input
                   type="text"
@@ -440,8 +488,8 @@ export default function SinglePost() {
                 <option value="Paper">Paper</option>
                 <option value="Journal">Journal</option>
                 <option value="Competition">Competition</option>
-                <option value="Product">Product</option> {/* New Option */}
-                <option value="Placement">Placement</option> {/* New Option */}
+                <option value="Product">Product</option>
+                <option value="Placement">Placement</option>
               </select>
 
               <select className="writeInput" value={year} onChange={(e) => setYear(e.target.value)} required>
@@ -458,8 +506,8 @@ export default function SinglePost() {
                 <option value="Paper">Paper</option>
                 <option value="Journal">Journal</option>
                 <option value="Competition">Competition</option>
-                <option value="Product">Product</option> {/* New Option */}
-                <option value="Placement">Placement</option> {/* New Option */}
+                <option value="Product">Product</option>
+                <option value="Placement">Placement</option>
               </select>
             </div>
             <textarea className="singlePostDescInput" value={desc} onChange={(e) => setDesc(e.target.value)} />
@@ -468,7 +516,7 @@ export default function SinglePost() {
         ) : (
           <div>
             {post.photo && (
-              <img className="singlePostImg" src={PF + post.photo} alt={post.title} />
+              <img className="singlePostImg" src={post.photo} alt={post.title} />
             )}
             <h1 className="siglePostTitle">
               {title}
@@ -512,21 +560,28 @@ export default function SinglePost() {
             <p className="singlePostDesc">{desc}</p>
           </div>
         )}
-        <div className="comments">
-          <h3>Comments</h3>
-          {comments.map(comment => renderComment(comment))}
+        <div className="comments-container">
+          <div className="comments">
+            <h3>Comments</h3>
+            {comments.map(comment => renderComment(comment))}
+          </div>
           {user && (
-            <form className="commentForm" onSubmit={handleCommentSubmit}>
-              <textarea
-                placeholder="Write a comment..."
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                required
-              ></textarea>
-              <button type="submit">
-                <FontAwesomeIcon icon={faPaperPlane} />
-              </button>
-            </form>
+            <div className="comment-input-container">
+              <form className="commentForm" onSubmit={handleCommentSubmit}>
+                <textarea
+                  placeholder="Write a comment..."
+                  value={newComment}
+                  onChange={(e) => {
+                    setNewComment(e.target.value);
+                    e.target.style.fontSize = "1.1em"; // Increase font size while typing
+                  }}
+                  required
+                ></textarea>
+                <button type="submit">
+                  <FontAwesomeIcon icon={faPaperPlane} />
+                </button>
+              </form>
+            </div>
           )}
         </div>
       </div>

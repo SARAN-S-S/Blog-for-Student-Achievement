@@ -8,32 +8,55 @@ export default function Write() {
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
   const [category, setCategory] = useState("");
-  const [category2, setCategory2] = useState(""); // New optional category
+  const [category2, setCategory2] = useState(""); // Optional category
   const [year, setYear] = useState("");
+  const [error, setError] = useState(""); // Error message for file size
+  const [imerror, setimError] = useState(""); // Error message for missing image
+  const [loading, setLoading] = useState(false); // Loading state
   const { user } = useContext(Context);
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (!selectedFile) {
+      setimError("Please upload an image.");
+      return;
+    }
+
+    if (selectedFile.size > 3 * 1024 * 1024) {
+      setError("Image size should be under 3MB.");
+      setFile(null);
+      setimError(""); // Clear "missing image" error since the user tried to upload
+    } else {
+      setError("");
+      setimError(""); // Clear any previous error
+      setFile(selectedFile);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Ensure consistent order in the tags array
-    const tags = [category, year, category2].filter(Boolean); // [Event Type 1, Student Year, Event Type 2]
+    if (!file) {
+      setimError("Please upload an image.");
+      return;
+    }
 
+    setLoading(true); // Start loading
+    const tags = [category, year, category2].filter(Boolean);
     const newPost = {
       username: user.username,
       title,
       desc,
-      tags, // Use the correctly ordered tags array
+      tags,
       approved: false,
     };
 
     if (file) {
       const data = new FormData();
-      const filename = Date.now() + file.name;
-      data.append("name", filename);
       data.append("file", file);
-      newPost.photo = filename;
       try {
-        await axios.post("/api/upload", data);
+        const uploadRes = await axios.post("/api/upload", data);
+        newPost.photo = uploadRes.data.url;
       } catch (err) {
         console.error("Error uploading file:", err);
       }
@@ -44,12 +67,22 @@ export default function Write() {
       window.location.replace("/post/" + res.data._id);
     } catch (err) {
       console.error("Error creating post:", err);
+    } finally {
+      setTimeout(() => setLoading(false), 3000);
     }
   };
 
   return (
     <div className="write">
+      {loading && (
+        <div className="loading-overlay">
+          <div className="loading-message">Posting... Please wait</div>
+        </div>
+      )}
       {file && <img className="writeImg" src={URL.createObjectURL(file)} alt="" />}
+      {error && <p className="error-message">{error}</p>} {/* File size error */}
+      {imerror && <p className="imerror-message">{imerror}</p>} {/* Image required error */}
+
       <form className="writeForm" onSubmit={handleSubmit}>
         <div className="writeFormGroup">
           <label htmlFor="fileInput">
@@ -59,9 +92,9 @@ export default function Write() {
             type="file"
             id="fileInput"
             className="writeFile"
-            onChange={(e) => setFile(e.target.files[0])}
-            required
+            onChange={handleFileChange}
           />
+                    
           <input
             type="text"
             placeholder="Event Name | Location"
@@ -84,10 +117,10 @@ export default function Write() {
             <option value="Paper">Paper</option>
             <option value="Journal">Journal</option>
             <option value="Competition">Competition</option>
-            <option value="Product">Product</option> {/* New Option */}
-            <option value="Placement">Placement</option> {/* New Option */}
+            <option value="Product">Product</option>
+            <option value="Placement">Placement</option>
           </select>
-    
+
           <select
             className="writeInput"
             value={year}
@@ -112,8 +145,8 @@ export default function Write() {
             <option value="Paper">Paper</option>
             <option value="Journal">Journal</option>
             <option value="Competition">Competition</option>
-            <option value="Product">Product</option> {/* New Option */}
-            <option value="Placement">Placement</option> {/* New Option */}
+            <option value="Product">Product</option>
+            <option value="Placement">Placement</option>
           </select>
         </div>
         <div className="writeFormGroup">

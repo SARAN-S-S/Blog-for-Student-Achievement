@@ -13,7 +13,7 @@ const StatisticsPage = () => {
 
   const fetchData = useCallback(async () => {
     setLoading(true);
-    setNoPostsFound(false); // Reset noPostsFound when fetching new data
+    setNoPostsFound(false); 
     try {
       const res = await axios.get(`/api/stats/monthly-posts?month=${month}&year=${year}`);
       setMonthlyPosts(res.data.posts);
@@ -39,7 +39,7 @@ const StatisticsPage = () => {
 
   return (
     <div className="statisStatisticsPage">
-      <h1>Monthly Approved Post Statistics</h1> {/* Updated title */}
+      <h1>Monthly Approved Post Statistics</h1> 
       <div className="statisFilters">
         <select value={month} onChange={(e) => setMonth(e.target.value)}>
           <option value="">Select Month</option>
@@ -60,13 +60,13 @@ const StatisticsPage = () => {
       </div>
       <div className="statisStatsContainer">
         <div className="statisTotalPosts">
-          <h3>Total Approved Posts in {year || "All Years"}</h3> {/* Updated label */}
+          <h3>Total Approved Posts in {year || "All Years"}</h3> 
           <p>{totalPosts}</p>
         </div>
         {monthlyPosts.map((post) => (
           <div key={post._id} className="statisStatItem">
             <h3>{post.monthName || "No Data"}</h3>
-            <p>Approved Posts: {post.count || 0}</p> {/* Updated label */}
+            <p>Approved Posts: {post.count || 0}</p> 
             <p>Percentage: {post.percentage || "0.00"}%</p>
           </div>
         ))}

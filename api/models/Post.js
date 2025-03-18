@@ -19,7 +19,7 @@ const PostSchema = new mongoose.Schema({
         required: true,
     },
     tags: {
-      type: [String], // Array of strings for event type and student year
+      type: [String], 
       default: [],
     },
     likes: {

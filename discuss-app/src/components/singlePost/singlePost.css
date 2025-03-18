@@ -1,11 +1,10 @@
-/* General Styles */
+
 .singlePost {
     margin-top: 5px;
     margin-left: 10px;
     margin-right: -10px;
     flex: 9;
-    background: #c8c8c8;
-    border-radius: 10px;
+    background: #f0f0f1; 
     border: 2px solid #a0c0ff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease;
@@ -96,7 +95,7 @@
 
 .singlePostTitleInput {
     text-align: left;
-    margin: 5px auto; /* Decreased top and bottom margins */
+    margin: 5px auto; 
     font-family: "Lora", serif;
     font-size: 28px;
     color: #555;
@@ -166,14 +165,17 @@
     border-color: #3498db;
 }
 
-/* Comments Section */
+
 .comments {
-    margin-top: 20px;
+    margin-top: 50px;
     border: 1.5px solid #935828;
     padding: 15px;
     border-radius: 8px;
     background-color: #faf1e8;
     margin-right: 20px;
+    max-height: 500px; 
+    overflow-y: auto; 
+    
 }
 
 .comments h3 {
@@ -191,7 +193,18 @@
     background-color: #e3f2fd;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
 }
+
+.comments-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .comment-input-container {
+    margin-top: 0px;
+  }
 
 .reply {
     border: 2px solid #71a195;
@@ -276,14 +289,24 @@ reply-icon {
 }
 
 .reply-form textarea, .commentForm textarea {
-    width: calc(100% - 70px);
-    padding: 8px;
-    border: 1.5px solid #7eb296;
-    border-radius: 5px;
-    margin-bottom: 5px;
-    resize: vertical;
-    font-size: 0.95em;
+  width: calc(100% - 70px);
+  padding: 10px;
+  border: 1.5px solid #7eb296;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  resize: vertical;
+  font-size: 1em;
+  transition: font-size 0.2s ease;
 }
+
+
+.commentForm textarea:focus {
+    outline: none;
+    border: 2px solid #2170c9; 
+    box-shadow: 0 0 8px rgba(33, 112, 201, 0.5); 
+    font-size: 1.1em; 
+  }
+
 
 .reply-form button,
 .commentForm button {
@@ -324,15 +347,15 @@ reply-icon {
   }
   
   .comment-edit-textarea {
-    width: calc(70% - 20px); /* Decreased width */
-    padding: 8px; /* Slightly reduced padding */
+    width: calc(70% - 20px); 
+    padding: 8px; 
     border: 2px solid #4a90e2;
     border-radius: 6px;
-    margin-bottom: 8px; /* Slightly reduced margin */
+    margin-bottom: 8px; 
     resize: vertical;
-    font-size: 0.95em; /* Slightly reduced font size */
+    font-size: 0.95em; 
     color: #333;
-    background-color: #c5a7c6; /* Different background color */
+    background-color: #c5a7c6; 
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }
   
@@ -345,15 +368,15 @@ reply-icon {
   .comment-edit-buttons {
     display: flex;
     justify-content: flex-end;
-    gap: 8px; /* Slightly reduced gap */
+    gap: 8px; 
   }
   
   .comment-edit-update,
   .comment-edit-cancel {
-    padding: 8px 16px; /* Slightly reduced padding */
+    padding: 8px 16px; 
     border: none;
-    border-radius: 5px; /* Slightly reduced border radius */
-    font-size: 0.9em; /* Slightly reduced font size */
+    border-radius: 5px; 
+    font-size: 0.9em; 
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     font-weight: 600;
@@ -388,10 +411,10 @@ reply-icon {
 
 .postTags {
     margin-top: 10px;
-    text-align: center; /* Center the text */
-    display: flex; /* Use flexbox for layout */
-    justify-content: center; /* Center tags horizontally */
-    flex-wrap: wrap; /* Allow tags to wrap to the next line */
+    text-align: center; 
+    display: flex;
+    justify-content: center; 
+    flex-wrap: wrap; 
 }
 
 .tag {
@@ -400,7 +423,7 @@ reply-icon {
     color: white;
     padding: 6px 12px;
     border-radius: 8px;
-    margin: 5px; /* Add margin for spacing between tags */
+    margin: 5px; 
     font-size: 15px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
@@ -504,15 +527,17 @@ reply-icon {
     gap: 8px;
     padding: 10px 15px;
     border-radius: 8px;
-    background: #f4f4f4;
+    background: #ffffff; 
+    border: 2px solid #a0c0ff; 
     cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
+    transition: background 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
     width: fit-content;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .like-section:hover {
-    background: #e0e0e0;
+    background: #f0f0f0; 
+    border-color: #71a1ff; 
     transform: scale(1.05);
 }
 
@@ -526,28 +551,29 @@ reply-icon {
 }
 
 .liked {
-    color: #ff0015;
+    color: #ff0015; 
 }
 
 .like-icon:not(.liked) {
-    color: #ab9d9d;
+    color: #666; 
 }
 
 .like-count {
     font-size: 16px;
     font-weight: bold;
-    color: #333;
+    color: #333; 
 }
 
 .like-container {
     display: grid;
     place-items: center;
     margin-top: 15px;
+    margin-bottom: 20px;
 }
 
 .postContainer {
-    margin-left: 50px; /* Reduced left margin */
-    margin-right: 50px; /* Reduced right margin */
+    margin-left: 50px; 
+    margin-right: 50px; 
     display: flex;
     align-items: center;
     border: 2px solid #919597;
@@ -557,14 +583,106 @@ reply-icon {
     background: #dfe2e4;
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease;
-    width: calc(100% - 100px); /* Adjust width to fill more space */
-    max-width: none; /* Remove max-width restriction */
+    width: calc(100% - 100px); 
+    max-width: none; 
 }
 
 .postContainer:focus-within {
     border-color: rgba(0, 77, 77, 0.8);
     box-shadow: 0 0 5px rgba(0, 77, 77, 0.3);
 }
+
+
+
+/* Loading Overlay */
+.single-loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+
+.single-loading-message {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 25px 50px;
+    border-radius: 12px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    animation: pulseGlow 1.5s infinite alternate ease-in-out;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+
+.single-loading-message:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+}
+
+.single-loading-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.2); 
+    border-top: 4px solid #4CAF50; 
+    border-radius: 50%;
+    width: 40px; 
+    height: 40px; 
+    animation: spin 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite; 
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+/* Text glow effect */
+@keyframes pulseGlow {
+    0% {
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    }
+    100% {
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.4);
+    }
+}
+
+
+/* Spinner bounce effect */
+@keyframes bounceEffect {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
+}
+
+/* Fade-in effect for the loading screen */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.single-error-message {
+    color: #ff6b6b;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+    background: rgba(255, 107, 107, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ff6b6b;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
 
 /* Responsive Design adjustments */
 @media (max-width: 768px) {
@@ -617,6 +735,20 @@ reply-icon {
         font-size: 0.9em;
     }
 
+    .commentForm textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1.5px solid #7eb296;
+        border-radius: 5px;
+        resize: vertical;
+        font-size: 1em;
+        transition: font-size 0.2s ease;
+    }
+
+    .commentForm textarea:focus {
+        font-size: 1.1em;
+    }
+
     .commentForm button,
     .reply-form button,
     .update,
@@ -641,6 +773,114 @@ reply-icon {
 
     .writeInput {
         width: 100%;
+        font-size: 14px;
+    }
+}
+
+/* Specific adjustments for 480px and below */
+@media (max-width: 480px) {
+    .singlePostWrapper {
+        padding: 5px;
+    }
+
+    .siglePostTitle {
+        font-size: 20px;
+    }
+
+    .singlePostDesc {
+        font-size: 14px;
+    }
+
+    .singlePostImg, .writeImg {
+        width: 100%;
+        height: auto;
+        max-height: 250px;
+    }
+
+    .comment {
+        padding: 8px;
+    }
+
+    .reply {
+        padding: 6px;
+        margin-left: 15px;
+    }
+
+    .commentInfo {
+        font-size: 0.7em;
+    }
+
+    .comment p {
+        font-size: 0.8em;
+    }
+
+    .comment-controls, .reply-control {
+        flex-direction: row;
+        align-items: center;
+        margin-top: 3px;
+    }
+
+    .commentIcon {
+        margin: 3px;
+        font-size: 0.9em;
+    }
+
+    .reply-form {
+        padding-left: 0;
+    }
+
+    .commentForm textarea,
+    .reply-form textarea {
+        font-size: 0.8em;
+    }
+
+    .commentForm textarea {
+        width: 100%;
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    .commentForm textarea:focus {
+        font-size: 1em;
+    }
+
+    .commentForm button,
+    .reply-form button,
+    .update,
+    .cancel {
+        font-size: 0.8em;
+        padding: 5px 10px;
+        margin: 3px 0;
+    }
+
+    .tag {
+        font-size: 12px;
+        padding: 4px 8px;
+        margin-right: 3px;
+        margin-bottom: 3px;
+    }
+
+    .writeFormGroup {
+        flex-direction: column;
+        gap: 6px;
+        padding: 6px;
+    }
+
+    .writeInput {
+        width: 100%;
+        font-size: 12px;
+    }
+
+    .like-section {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .like-icon {
+        font-size: 18px;
+    }
+
+    .like-count {
         font-size: 14px;
     }
 }

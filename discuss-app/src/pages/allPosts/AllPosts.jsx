@@ -3,7 +3,7 @@ import axios from "axios";
 import BarChart from "../../components/BarChart/BarChart";
 import "./allPosts.css";
 
-// Updated eventTypes array to include "Product" and "Placement"
+
 const eventTypes = ["Project", "Paper", "Competition", "Patent", "Journal", "Product", "Placement"];
 const studentYears = ["First Year", "Second Year", "Third Year", "Final Year"];
 
@@ -89,22 +89,22 @@ const PostsPage = () => {
           labels={eventTypes}
           title="Posts by Event Type"
           backgroundColor={[
-            "#A5D6A7", // Project
-            "#90CAF9", // Paper
-            "#CE93D8", // Competition
-            "#FFE082", // Patent
-            "#E0E0E0", // Journal
-            "#FFAB91", // Product (New Color)
-            "#B39DDB", // Placement (New Color)
+            "#A5D6A7", 
+            "#90CAF9", 
+            "#CE93D8", 
+            "#FFE082", 
+            "#E0E0E0",
+            "#FFAB91", 
+            "#B39DDB", 
           ]}
           borderColor={[
-            "#4CAF50", // Project
-            "#2196F3", // Paper
-            "#AB47BC", // Competition
-            "#FFC107", // Patent
-            "#616161", // Journal
-            "#FF7043", // Product (Darker Border)
-            "#7E57C2", // Placement (Darker Border)
+            "#4CAF50", 
+            "#2196F3",
+            "#AB47BC", 
+            "#FFC107", 
+            "#616161", 
+            "#FF7043", 
+            "#7E57C2", 
           ]}
         />
 

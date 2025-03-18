@@ -148,11 +148,11 @@
 }
 
 .approvalPendingTable tr:nth-child(even) {
-  background-color: #f0f8fc; /* Soft white-blue */
+  background-color: #f0f8fc; 
 }
 
 .approvalPendingTable tr:nth-child(odd) {
-  background-color: #d5dde8; /* Light desaturated blue */
+  background-color: #d5dde8; 
 }
 
 
@@ -241,10 +241,10 @@
   font-size: 18px;
   font-weight: bold;
   margin: 0 10px;
-  padding: 12px 15px; /* Add padding for better visual appearance */
-  background-color: #ab9494; /* Light grey background */
-  color: #333; /* Dark grey text color */
-  border-radius: 5px; /* Optional: Rounded corners */
+  padding: 12px 15px; 
+  background-color: #ab9494; 
+  color: #333; 
+  border-radius: 5px; 
 
 }
 
@@ -279,7 +279,9 @@
   max-width: 300px;
 }
 
-/* Responsive Design */
+
+
+/* Responsive Design for Tablets */
 @media (max-width: 768px) {
   .searchContainerApproval {
     flex-direction: column;
@@ -292,33 +294,150 @@
 
   .searchContainerApproval input {
     width: 100%;
+    padding: 8px 8px 8px 30px;
+    font-size: 14px;
+  }
+
+  .searchIconApproval {
+    left: 8px;
+    font-size: 16px;
   }
 
   .bulkApproveButtonApproval {
     width: 100%;
+    padding: 8px 15px;
+    font-size: 14px;
+    margin-bottom: 8px;
   }
 
   .approvalPendingTable {
     font-size: 12px;
   }
 
-  .approvalPendingTable th, .approvalPendingTable td {
-    padding: 6px 8px;
+  .approvalPendingTable th,
+  .approvalPendingTable td {
+    padding: 4px 6px;
     height: 30px;
   }
 
   .reasonTextareaApproval {
     width: 100%;
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .actionLinkApproval {
+    font-size: 12px;
+  }
+
+  .actionButtonApproval {
+    padding: 4px 8px;
+    font-size: 12px;
   }
 
   .paginationButtonApproval {
     padding: 8px 15px;
+    font-size: 14px;
   }
 
   .pageInfoApproval {
-    font-size: 16px;
+    font-size: 14px;
+    padding: 8px 10px;
   }
 }
+
+/* Responsive Design for Mobile Phones */
+@media (max-width: 480px) {
+  .approvaltitle h1 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+
+  .searchWrapperApproval {
+    margin-bottom: 8px;
+  }
+
+  .searchContainerApproval input {
+    font-size: 12px;
+    padding: 6px 6px 6px 25px;
+  }
+
+  .searchIconApproval {
+    left: 6px;
+    font-size: 14px;
+  }
+
+  .bulkApproveButtonApproval {
+    font-size: 12px;
+    padding: 6px 10px;
+    margin-bottom: 6px;
+  }
+
+  .approvalPendingTable {
+    font-size: 10px;
+  }
+
+  .approvalPendingTable th,
+  .approvalPendingTable td {
+    padding: 3px 4px;
+    height: 25px;
+  }
+
+  .approvalPendingTable th:nth-child(3), /* Hide Author */
+  .approvalPendingTable td:nth-child(3),
+  .approvalPendingTable th:nth-child(4), /* Hide Email */
+  .approvalPendingTable td:nth-child(4),
+  .approvalPendingTable th:nth-child(6), /* Hide Event Type 1 */
+  .approvalPendingTable td:nth-child(6),
+  .approvalPendingTable th:nth-child(7), /* Hide Event Type 2 */
+  .approvalPendingTable td:nth-child(7),
+  .approvalPendingTable th:nth-child(8), /* Hide Student Year */
+  .approvalPendingTable td:nth-child(8),
+  .approvalPendingTable th:nth-child(9), /* Hide Image */
+  .approvalPendingTable td:nth-child(9) {
+    display: none;
+  }
+
+  .reasonTextareaApproval {
+    width: 100%;
+    font-size: 10px;
+    padding: 4px;
+  }
+
+  .actionLinkApproval {
+    font-size: 10px;
+  }
+
+  .actionButtonApproval {
+    padding: 3px 6px;
+    font-size: 10px;
+  }
+
+  .paginationButtonApproval {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .pageInfoApproval {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  .noPostsMessageApproval {
+    font-size: 1em;
+  }
+
+  .noPostsEmojiApproval {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+
+  .containerApproval {
+    padding: 10px;
+    border: 2px solid #ddd;
+  }
+}
+
 
 @media (max-width: 576px) {
   .approvalPendingTable th:nth-child(6),

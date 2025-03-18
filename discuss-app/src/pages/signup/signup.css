@@ -1,4 +1,3 @@
-/* signup.css */
 
 .signup {
   display: flex;
@@ -78,14 +77,14 @@
   background-color: #2196f3;
   color: white;
   border: 1px solid #1f0606;
-  padding: 8px 30px; /* Reduced padding to make the button smaller */
+  padding: 8px 30px; 
   border-radius: 5px;
   cursor: pointer;
   font-weight: 300;
-  font-size: 1rem; /* Reduced font size for a smaller button */
+  font-size: 1rem; 
   transition: background-color 0.3s ease;
   display: block;
-  margin: 0 auto; /* Center the button horizontally */
+  margin: 0 auto; 
 }
 
 .signupSubmit:hover {
@@ -117,68 +116,90 @@
   margin-top: 10px;
 }
 
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .signupContainer {
-      width: 90%;
-      padding: 20px;
+    width: 90%;
+    padding: 20px;
   }
 
   .signupImage {
-      max-width: 200px; /* Adjust image size for smaller screens */
+    max-width: 200px;
   }
 
   .signupContainer h1 {
-      font-size: 1.8rem;
+    font-size: 1.8rem;
   }
 
   .signupForm label {
-      font-size: 0.9rem;
+    font-size: 0.9rem;
   }
 
   .signupForm input {
-      font-size: 0.9rem;
-      padding: 8px;
+    font-size: 0.9rem;
+    padding: 8px;
   }
 
   .signupSubmit {
-      font-size: 1rem;
-      padding: 10px 18px;
+    font-size: 1rem;
+    padding: 10px 18px;
   }
 
   .loginButton {
-      font-size: 0.9rem;
+    font-size: 0.9rem;
+    padding: 8px 15px;
   }
 }
 
 @media (max-width: 480px) {
   .signupContainer {
-      padding: 15px;
+    padding: 15px;
+    width: 95%;
   }
 
   .signupImage {
-      max-width: 150px; /* Adjust image size for even smaller screens */
+    max-width: 150px;
   }
 
   .signupContainer h1 {
-      font-size: 1.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+
+  .signupContainer h2 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+  }
+
+  .signupForm {
+    gap: 10px;
+    padding: 0px 15px;
   }
 
   .signupForm label {
-      font-size: 0.8rem;
+    font-size: 0.8rem;
   }
 
   .signupForm input {
-      font-size: 0.8rem;
-      padding: 6px;
+    font-size: 0.8rem;
+    padding: 6px;
   }
 
   .signupSubmit {
-      font-size: 0.9rem;
-      padding: 8px 16px;
+    font-size: 0.9rem;
+    padding: 8px 16px;
   }
 
   .loginButton {
-      font-size: 0.8rem;
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    margin-top: 10px;
+  }
+
+  .errorMessage {
+    font-size: 0.8rem;
+    margin-top: 8px;
   }
 }

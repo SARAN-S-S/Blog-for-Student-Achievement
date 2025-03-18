@@ -48,17 +48,17 @@ export default function Signup() {
         const res = await axios.post("/api/auth/admin-login", {
           email,
           password,
-          username: admin.username, // Send the corresponding username
+          username: admin.username, 
         });
 
         if (res.data) {
           dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
           navigate("/dashboard");       }
       } catch (err) {
-        setError(true); // Show error if backend request fails
+        setError(true); 
       }
     } else {
-      setError(true); // Show error if the credentials don't match any admin
+      setError(true); 
     }
   };
 
@@ -68,7 +68,7 @@ export default function Signup() {
       
         <div className="signupImageContainer">
           <img
-            src="/bit.png" // Replace with your image source
+            src="/bit.png" 
             alt="Signup"
             className="signupImage"
           />

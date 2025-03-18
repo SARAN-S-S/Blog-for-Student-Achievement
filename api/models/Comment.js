@@ -22,9 +22,9 @@ const CommentSchema = new mongoose.Schema(
             type: String,
             default: null,
         },
-        replies: [{ // Add this field
+        replies: [{ 
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Comment' // Reference the Comment model
+            ref: 'Comment' 
         }],
     },
     { timestamps: true }

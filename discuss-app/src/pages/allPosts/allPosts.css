@@ -1,5 +1,3 @@
-/* src/pages/PostsPage/allPosts.css */
-
 .allpostsPostsPage {
     text-align: center;
     padding: 20px;
@@ -7,7 +5,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    font-family: 'Arial', sans-serif; /* Modern font */
+    font-family: 'Arial', sans-serif; 
     min-height: 370vh;
   }
   
@@ -31,30 +29,30 @@
   }
   
   .allpostsPostsPage > *:not(:last-child) {
-    margin-bottom: 30px; /* Increased margin */
+    margin-bottom: 30px; 
   }
   
   .allpostsTotalPostsContainer {
-    background: linear-gradient(to right, #6a5acd, #483d8b); /* Gradient background */
+    background: linear-gradient(to right, #6a5acd, #483d8b); 
     color: #ffffff;
     padding: 30px;
-    border-radius: 15px; /* More rounded corners */
+    border-radius: 15px; 
     margin: 20px auto;
     width: fit-content;
     font-size: 1.6rem;
-    font-weight: 600; /* Slightly less bold */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Softer shadow */
+    font-weight: 600; 
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); 
     transition: transform 0.2s, box-shadow 0.2s;
   }
   
   .allpostsTotalPostsContainer:hover {
-    transform: translateY(-8px); /* More pronounced hover effect */
-    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+    transform: translateY(-8px); 
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2); 
   }
   
   .allpostsGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjusted minmax */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
     gap: 30px;
     margin: 20px auto;
     max-width: 1000px;
@@ -67,11 +65,11 @@
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
     text-align: center;
     transition: transform 0.2s, box-shadow 0.2s;
-    height: 180px; /* Adjusted height */
+    height: 180px; 
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 1px solid #eee; /* Subtle border */
+    border: 1px solid #eee; 
   }
   
   .allpostsCountContainer:hover {
@@ -81,16 +79,16 @@
   
   .allpostsCountContainer p {
     margin: 10px 0;
-    font-size: 1.3rem; /* Adjusted font size */
+    font-size: 1.3rem; 
   }
   
-  .allpostsCountContainer p:first-of-type { /* Style for the label */
-    color: #cf0e0e; /* Darker grey for labels */
+  .allpostsCountContainer p:first-of-type { 
+    color: #cf0e0e; 
     font-weight: 550;
   }
   
-  .allpostsCountContainer p:last-of-type { /* Style for the value */
-    color: #2c179a; /* Your original color */
+  .allpostsCountContainer p:last-of-type { 
+    color: #2c179a;
     font-weight: 700;
   }
   
@@ -99,32 +97,20 @@
     max-width: 900px;
     margin: 20px auto;
     display: flex;
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center horizontally */
+    flex-direction: column;
+    align-items: center; 
     margin-bottom: 70px;
   }
   
   .allpostsBarChartContainer canvas {
     max-width: 100% !important;
-    height: 400px !important; /* Set a fixed height for the canvas */
+    height: 400px !important; 
     border-radius: 8px;
     border: 3px solid #335a72;
     background-color: #f0f8ff;
   }
   
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .allpostsGrid {
-      grid-template-columns: 1fr;
-    }
   
-    .allpostsBarChartContainer canvas {
-      max-width: 95% !important;
-      height: 350px !important;
-    }
-  }
-  
-  /* Added styles for better text readability */
   h1 {
     color: #333;
     margin-bottom: 20px;
@@ -132,5 +118,85 @@
   }
   
   .allpostsPostsPage {
-    background-color: #f9f9f9; /* Softer background */
+    background-color: #f9f9f9; 
   }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .allpostsPostsPage {
+    padding: 15px;
+  }
+
+  .allpostsTotalPostsContainer {
+    padding: 15px;
+    font-size: 1.2rem;
+  }
+
+  .allpostsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin: 10px auto;
+  }
+
+  .allpostsCountContainer {
+    padding: 10px;
+  }
+
+  .allpostsCountContainer p {
+    font-size: 0.9rem;
+    margin: 5px 0;
+  }
+
+  .allpostsBarChartContainer canvas {
+    height: 250px !important;
+  }
+
+  .allpostsPostsPage span {
+    margin-bottom: 25px;
+    margin-top: 50px;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .allpostsPostsPage {
+    padding: 10px;
+  }
+
+  .allpostsTotalPostsContainer {
+    padding: 10px;
+    font-size: 1rem;
+  }
+
+  .allpostsGrid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 8px;
+    margin: 8px auto;
+  }
+
+  .allpostsCountContainer {
+    padding: 8px;
+  }
+
+  .allpostsCountContainer p {
+    font-size: 0.8rem;
+    margin: 3px 0;
+  }
+
+  .allpostsBarChartContainer canvas {
+    height: 200px !important;
+  }
+
+  .allpostsPostsPage span {
+    margin-bottom: 20px;
+    margin-top: 30px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+}

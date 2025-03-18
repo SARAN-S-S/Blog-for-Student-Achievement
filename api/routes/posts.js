@@ -6,64 +6,54 @@ const express = require("express");
 
 
 // CREATE POST
+
 router.post("/", async (req, res) => {
-    const newPost = new Post(req.body);
-    try {
-        const savedPost = await newPost.save();
-        res.status(200).json(savedPost);
-    } catch (err) {
-        //console.error("Error saving post:", err);
-        res.status(500).json(err);
-    }
+  try {
+      const newPost = new Post(req.body);
+      const savedPost = await newPost.save();
+      res.status(200).json(savedPost);
+  } catch (err) {
+      console.error("Error saving post:", err);
+      res.status(500).json({ message: "Failed to create post" });
+  }
 });
+
 
 
 // UPDATE POST (Allow admin to update any post)
 router.put("/:id", async (req, res) => {
   try {
-    const post = await Post.findById(req.params.id);
-    if (!post) {
-      return res.status(404).json("Post not found");
-    }
-
-    // Check if the user is the author or an admin
-    const user = await User.findOne({ username: req.body.username });
-    if (!user) {
-      return res.status(404).json("User not found");
-    }
-
-    if (post.username === req.body.username || user.role === "admin") {
-      try {
-        // Validate required fields
-        if (!req.body.title || req.body.title.trim() === "") {
-          return res.status(400).json("Title is required");
-        }
-
-        // Construct the update object
-        const updateObject = {
-          title: req.body.title, // Ensure title is included
-          desc: req.body.desc,
-          tags: [req.body.category, req.body.year, req.body.category2].filter(Boolean), // Ensure consistent order
-          photo: req.body.photo || post.photo, // Use the new photo if provided, otherwise keep the old one
-        };
-
-        // Update the post
-        const updatedPost = await Post.findByIdAndUpdate(
-          req.params.id,
-          { $set: updateObject },
-          { new: true }
-        );
-
-        res.status(200).json(updatedPost);
-      } catch (err) {
-        console.error("Error updating post:", err);
-        res.status(500).json(err);
+      const post = await Post.findById(req.params.id);
+      if (!post) {
+          return res.status(404).json("Post not found");
       }
-    } else {
-      res.status(401).json("You can update only your posts!");
-    }
+
+      const user = await User.findOne({ username: req.body.username });
+      if (!user) {
+          return res.status(404).json("User not found");
+      }
+
+      if (post.username === req.body.username || user.role === "admin") {
+          const updateObject = {
+              title: req.body.title,
+              desc: req.body.desc,
+              tags: [req.body.category, req.body.year, req.body.category2].filter(Boolean),
+              photo: req.body.photo || post.photo,
+          };
+
+          const updatedPost = await Post.findByIdAndUpdate(
+              req.params.id,
+              { $set: updateObject },
+              { new: true }
+          );
+
+          res.status(200).json(updatedPost);
+      } else {
+          res.status(401).json("You can update only your posts!");
+      }
   } catch (err) {
-    res.status(500).json(err);
+      console.error("Error updating post:", err);
+      res.status(500).json({ message: "Failed to update post" });
   }
 });
 
@@ -418,9 +408,6 @@ router.put("/edit/:id", async (req, res) => {
     res.status(500).json("Server error. Please try again later.");
   }
 });
-
-
-
 
 
 module.exports = router;

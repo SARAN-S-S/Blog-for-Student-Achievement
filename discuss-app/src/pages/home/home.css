@@ -1,4 +1,4 @@
-/* Home Container */
+
 .homeMainContainer {
   display: flex;
   justify-content: space-between;
@@ -9,7 +9,7 @@
   min-height: 100vh;
 }
 
-/* Posts Container */
+
 .homePostsContainer {
   flex: 9;
   background-color: #fff7e6;
@@ -39,47 +39,47 @@
   margin-bottom: 20px;
 }
 
-/* Page Number Button Styles */
+
 .homePageNumberBtn {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
-  background-color: #ffd1dc; /* Inactive background */
-  color: #333; /* Inactive text color */
+  background-color: #ffd1dc; 
+  color: #333; 
 }
 
-/* Highlighted Current Page - Darker Background */
+
 .homeActivePage {
-  background-color: #cc5073; /* Darker shade for active */
+  background-color: #cc5073;
   color: #fff;
   border: 2px solid #cc5073;
 }
 
-/* Adjacent Pages Style - Darker Text for Inactive */
+
 .homeAdjacentPage {
-  background-color: #ffd1dc; /* Same as inactive background */
-  color: #993355; /* Darker text color for inactive */
+  background-color: #ffd1dc; 
+  color: #993355; 
 }
 
-/* Hover Effect for Page Numbers */
+
 .homePageNumberBtn:hover {
   background-color: #ffe4e1;
   border-color: #6e1630;
 }
 
-/* Disabled Button Style */
+
 button:disabled {
   background-color: #eee;
   cursor: not-allowed;
 }
 
-/* First and Last Button Styles */
+
 .homeFirstLastBtn {
   padding: 10px 25px;
   border: none;
-  background: linear-gradient(135deg, #007bff, #0056b3); /* Blue gradient */
+  background: linear-gradient(135deg, #007bff, #0056b3); 
   border-radius: 6px;
   transition: background 0.3s ease, transform 0.2s ease;
   color: white;
@@ -89,15 +89,15 @@ button:disabled {
 }
 
 .homeFirstLastBtn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #0056b3, #004085); /* Darker blue on hover */
+  background: linear-gradient(135deg, #0056b3, #004085); 
   transform: scale(1.05);
 }
 
-/* Previous and Next Button Styles */
+
 .homePrevNextBtn {
   padding: 10px 20px;
   border: none;
-  background: linear-gradient(135deg, #28a745, #1e7e34); /* Green gradient */
+  background: linear-gradient(135deg, #28a745, #1e7e34); 
   border-radius: 6px;
   transition: background 0.3s ease, transform 0.2s ease;
   color: white;
@@ -107,15 +107,15 @@ button:disabled {
 }
 
 .homePrevNextBtn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #1e7e34, #155724); /* Darker green on hover */
+  background: linear-gradient(135deg, #1e7e34, #155724); 
   transform: scale(1.05);
 }
 
-/* Disabled Button Style - No Shadow, No Hover */
+
 .homeFirstLastBtn:disabled,
 .homePrevNextBtn:disabled {
-  background: #cccccc !important; /* Gray background */
-  color: #888888 !important; /* Faded text */
+  background: #cccccc !important; 
+  color: #888888 !important; 
   cursor: not-allowed !important;
   box-shadow: none !important;
   transform: none !important;
@@ -123,7 +123,6 @@ button:disabled {
 
 
 
-/* Ellipsis Style */
 .homePagination span {
   cursor: default;
   background-color: transparent;
@@ -132,7 +131,7 @@ button:disabled {
   font-size: 18px;
 }
 
-/* Page Info Container */
+
 .homePageInfoContainer {
   background-color: #f0f8ff;
   border: 2px solid #b0c4de;
@@ -144,29 +143,6 @@ button:disabled {
   text-align: center;
 }
 
-@media (max-width: 768px) {
-  .homeMainContainer {
-    flex-direction: column;
-    padding: 15px;
-  }
-  .homePostsContainer {
-    margin-right: 0;
-    margin-bottom: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .homeMainContainer {
-    padding: 10px;
-  }
-  .homePostsContainer {
-    padding: 15px;
-  }
-  .homePagination button {
-    padding: 6px 10px;
-    margin: 0 3px;
-  }
-}
 
 /* Loading Spinner */
 .homeLoading {
@@ -228,4 +204,118 @@ button:disabled {
   font-size: 1.1em;
   color: #777;
   max-width: 300px;
+}
+
+
+/* Responsive Design for Tablets */
+@media (max-width: 768px) {
+  .homeMainContainer {
+    flex-direction: column;
+    padding: 15px;
+  }
+  .homePostsContainer {
+    margin-right: 0;
+    margin-bottom: 20px;
+    padding: 15px;
+  }
+  .homePagination,
+  .homePageInfoContainer {
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .homePageNumberBtn {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+  }
+  .homeFirstLastBtn,
+  .homePrevNextBtn {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+  }
+  .homePagination span {
+    font-size: 1rem;
+  }
+  .homePageInfoContainer {
+    font-size: 0.9rem;
+    padding: 4px 10px;
+  }
+  .homeLoading {
+    font-size: 1rem;
+    height: 150px;
+  }
+  .homeSpinner {
+    width: 30px;
+    height: 30px;
+    border-width: 3px;
+    margin-bottom: 8px;
+  }
+  .homeNoPostsContent {
+    padding: 20px;
+  }
+  .homeNoPostsEmoji {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+  .homeNoPostsMessage {
+    font-size: 0.9em;
+    max-width: 90%;
+  }
+}
+
+/* Responsive Design for Mobile Phones */
+@media (max-width: 480px) {
+  .homeMainContainer {
+    padding: 10px;
+  }
+  .homePostsContainer {
+    padding: 10px;
+    border-width: 1px;
+  }
+  .homePagination,
+  .homePageInfoContainer {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .homePageNumberBtn {
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    margin: 2px;
+  }
+  .homeFirstLastBtn,
+  .homePrevNextBtn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    margin: 2px;
+  }
+  .homePagination span {
+    font-size: 0.9rem;
+    margin: 0 5px;
+  }
+  .homePageInfoContainer {
+    font-size: 0.8rem;
+    padding: 3px 8px;
+  }
+  .homeLoading {
+    font-size: 0.9rem;
+    height: 120px;
+  }
+  .homeSpinner {
+    width: 24px;
+    height: 24px;
+    border-width: 3px;
+    margin-bottom: 6px;
+  }
+  .homeNoPostsContent {
+    padding: 15px;
+  }
+  .homeNoPostsEmoji {
+    font-size: 2em;
+    margin-bottom: 8px;
+  }
+  .homeNoPostsMessage {
+    font-size: 0.8em;
+    max-width: 95%;
+  }
 }

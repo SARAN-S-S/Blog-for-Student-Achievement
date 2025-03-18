@@ -1,4 +1,4 @@
-/* Updated write block styles */
+
 .writeFile {
     display: none;
 }
@@ -110,77 +110,157 @@
 }
 
 .writeFormGroup select.writeInput {
-    margin-right: 10px; /* Add spacing between select fields */
+    margin-right: 10px; 
   }
   
   .writeFormGroup select.writeInput:last-child {
-    margin-right: 0; /* Remove margin for the last select field */
+    margin-right: 0; 
   }
 
+  .error-message {
+    color: darkred;
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10px;
+    text-shadow: 2px 2px 4px rgba(139, 0, 0, 0.5); 
+  }
+  
+
+
+/* Loading Overlay */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  
+  .loading-message {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 20px 40px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  /* Error message */
+  .error-message, 
+  .imerror-message {
+    color: red;
+    font-size: 16px;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+
+/* Responsive codes */
 @media (max-width: 768px) {
     .writeImg {
-        margin: 10px auto;
-        width: 90vw;
-        height: 300px;
+      margin: 10px auto;
+      width: 90vw;
+      height: 300px;
     }
-
+  
     .writeFormGroup {
-        margin: 10px auto;
-        width: 90vw;
-        flex-direction: column;
-        padding: 10px;
+      margin: 10px auto;
+      width: 90vw;
+      flex-direction: column;
+      padding: 10px;
     }
-
+  
     .writeIcon {
-        margin-right: 0;
-        margin-bottom: 10px;
+      margin-right: 0;
+      margin-bottom: 10px;
     }
-
+  
     .writeInput {
-        font-size: 16px;
-        padding: 8px;
-        margin: 5px 0;
+      font-size: 16px;
+      padding: 8px;
+      margin: 5px 0;
     }
-
+  
     .writeText {
-        font-size: 16px;
-        height: 40vh;
-        padding: 8px;
+      font-size: 16px;
+      height: 40vh;
+      padding: 8px;
     }
-
+  
     .writeSubmit {
-        padding: 10px 50px;
-        margin: 10px auto;
-        width: 50%;
-        display: block;
+      padding: 10px 50px;
+      margin: 10px auto;
+      width: 50%;
+      display: block;
     }
-}
-
-@media (max-width: 480px) {
+  
+    .writeFormGroup select.writeInput {
+      margin-right: 0; /* Remove right margin for stacked selects */
+      margin-bottom: 10px; /* Add bottom margin for spacing */
+    }
+  
+    .writeFormGroup select.writeInput:last-child {
+      margin-bottom: 0; /* Remove bottom margin for the last select */
+    }
+  
+    .error-message,
+    .imerror-message {
+      font-size: 14px;
+    }
+  
+    .loading-message {
+      font-size: 1.2rem;
+      padding: 15px 30px;
+    }
+  }
+  
+  @media (max-width: 480px) {
     .writeImg {
-        height: 200px;
+      height: 200px;
     }
-
+  
     .writeFormGroup {
-        width: 95vw;
-        padding: 8px;
+      width: 95vw;
+      padding: 8px;
     }
-
+  
+    .writeIcon {
+      width: 25px;
+      height: 25px;
+      font-size: 18px;
+    }
+  
     .writeInput {
-        font-size: 14px;
-        padding: 6px;
+      font-size: 14px;
+      padding: 6px;
     }
-
+  
     .writeText {
-        font-size: 14px;
-        height: 30vh;
-        padding: 6px;
+      font-size: 14px;
+      height: 30vh;
+      padding: 6px;
     }
-
+  
     .writeSubmit {
-        font-size: 14px;
-        padding: 8px 30px;
-        width: 70%;
-        display: block;
+      font-size: 14px;
+      padding: 8px 30px;
+      width: 70%;
     }
-}
+  
+    .error-message,
+    .imerror-message {
+      font-size: 12px;
+    }
+  
+    .loading-message {
+      font-size: 1rem;
+      padding: 10px 20px;
+    }
+  }

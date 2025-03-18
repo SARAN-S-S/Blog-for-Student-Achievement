@@ -6,18 +6,24 @@ import Sidebar from "../../components/sidebar/Sidebar";
 
 export default function Settings() {
   const { user, dispatch } = useContext(Context);
-  const [username, setUsername] = useState(user.username);
+  const [username, setUsername] = useState(user.username); // Initialize with current username
   const [password, setPassword] = useState("");
   const [file, setFile] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
 
-  // Synchronize local state with the updated user object
+  // Sync username state with user context
   useEffect(() => {
     setUsername(user.username);
   }, [user.username]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (file && file.size > 3 * 1024 * 1024) {
+      setError("Image size should be under 3MB only allowed...");
+      return;
+    }
 
     dispatch({ type: "UPDATE_START" });
     const updatedUser = {
@@ -28,12 +34,10 @@ export default function Settings() {
 
     if (file) {
       const data = new FormData();
-      const filename = Date.now() + file.name;
-      data.append("name", filename);
       data.append("file", file);
-      updatedUser.profilePic = filename;
       try {
-        await axios.post("/api/upload", data);
+        const uploadRes = await axios.post("/api/upload", data);
+        updatedUser.profilePic = uploadRes.data.url; // Update profilePic with the new URL
       } catch (err) {
         console.error("File upload failed:", err);
       }
@@ -43,13 +47,16 @@ export default function Settings() {
       const res = await axios.put(`/api/users/${user._id}`, updatedUser);
       setSuccess(true);
 
-      // Update the user in the context with the new data
-      dispatch({ type: "UPDATE_SUCCESS", payload: res.data });
+      // Update the user in the context with the new data, including the profilePic
+      dispatch({ type: "UPDATE_SUCCESS", payload: { ...res.data, profilePic: updatedUser.profilePic || user.profilePic } });
 
-      // Clear the form fields
-      setUsername(res.data.username);
-      setPassword("");
-      setFile(null);
+      // Reset the form fields immediately after successful update
+      setUsername(""); // Set username to the updated value
+      setPassword(""); // Clear the password field
+      setFile(null); // Clear the file input
+
+      // Hide the success message after 5 seconds
+      setTimeout(() => setSuccess(false), 5000);
     } catch (err) {
       setSuccess(false);
       dispatch({ type: "UPDATE_FAILURE" });
@@ -71,7 +78,7 @@ export default function Settings() {
                 file
                   ? URL.createObjectURL(file)
                   : user.profilePic
-                  ? `/images/${user.profilePic}`
+                  ? user.profilePic
                   : "/profile.jpg"
               }
               alt=""
@@ -82,8 +89,18 @@ export default function Settings() {
             <input
               type="file"
               id="fileInput"
-              onChange={(e) => setFile(e.target.files[0])}
+              onChange={(e) => {
+                const selectedFile = e.target.files[0];
+                if (selectedFile && selectedFile.size > 3 * 1024 * 1024) {
+                  setError("Image size should be under 3MB only allowed...");
+                  setFile(null);
+                } else {
+                  setError("");
+                  setFile(selectedFile);
+                }
+              }}
             />
+            {error && <p className="error-message">{error}</p>}
           </div>
           <label>User Details</label>
           <br></br>
@@ -99,7 +116,8 @@ export default function Settings() {
           <label>Username</label>
           <input
             type="text"
-            placeholder={user.username}
+            placeholder={user.username} // Placeholder for username
+            value={username} // Controlled input for username
             onChange={(e) => setUsername(e.target.value)}
             autoFocus
             required
@@ -109,6 +127,7 @@ export default function Settings() {
               <label>Password</label>
               <input
                 type="password"
+                value={password} // Controlled input for password
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
@@ -118,7 +137,7 @@ export default function Settings() {
             Update
           </button>
           {success && (
-            <span style={{ color: "green", textAlign: "center" }}>
+            <span className={`updateSuccessMessageSet ${success ? '' : 'fade-out'}`}>
               Profile updated successfully!
             </span>
           )}

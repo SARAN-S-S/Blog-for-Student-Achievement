@@ -152,10 +152,10 @@
   font-weight: bold;
   margin-left: 15px;
   margin-right: 15px;
-  padding: 12px 15px; /* Add padding for better visual appearance */
-  background-color: #ab9494; /* Light grey background */
-  color: #333; /* Dark grey text color */
-  border-radius: 5px; /* Optional: Rounded corners */
+  padding: 12px 15px;
+  background-color: #ab9494; 
+  color: #333; 
+  border-radius: 5px; 
 }
 
 
@@ -239,4 +239,167 @@
   font-size: 1.1em;
   color: #777;
   max-width: 300px;
+}
+
+/* Responsive Design for Mobile Phones (320px – 480px) and Tablets (481px – 768px) */
+@media (max-width: 768px) {
+  .managePostsCustom {
+    padding: 10px;
+  }
+
+  .managePostsCustom h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+  }
+
+  .containerCustom {
+    padding: 15px;
+    border-radius: 6px;
+  }
+
+  .searchContainerCustom {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .searchWrapperCustom input {
+    width: 100%;
+    padding: 8px 8px 8px 30px;
+    font-size: 14px;
+  }
+
+  .bulkDeleteButtonCustom {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .customPostsTable {
+    border: 1px solid #ddd;
+  }
+
+  .customPostsTable th,
+  .customPostsTable td {
+    padding: 8px;
+    font-size: 12px;
+    white-space: normal;
+  }
+
+  .customPostsTable th {
+    font-size: 13px;
+  }
+
+  .customPostsTable td input[type="checkbox"] {
+    transform: scale(1.1);
+  }
+
+  .paginationCustom {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .paginationCustom button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .paginationCustom span {
+    font-size: 14px;
+    margin: 5px 0;
+    padding: 8px 12px;
+  }
+
+  .loadingMessageCustom {
+    font-size: 1.2rem;
+  }
+
+  .spinnerCustom {
+    width: 30px;
+    height: 30px;
+  }
+
+  .noPostsContainerCustom {
+    height: 150px;
+  }
+
+  .noPostsContentCustom {
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .noPostsEmojiCustom {
+    font-size: 2em;
+  }
+
+  .noPostsMessageCustom {
+    font-size: 1em;
+  }
+}
+
+/* Specific adjustments for Mobile Phones (320px – 480px) */
+@media (max-width: 480px) {
+  .managePostsCustom h1 {
+    font-size: 20px;
+  }
+
+  .containerCustom {
+    padding: 10px;
+  }
+
+  .searchWrapperCustom input {
+    padding: 6px 6px 6px 28px;
+    font-size: 12px;
+  }
+
+  .bulkDeleteButtonCustom {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .customPostsTable th,
+  .customPostsTable td {
+    padding: 6px;
+    font-size: 11px;
+  }
+
+  .customPostsTable th {
+    font-size: 12px;
+  }
+
+  .paginationCustom button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .paginationCustom span {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .loadingMessageCustom {
+    font-size: 1rem;
+  }
+
+  .spinnerCustom {
+    width: 25px;
+    height: 25px;
+  }
+
+  .noPostsContainerCustom {
+    height: 120px;
+  }
+
+  .noPostsContentCustom {
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .noPostsEmojiCustom {
+    font-size: 1.5em;
+  }
+
+  .noPostsMessageCustom {
+    font-size: 0.9em;
+  }
 }

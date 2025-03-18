@@ -24,6 +24,9 @@ export default function PostForReview() {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [likes, setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
+  const [error, setError] = useState("");
+
+  const [updateloading, setupdateloading] = useState(false);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -52,11 +55,14 @@ export default function PostForReview() {
   }, [postId]);
 
   const handleApprove = async () => {
+    setLoading(true); // Start loading
     try {
       await axios.put(`/api/posts/approve/${postId}`);
       navigate("/approval-pending");
     } catch (err) {
       console.error("Error approving post:", err);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -65,46 +71,60 @@ export default function PostForReview() {
       alert("Please provide a reason for rejection.");
       return;
     }
+    setLoading(true); // Start loading
     try {
       await axios.put(`/api/posts/reject/${postId}`, { reason: rejectionReason });
       navigate("/approval-pending");
     } catch (err) {
       console.error("Error rejecting post:", err);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
   const handleSave = async (event) => {
-    event.preventDefault();  // Prevents page reload
-    try {
-      const updatedPost = {
-        title,
-        desc,
-        tags: [category, year, category2].filter(Boolean), // Ensure consistent order in tags array
-      };
+    event.preventDefault();
+    if (file && file.size > 3 * 1024 * 1024) {
+      setError("Image size should be under 3MB only allowed...");
+      return;
+    }
 
-      if (file) {
-        const data = new FormData();
-        const filename = Date.now() + file.name;
-        data.append("name", filename);
-        data.append("file", file);
-        updatedPost.photo = filename;
-        try {
-          await axios.post("/api/upload", data);
-        } catch (err) {
-          console.error("Error uploading file:", err);
-        }
+    setupdateloading(true); // Start loading
+    const tags = [category, year, category2].filter(Boolean);
+    const updatedPost = {
+      title,
+      desc,
+      tags,
+    };
+
+    if (file) {
+      const data = new FormData();
+      data.append("file", file);
+      try {
+        const uploadRes = await axios.post("/api/upload", data);
+        updatedPost.photo = uploadRes.data.url; // Update the photo URL
+      } catch (err) {
+        console.error("Error uploading file:", err);
+        setupdateloading(false); // Stop loading if file upload fails
+        return;
       }
+    }
 
+    try {
       await axios.put(`/api/posts/edit/${postId}`, updatedPost);
+      setPost({ ...post, ...updatedPost }); // Update the post state with the new data
       setUpdateMode(false);
       setFile(null);
       setNewPhoto(null);
       setInitialPhoto(updatedPost.photo);
-      setUpdateSuccess(true);  // Show success message
-
-      setTimeout(() => setUpdateSuccess(false), 10000) // Hide message after 10 seconds
+      setUpdateSuccess(true);
+      setTimeout(() => setUpdateSuccess(false), 10000);
     } catch (err) {
       console.error("Error updating post:", err);
+    } finally {
+      setTimeout(() => {
+        setupdateloading(false); // Stop loading after 3 seconds
+      }, 3000);
     }
   };
 
@@ -142,15 +162,25 @@ export default function PostForReview() {
 
   if (loading) {
     return (
-      <div className="loadingContainer">
-        <p className="loadingMessage">Loading posts...</p>
-        <div className="spinner"></div>
+      <div className="review-loading-overlay">
+        <div className="review-loading-message">
+          <div className="review-loading-spinner"></div>
+          Loading posts...
+        </div>
       </div>
     );
   }
 
   return (
     <div className="postForReview">
+      {updateloading && (
+        <div className="review-loading-overlay">
+          <div className="review-loading-message">
+            <div className="review-loading-spinner"></div>
+            Updating... Please wait
+          </div>
+        </div>
+      )}
       <div className="postForReviewHeader">
         <h1>Review the Post</h1>
         <span className="postIdDisplay">Post ID: {postId}</span>
@@ -162,7 +192,7 @@ export default function PostForReview() {
               {newPhoto ? (
                 <img className="writeImg" src={newPhoto} alt="New Post Preview" />
               ) : initialPhoto ? (
-                <img className="singlePostImg" src={`http://localhost:7733/images/${initialPhoto}`} alt={post.title} />
+                <img className="singlePostImg" src={initialPhoto} alt={post.title} />
               ) : null}
 
               <div className="postContainer">
@@ -175,14 +205,22 @@ export default function PostForReview() {
                     id="fileInput"
                     className="writeFile"
                     onChange={(e) => {
-                      setFile(e.target.files[0]);
-                      if (e.target.files && e.target.files.length > 0) {
-                        setNewPhoto(URL.createObjectURL(e.target.files[0]));
+                      const selectedFile = e.target.files[0];
+                      if (selectedFile && selectedFile.size > 3 * 1024 * 1024) {
+                        setError("Image size should be under 3MB only allowed...");
+                        setFile(null);
                       } else {
-                        setNewPhoto(null);
+                        setError("");
+                        setFile(selectedFile);
+                        if (selectedFile) {
+                          setNewPhoto(URL.createObjectURL(selectedFile));
+                        } else {
+                          setNewPhoto(null);
+                        }
                       }
                     }}
                   />
+                  {error && <p className="review-error-message">{error}</p>}
                 </div>
                 <input
                   type="text"
@@ -237,7 +275,7 @@ export default function PostForReview() {
         ) : (
           <div>
             {post.photo && (
-              <img className="singlePostImg" src={`http://localhost:7733/images/${post.photo}`} alt={post.title} />
+              <img className="singlePostImg" src={post.photo} alt={post.title} />
             )}
             <h1 className="siglePostTitle">
               {title}

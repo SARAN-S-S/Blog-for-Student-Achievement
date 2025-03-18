@@ -8,13 +8,13 @@ export default function Contact() {
       name: 'MADHUMITHA S',
       department: 'INFORMATION TECHNOLOGY',
       email: 'madhumitha.it21@bitsathy.ac.in',
-      linkedin: 'https://www.linkedin.com/in/saran-s-s-84a696245/',
+      linkedin: 'https://www.linkedin.com/in/madhumitha-sundarakrishnan/',
     },
     {
       name: 'THARSHILIN BANU M',
       department: 'Electronics and Communication Engineering',
       email: 'tharshilinbanu.ec21@bitsathy.ac.in',
-      linkedin: 'https://www.linkedin.com/in/saran-s-s-84a696245/',
+      linkedin: 'https://www.linkedin.com/in/tharshilin-banu-m-0b4020253/',
     },
     
     {

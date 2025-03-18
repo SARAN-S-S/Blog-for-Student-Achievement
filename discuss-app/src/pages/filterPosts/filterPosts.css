@@ -23,7 +23,7 @@
   margin-bottom: 80px;
 }
 
-/* Filters Section */
+
 .filterFilters {
   display: flex;
   gap: 15px;
@@ -50,16 +50,16 @@
   outline: none;
 }
 
-/* Posts Container */
+
 .filterPostsContainer {
   display: grid;
   gap: 30px;
   padding: 50px;
   max-width: 1000px;
-  margin: 0 auto; /* Centers the grid */
-  border: 2px solid #6b755d; /* Darker greenish-gray border */
+  margin: 0 auto; 
+  border: 2px solid #6b755d; 
   border-radius: 10px;
-  background: #aad1b2; /* Light Olive Green */
+  background: #aad1b2; 
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -67,25 +67,25 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60vh; /* Adjust to fit content well */
+  height: 60vh; 
   text-align: center;
 }
 
-/* Loading Message */
+
 .filterLoading {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
-  color: #3498db; /* A nice, vibrant blue */
+  color: #3498db; 
   font-weight: 600;
-  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  background: rgba(255, 255, 255, 0.8); 
   padding: 20px 30px;
   border-radius: 12px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-  animation: fadeInOut 2s infinite alternate; /* Smooth fade-in and fade-out */
-  position: relative; /* For positioning the spinner */
+  animation: fadeInOut 2s infinite alternate; 
+  position: relative; 
 }
 
 /* Spinner Animation */
@@ -93,7 +93,7 @@
   content: '';
   width: 40px;
   height: 40px;
-  border: 4px solid rgba(52, 152, 219, 0.3); /* Lighter shade of the blue */
+  border: 4px solid rgba(52, 152, 219, 0.3); 
   border-top-color: #3498db;
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -115,15 +115,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.3rem; /* Slightly reduced for better fit */
+  font-size: 1.3rem; 
   color: #fff;
-  font-weight: 600; /* Adjusted for consistency */
-  background: linear-gradient(135deg, #e74c3c, #c0392b); /* More vibrant gradient */
-  padding: 18px 30px; /* Adjusted padding */
-  border-radius: 12px; /* Increased radius for a softer look */
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Enhanced shadow */
+  font-weight: 600; 
+  background: linear-gradient(135deg, #e74c3c, #c0392b); 
+  padding: 18px 30px; 
+  border-radius: 12px; 
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); 
   text-align: center;
-  animation: errorPulse 1.5s infinite alternate; /* Added pulse animation */
+  animation: errorPulse 1.5s infinite alternate; 
 }
 
 @keyframes errorPulse {
@@ -190,30 +190,144 @@
   font-weight: bold;
   margin-left: 15px;
   margin-right: 15px;
-  padding: 12px 15px; /* Add padding for better visual appearance */
-  background-color: #ab9494; /* Light grey background */
-  color: #333; /* Dark grey text color */
-  border-radius: 5px; /* Optional: Rounded corners */
+  padding: 12px 15px; 
+  background-color: #ab9494; 
+  color: #333; 
+  border-radius: 5px; 
 }
 
-/* Responsive Design */
-@media (max-width: 900px) {
+
+
+/* Responsive Design for Tablets */
+@media (max-width: 768px) {
+  .filterHead {
+    margin-bottom: 60px;
+  }
+
+  .filterFilters {
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 40px;
+  }
+
+  .filterFilters select {
+    width: 45%;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
   .filterPostsContainer {
+    padding: 30px;
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .filterPagination button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .filterPagination span {
+    font-size: 16px;
+    margin: 0 10px;
+    padding: 10px 12px;
+  }
+
+  .filterLoading {
+    font-size: 1.3rem;
+    padding: 15px 25px;
+  }
+
+  .filterLoading::before {
+    width: 30px;
+    height: 30px;
+    border: 3px solid rgba(52, 152, 219, 0.3);
+    border-top-color: #3498db;
+  }
+
+  .filterError {
+    font-size: 1.1rem;
+    padding: 15px 25px;
+  }
+
+  .filterNoPostsContent {
+    padding: 20px;
+  }
+
+  .filterNoPostsEmoji {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+
+  .filterNoPostsMessage {
+    font-size: 1em;
   }
 }
 
-@media (max-width: 600px) {
-  .filterPostsContainer {
-    grid-template-columns: repeat(1, 1fr);
+/* Responsive Design for Mobile Phones */
+@media (max-width: 480px) {
+  .filterHead {
+    margin-bottom: 40px;
   }
 
   .filterFilters {
     flex-direction: column;
     align-items: center;
+    margin-bottom: 30px;
   }
 
   .filterFilters select {
-    width: 100%;
+    width: 90%;
+    padding: 8px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+  }
+
+  .filterPostsContainer {
+    padding: 20px;
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .filterPagination button {
+    padding: 8px 15px;
+    font-size: 12px;
+  }
+
+  .filterPagination span {
+    font-size: 14px;
+    margin: 0 8px;
+    padding: 8px 10px;
+  }
+
+  .filterLoading {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+
+  .filterLoading::before {
+    width: 25px;
+    height: 25px;
+    border: 3px solid rgba(52, 152, 219, 0.3);
+    border-top-color: #3498db;
+    margin-bottom: 10px;
+  }
+
+  .filterError {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+
+  .filterNoPostsContent {
+    padding: 15px;
+  }
+
+  .filterNoPostsEmoji {
+    font-size: 2em;
+    margin-bottom: 8px;
+  }
+
+  .filterNoPostsMessage {
+    font-size: 0.9em;
   }
 }

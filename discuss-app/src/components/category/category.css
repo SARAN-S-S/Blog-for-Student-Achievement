@@ -11,7 +11,7 @@
 
 
 .categorySection {
-  width: 45%; /* Reduced width of category boxes */
+  width: 45%; 
 }
 
 .categorySection h3 {
@@ -20,14 +20,13 @@
   margin-bottom: 10px;
   font-family: 'Varela Round', sans-serif;
   padding: 10px;
-  border-radius: 8px; /* Subtle curve for the heading container */
+  border-radius: 8px; 
   text-transform: uppercase;
   background: linear-gradient(135deg, #2857ce 0%, #5f92eb 100%);
- /* Lighter blue gradient for event types */
 }
 
 .categorySection ul {
-  list-style-type: none; /* Remove bullet points */
+  list-style-type: none; 
   padding: 0;
 }
 
@@ -35,7 +34,7 @@
   margin: 8px 0;
   padding: 10px;
   background: linear-gradient(135deg, #6a94f3 0%, #78aef7 100%); /* Lighter blue gradient for category items */
-  border-radius: 8px; /* Reduced border radius for category items */
+  border-radius: 8px; 
   transition: all 0.3s ease;
   font-size: 14px;
   color: white;
@@ -44,16 +43,16 @@
 
 .categorySection ul li:hover {
   background: linear-gradient(135deg, #5a81d3 0%, #66a7df 100%); /* Lighter blue gradient on hover */
-  transform: scale(1.05); /* Slight scale effect */
+  transform: scale(1.05); 
 }
 
 .categorySection ul li a {
   text-decoration: none;
-  color: inherit; /* Inherit the color from the parent */
+  color: inherit; 
 }
 
 .categorySection ul li a:hover {
-  color: white; /* White color when hovering over the link */
+  color: white; 
 }
 
 /* Active link (when clicked) */
@@ -63,10 +62,47 @@
 }
 
 .categorySection ul li.active a:hover {
-  color: white; /* White color when hovering over the active link */
+  color: white; 
 }
 
 /* Background gradient for student years section */
 .categorySection.studentYears h3 {
   background: linear-gradient(135deg, #00c8b7 0%, #00e0b9 100%); /* Lighter turquoise gradient for Student Years */
+}
+
+
+/* Responsive styles for tablets */
+@media (max-width: 768px) {
+  .category {
+    flex-direction: column; 
+  }
+
+  .categorySection {
+    width: 90%; 
+    margin-bottom: 15px; 
+  }
+}
+
+/* Responsive styles for mobile phones */
+@media (max-width: 480px) {
+  .category {
+    padding: 10px; 
+  }
+
+  .categorySection {
+    width: 100%; 
+    margin-bottom: 10px;
+  }
+
+  .categorySection h3 {
+    font-size: 16px; 
+    padding: 8px;
+    margin-bottom: 8px;
+  }
+
+  .categorySection ul li {
+    font-size: 12px; 
+    padding: 8px;
+    margin: 5px 0;
+  }
 }

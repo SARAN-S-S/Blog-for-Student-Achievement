@@ -25,23 +25,23 @@
 }
 
 .mypostTotalPosts {
-  background: linear-gradient(to right, #6a5acd, #483d8b); /* Gradient background */
+  background: linear-gradient(to right, #6a5acd, #483d8b);
   color: #ffffff;
   padding: 30px;
-  border-radius: 15px; /* More rounded corners */
+  border-radius: 15px; 
   margin: 20px auto;
   width: fit-content;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Softer shadow */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); 
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .mypostTotalPosts:hover {
-  transform: translateY(-8px); /* More pronounced hover effect */
-  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+  transform: translateY(-8px); 
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.2); 
 }
 
 .mypostTotalPosts span {
-  font-size: 25px; /* Increased from 18px */
+  font-size: 25px; 
   font-weight: bold;
 }
 
@@ -132,8 +132,8 @@
   background-color: #007bff;
   color: white;
   font-weight: bold;
-  text-align: center; /* Centers text horizontally */
-  vertical-align: middle; /* Centers text vertically */
+  text-align: center; 
+  vertical-align: middle; 
 }
 
 
@@ -183,10 +183,10 @@
   font-weight: bold;
   margin-left: 15px;
   margin-right: 15px;
-  padding: 12px 15px; /* Add padding for better visual appearance */
-  background-color: #ab9494; /* Light grey background */
-  color: #333; /* Dark grey text color */
-  border-radius: 5px; /* Optional: Rounded corners */
+  padding: 12px 15px; 
+  background-color: #ab9494; 
+  color: #333; 
+  border-radius: 5px; 
 }
 
 .mypostActionLink,
@@ -234,22 +234,22 @@
 }
 
 .mypostStatus.approved {
-  color: #004d00; /* Deep Forest Green */
+  color: #004d00; 
   font-weight: bold;
 }
 
 .mypostStatus.rejected {
-  color: #ff0707; /* Bright Crimson Red */
+  color: #ff0707; 
   font-weight: bold;
 }
 
 .mypostStatus.pending {
-  color: #d97706; /* Deep Amber */
+  color: #d97706; 
   font-weight: bold;
 }
 
 .mypostRejectionReason {
-  color: #7b00ff; /* Grey color for rejection reason */
+  color: #7b00ff; 
   font-weight: bold;
 }
 
@@ -313,4 +313,240 @@
   font-size: 1.1em;
   color: #777;
   max-width: 300px;
+}
+
+
+/* Responsive Design for Tablets */
+@media (max-width: 768px) {
+  .mypostContainer {
+    padding: 15px;
+  }
+
+  .mypostTitle {
+    font-size: 24px;
+    margin-bottom: 50px;
+  }
+
+  .mypostInnerContainer {
+    grid-template-rows: auto auto auto;
+    gap: 15px;
+    padding: 15px;
+    border-width: 2px;
+  }
+
+  .mypostTotalPosts {
+    padding: 20px;
+    border-radius: 12px;
+    margin: 15px auto;
+  }
+
+  .mypostTotalPosts span {
+    font-size: 20px;
+  }
+
+  .mypostSearchContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .mypostSearchWrapper {
+    width: 100%;
+  }
+
+  .mypostSearchInput {
+    padding: 8px 8px 8px 30px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .mypostSearchIcon {
+    left: 8px;
+    font-size: 16px;
+  }
+
+  .mypostBulkDeleteButton {
+    padding: 8px 15px;
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .mypostTable th,
+  .mypostTable td {
+    padding: 8px 15px;
+    font-size: 12px;
+    height: auto;
+  }
+
+  .mypostPagination button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .mypostPagination span {
+    font-size: 16px;
+    margin: 0 10px;
+    padding: 10px 12px;
+  }
+
+  .mypostActionLink,
+  .mypostDeleteButton,
+  .writelink {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .mypostLoading {
+    font-size: 1rem;
+    height: 150px;
+  }
+
+  .mypostSpinner {
+    width: 30px;
+    height: 30px;
+    border-width: 3px;
+    margin-bottom: 8px;
+  }
+
+  .mypostNoPostsContent {
+    padding: 20px;
+  }
+
+  .mypostNoPostsEmoji {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+  }
+
+  .mypostNoPostsMessage {
+    font-size: 0.9em;
+    max-width: 90%;
+  }
+}
+
+/* Responsive Design for Mobile Phones */
+@media (max-width: 480px) {
+  .mypostContainer {
+    padding: 10px;
+  }
+
+  .mypostTitle {
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
+
+  .mypostInnerContainer {
+    grid-template-rows: auto auto auto;
+    gap: 10px;
+    padding: 10px;
+    border-width: 1px;
+  }
+
+  .mypostTotalPosts {
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px auto;
+  }
+
+  .mypostTotalPosts span {
+    font-size: 16px;
+  }
+
+  .mypostSearchContainer {
+    gap: 8px;
+  }
+
+  .mypostSearchInput {
+    padding: 6px 6px 6px 25px;
+    font-size: 12px;
+  }
+
+  .mypostSearchIcon {
+    left: 6px;
+    font-size: 14px;
+  }
+
+  .mypostBulkDeleteButton {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .mypostTable {
+    border-width: 1.5px;
+  }
+
+  .mypostTable th,
+  .mypostTable td {
+    padding: 6px 10px;
+    font-size: 10px;
+    white-space: normal;
+    word-break: break-word;
+    height: auto;
+  }
+
+  .mypostTable th:nth-child(3), /* Hide Author */
+  .mypostTable td:nth-child(3),
+  .mypostTable th:nth-child(4), /* Hide Email */
+  .mypostTable td:nth-child(4),
+  .mypostTable th:nth-child(6), /* Hide Event Type 1 */
+  .mypostTable td:nth-child(6),
+  .mypostTable th:nth-child(7), /* Hide Event Type 2 */
+  .mypostTable td:nth-child(7),
+  .mypostTable th:nth-child(8), /* Hide Student Year */
+  .mypostTable td:nth-child(8),
+  .mypostTable th:nth-child(9), /* Hide Image */
+  .mypostTable td:nth-child(9) {
+    display: none;
+  }
+
+  .mypostPagination {
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .mypostPagination button {
+    padding: 8px 15px;
+    font-size: 12px;
+  }
+
+  .mypostPagination span {
+    font-size: 14px;
+    padding: 8px 10px;
+    background-color: #eee;
+    border-radius: 4px;
+  }
+
+  .mypostActionLink,
+  .mypostDeleteButton,
+  .writelink {
+    padding: 3px 6px;
+    font-size: 10px;
+  }
+
+  .mypostLoading {
+    font-size: 0.9rem;
+    height: 120px;
+  }
+
+  .mypostSpinner {
+    width: 24px;
+    height: 24px;
+    border-width: 3px;
+    margin-bottom: 6px;
+  }
+
+  .mypostNoPostsContent {
+    padding: 15px;
+  }
+
+  .mypostNoPostsEmoji {
+    font-size: 2em;
+    margin-bottom: 8px;
+  }
+
+  .mypostNoPostsMessage {
+    font-size: 0.8em;
+    max-width: 95%;
+  }
 }

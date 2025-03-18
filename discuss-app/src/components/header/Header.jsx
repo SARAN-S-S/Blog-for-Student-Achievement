@@ -43,7 +43,6 @@ export default function Header() {
             <strong>" Dream, transforms into thoughts. Thoughts, result into action. "</strong>
           </i>
         </span>
-        
       </div>
       <div className="carousel-container">
         <Slider {...settings}>
@@ -63,7 +62,7 @@ const PrevArrow = (props) => {
   const { onClick } = props;
   return (
     <div className="slick-arrow slick-prev" onClick={onClick}>
-      &lt; {/* Left arrow icon */}
+      &lt;
     </div>
   );
 };
@@ -72,7 +71,7 @@ const NextArrow = (props) => {
   const { onClick } = props;
   return (
     <div className="slick-arrow slick-next" onClick={onClick}>
-      &gt; {/* Right arrow icon */}
+      &gt;
     </div>
   );
 };
