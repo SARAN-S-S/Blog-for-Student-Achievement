@@ -37,9 +37,15 @@ function App() {
     <Router>
       <TopBar />
       <Routes>
-      <Route
+        <Route
           path="/"
-          element={user ? <Home /> : <Navigate to="/login" />}
+          element={
+            user?.role === "admin" ? (
+              <Navigate to="/dashboard" />
+            ) : (
+              <Home />
+            )
+          }
         />
 
         <Route
