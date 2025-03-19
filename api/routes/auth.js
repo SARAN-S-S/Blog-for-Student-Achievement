@@ -18,8 +18,8 @@ router.post("/google", async (req, res) => {
     let user = await User.findOne({ email: payload.email });
     if (!user) {
 
-      // Extract username from email (before '@')
-      let username = payload.email.split("@")[0];
+      // Extract username from email (before '.')
+      let username = payload.email.split(".")[0];
 
       // Convert the first letter to uppercase and keep the rest lowercase
       username = username.charAt(0).toUpperCase() + username.slice(1).toLowerCase();
