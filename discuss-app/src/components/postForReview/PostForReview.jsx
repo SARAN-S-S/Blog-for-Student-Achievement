@@ -28,6 +28,13 @@ export default function PostForReview() {
 
   const [updateloading, setupdateloading] = useState(false);
 
+
+  const [titleError, setTitleError] = useState("");
+  const [descError, setDescError] = useState("");
+  const [categoryError, setCategoryError] = useState("");
+  const [yearError, setYearError] = useState("");
+  
+
   useEffect(() => {
     const fetchPost = async () => {
       try {
@@ -116,6 +123,23 @@ export default function PostForReview() {
     event.preventDefault();
     if (file && file.size > 3 * 1024 * 1024) {
       setError("Image size should be under 3MB only allowed...");
+      return;
+    }
+
+    if (!title.trim()) {
+      setTitleError("Title is required.");
+      return;
+    }
+    if (!category.trim()) {
+      setCategoryError("Category 1 is required.");
+      return;
+    }
+    if (!year.trim()) {
+      setYearError("Student year is required.");
+      return;
+    }
+    if (!desc.trim()) {
+      setDescError("Description is required.");
       return;
     }
 
@@ -245,14 +269,16 @@ export default function PostForReview() {
                   value={title}
                   className="singlePostTitleInput"
                   autoFocus
-                  onChange={(e) => setTitle(e.target.value)}
-                  placeholder="Enter post title"
+                  onChange={(e) => {setTitle(e.target.value);
+                  setTitleError("");
+                  } }
                 />
               </div>
+              {titleError && <p className="error-message">{titleError}</p>}
             </div>
 
             <div className="writeFormGroup">
-              <select className="writeInput" value={category} onChange={(e) => setCategory(e.target.value)} required>
+            <select className="writeInput" value={category} onChange={(e) => { setCategory(e.target.value); setCategoryError(""); }} required>
                 <option value="Project">Project</option>
                 <option value="Patent">Patent</option>
                 <option value="Paper">Paper</option>
@@ -262,7 +288,7 @@ export default function PostForReview() {
                 <option value="Placement">Placement</option>
               </select>
 
-              <select className="writeInput" value={year} onChange={(e) => setYear(e.target.value)} required>
+              <select className="writeInput" value={year} onChange={(e) => { setYear(e.target.value);  setYearError(""); }} required>
                 <option value="First Year">First Year</option>
                 <option value="Second Year">Second Year</option>
                 <option value="Third Year">Third Year</option>
@@ -281,10 +307,16 @@ export default function PostForReview() {
               </select>
             </div>
 
+            {categoryError && <p className="error-message">{categoryError}</p>}
+            {yearError && <p className="error-message">{yearError}</p>}
+
+
+            {descError && <p className="error-message">{descError}</p>}
+          
             <textarea
               className="singlePostDescInput"
               value={desc}
-              onChange={(e) => setDesc(e.target.value)}
+              onChange={(e) => { setDesc(e.target.value); setDescError(""); }}
               placeholder="Write your post description here..."
             />
 

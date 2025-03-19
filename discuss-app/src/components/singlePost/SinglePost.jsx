@@ -40,6 +40,12 @@ export default function SinglePost() {
   const textareaRef = useRef(null);
   const replyTextareaRef = useRef(null);
 
+  const [titleError, setTitleError] = useState("");
+  const [descError, setDescError] = useState("");
+  const [categoryError, setCategoryError] = useState("");
+  const [yearError, setYearError] = useState("");
+  const [commentError, setcommentError] = useState("");
+
   useEffect(() => {
     if (editingComment && textareaRef.current) {
       textareaRef.current.focus();
@@ -155,10 +161,29 @@ export default function SinglePost() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
+
     if (file && file.size > 3 * 1024 * 1024) {
       setError("Image size should be under 3MB only allowed...");
       return;
     }
+
+        
+      if (!title.trim()) {
+        setTitleError("Title is required.");
+        return;
+      }
+      if (!category.trim()) {
+        setCategoryError("Category 1 is required.");
+        return;
+      }
+      if (!year.trim()) {
+        setYearError("Student year is required.");
+        return;
+      }
+      if (!desc.trim()) {
+        setDescError("Description is required.");
+        return;
+      }
 
     setupdateLoading(true); // Start loading
     try {
@@ -294,6 +319,10 @@ export default function SinglePost() {
 
   const handleUpdateComment = async (commentId) => {
     try {
+      if (!editedCommentText.trim()) {
+        setcommentError("Comment cannot be empty while updating."); 
+        return; 
+      }
       const comment = findCommentById(comments, commentId);
       if (user._id === comment.userId || user.role === "admin") {
         const res = await axios.put(`/api/comments/${commentId}`, {
@@ -306,6 +335,8 @@ export default function SinglePost() {
         });
 
         setEditingComment(null);
+        setcommentError("");
+        
       } else {
         alert("You can only update your own comments.");
       }
@@ -387,7 +418,7 @@ export default function SinglePost() {
               ref={textareaRef}
               className="comment-edit-textarea"
               value={editedCommentText}
-              onChange={(e) => setEditedCommentText(e.target.value)}
+              onChange={(e) => { setEditedCommentText(e.target.value); setcommentError(""); }}
               style={{ backgroundColor: "#f0f8ff" }} // Light blue background for edit textarea
             />
             <div className="comment-edit-buttons">
@@ -404,6 +435,7 @@ export default function SinglePost() {
                 Cancel
               </button>
             </div>
+            {commentError && <p className="error-message">{commentError}</p>}
           </div>
         ) : (
           <p>{comment.text}</p>
@@ -488,20 +520,22 @@ export default function SinglePost() {
                     className="writeFile"
                     onChange={handleFileChange}
                   />
-                  
                 </div>
                 <input
                   type="text"
                   value={title}
                   className="singlePostTitleInput"
                   autoFocus
-                  onChange={(e) => setTitle(e.target.value)}
+                  onChange={(e) => {setTitle(e.target.value);
+                  setTitleError("");
+                  } }
                 />
               </div>
+              {titleError && <p className="error-message">{titleError}</p>}
             </div>
 
             <div className="writeFormGroup">
-              <select className="writeInput" value={category} onChange={(e) => setCategory(e.target.value)} required>
+              <select className="writeInput" value={category} onChange={(e) => { setCategory(e.target.value); setCategoryError(""); }} required>
                 <option value="Project">Project</option>
                 <option value="Patent">Patent</option>
                 <option value="Paper">Paper</option>
@@ -511,7 +545,7 @@ export default function SinglePost() {
                 <option value="Placement">Placement</option>
               </select>
 
-              <select className="writeInput" value={year} onChange={(e) => setYear(e.target.value)} required>
+              <select className="writeInput" value={year} onChange={(e) => { setYear(e.target.value);  setYearError(""); }} required>
                 <option value="First Year">First Year</option>
                 <option value="Second Year">Second Year</option>
                 <option value="Third Year">Third Year</option>
@@ -529,7 +563,12 @@ export default function SinglePost() {
                 <option value="Placement">Placement</option>
               </select>
             </div>
-            <textarea className="singlePostDescInput" value={desc} onChange={(e) => setDesc(e.target.value)} />
+            {categoryError && <p className="error-message">{categoryError}</p>}
+            {yearError && <p className="error-message">{yearError}</p>}
+
+
+            {descError && <p className="error-message">{descError}</p>}
+            <textarea className="singlePostDescInput" value={desc} onChange={(e) => { setDesc(e.target.value); setDescError(""); }} />
             <button className="singlePostButton" type="submit">Update</button>
           </form>
         ) : (
