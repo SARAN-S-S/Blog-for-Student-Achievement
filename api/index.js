@@ -84,3 +84,5 @@ app.listen("7733" || process.env.PORT, () => {
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
+
+module.exports = app;
