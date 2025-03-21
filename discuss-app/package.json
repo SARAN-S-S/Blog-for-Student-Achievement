@@ -55,7 +55,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://saran-backend-xu5w.onrender.com/",
+  "proxy": "http://localhost:7733/",
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "webpack": "^5.97.1"
