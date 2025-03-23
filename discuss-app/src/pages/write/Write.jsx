@@ -7,14 +7,18 @@ export default function Write() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState(null);
+  const [video, setVideo] = useState(null); // New state for video
   const [category, setCategory] = useState("");
   const [category2, setCategory2] = useState(""); // Optional category
   const [year, setYear] = useState("");
   const [error, setError] = useState(""); // Error message for file size
   const [imerror, setimError] = useState(""); // Error message for missing image
+  const [videoError, setVideoError] = useState(""); // Error message for video upload
   const [formatError, setFormatError] = useState(""); // Error message for invalid file format
   const [loading, setLoading] = useState(false); // Loading state
   const { user } = useContext(Context);
+
+  const [showVideo, setShowVideo] = useState(false);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -46,6 +50,39 @@ export default function Write() {
     }
   };
 
+  const handleVideoChange = (e) => {
+    const selectedVideo = e.target.files[0];
+    if (!selectedVideo) {
+      setVideoError("Please upload a video.");
+      return;
+    }
+
+    // Check video format
+    const allowedFormats = ["video/mp4", "video/mov", "video/avi"];
+    if (!allowedFormats.includes(selectedVideo.type)) {
+      setVideoError("Invalid file format. Only MP4, MOV, and AVI are allowed.");
+      setVideo(null);
+      return;
+    }
+
+    if (selectedVideo.size > 10 * 1024 * 1024) {
+      setVideoError("Video size should be under 10MB.");
+      setVideo(null);
+    } else {
+      setVideoError("");
+      setVideo(selectedVideo);
+    }
+  };
+
+  const handleRemoveVideo = () => {
+    setVideo(null);
+    setShowVideo(false);
+  };
+
+  const toggleVideo = () => {
+    setShowVideo((prev) => !prev);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -75,6 +112,17 @@ export default function Write() {
       }
     }
 
+    if (video) {
+      const data = new FormData();
+      data.append("file", video);
+      try {
+        const uploadRes = await axios.post("/api/upload-video", data);
+        newPost.video = uploadRes.data.url;
+      } catch (err) {
+        console.error("Error uploading video:", err);
+      }
+    }
+
     try {
       const res = await axios.post("/api/posts", newPost);
       window.location.replace("/post/" + res.data._id);
@@ -93,9 +141,11 @@ export default function Write() {
         </div>
       )}
       {file && <img className="writeImg" src={URL.createObjectURL(file)} alt="" />}
+
       {error && <p className="error-message">{error}</p>} {/* File size error */}
       {imerror && <p className="imerror-message">{imerror}</p>} {/* Image required error */}
       {formatError && <p className="format-error-message">{formatError}</p>} {/* Invalid format error */}
+      {videoError && <p className="video-error-message">{videoError}</p>} {/* Video upload error */}
 
       <form className="writeForm" onSubmit={handleSubmit}>
         <div className="writeFormGroup">
@@ -118,6 +168,43 @@ export default function Write() {
             required
           />
         </div>
+
+        {/* Video Upload Field */}
+        <div className="videoUploadContainer" onClick={() => document.getElementById('videoInput').click()}>
+          <label htmlFor="videoInput">
+            <i className="fa-solid fa-video"></i> 
+          </label>
+          <input
+            type="file"
+            id="videoInput"
+            className="videoInput"
+            onChange={handleVideoChange}
+            accept="video/*"
+          />
+        </div>
+
+        {video && (
+          <div className="videoContainer">
+            {showVideo && (
+              <video controls className="videoPlayer">
+                <source src={URL.createObjectURL(video)} type={video.type} />
+                Your browser does not support the video tag.
+              </video>
+            )}
+            
+            {/* Buttons container */}
+            <div className="videoButtons">
+              <button className="videoButton" onClick={toggleVideo}>
+                {showVideo ? "📹 Minimize the video" : "📹 Click here to view the video"}
+              </button>
+              <button className="removeVideoButton" onClick={handleRemoveVideo}>
+                ❌ Remove Video
+              </button>
+            </div>
+          </div>
+        )}
+
+
         <div className="writeFormGroup">
           <select
             className="writeInput"

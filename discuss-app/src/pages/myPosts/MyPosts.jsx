@@ -104,7 +104,8 @@ export default function MyPosts() {
                   <th>Event Type 1</th>
                   <th>Event Type 2 (Optional)</th>
                   <th>Student Year</th>
-                  <th>Image</th>
+                  <th>Image Status</th>
+                  <th>Video Status</th>
                   <th>Status</th>
                   <th>Rejection Reason</th>
                   <th>Review</th>
@@ -138,6 +139,7 @@ export default function MyPosts() {
                     </td>
                     <td>{post.tags[1]}</td>
                     <td>{post.photo ? "Image" : "No Image"}</td>
+                    <td>{post.video ? "Video" : "No Video"}</td>
                     <td className={`mypostStatus ${post.status}`}>{post.status}</td>
                     <td className="mypostRejectionReason" style={{ textAlign: "center", verticalAlign: "middle" }}>{post.rejectionReason || "N/A"}</td>
                     <td >

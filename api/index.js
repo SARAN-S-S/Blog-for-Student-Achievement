@@ -11,7 +11,7 @@ const cors = require("cors");
 const multer = require("multer");
 const cloudinary = require("cloudinary").v2;
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const path = require("path"); // Import path module
+const path = require("path");
 
 dotenv.config();
 app.use(express.json());
@@ -27,38 +27,70 @@ mongoose
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
+    api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Multer Cloudinary Storage
-const storage = new CloudinaryStorage({
+// Multer Cloudinary Storage for Images
+const imageStorage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: async (req, file) => {
         const allowedFormats = ["png", "jpg", "jpeg", "webp"];
         const fileFormat = file.mimetype.split("/")[1];
-        
-        // Ensure only PNG, JPG, and JPEG are allowed
+
         if (!allowedFormats.includes(fileFormat)) {
             return Promise.reject(new Error("Invalid file format. Only PNG, JPG, and JPEG are allowed."));
         }
-        
+
         return {
             folder: "blog_images",
             format: fileFormat,
-            public_id: file.originalname.split(".")[0]
+            public_id: file.originalname.split(".")[0],
         };
-    }
+    },
 });
 
-const upload = multer({
-    storage: storage,
+const imageUpload = multer({
+    storage: imageStorage,
     limits: { fileSize: 3 * 1024 * 1024 }, // Limit file size to 3MB
 });
 
-// Upload Route
-app.post("/api/upload", upload.single("file"), (req, res) => {
+// Multer Cloudinary Storage for Videos
+const videoStorage = new CloudinaryStorage({
+    cloudinary: cloudinary,
+    params: async (req, file) => {
+        const allowedFormats = ["mp4", "mov", "avi"];
+        const fileFormat = file.mimetype.split("/")[1];
+
+        if (!allowedFormats.includes(fileFormat)) {
+            return Promise.reject(new Error("Invalid file format. Only MP4, MOV, and AVI are allowed."));
+        }
+
+        return {
+            folder: "blog_videos",
+            format: fileFormat,
+            public_id: file.originalname.split(".")[0],
+            resource_type: "video", // Ensure this is set for video uploads
+        };
+    },
+});
+
+const videoUpload = multer({
+    storage: videoStorage,
+    limits: { fileSize: 10 * 1024 * 1024 }, // Limit file size to 10MB
+});
+
+// Image Upload Route
+app.post("/api/upload", imageUpload.single("file"), (req, res) => {
     if (!req.file || !req.file.path) {
         return res.status(400).json({ message: "Invalid file upload. Ensure it is PNG, JPG, or JPEG and below 3MB." });
+    }
+    res.status(200).json({ message: "File has been uploaded", url: req.file.path });
+});
+
+// Video Upload Route
+app.post("/api/upload-video", videoUpload.single("file"), (req, res) => {
+    if (!req.file || !req.file.path) {
+        return res.status(400).json({ message: "Invalid file upload. Ensure it is MP4, MOV, or AVI and below 10MB." });
     }
     res.status(200).json({ message: "File has been uploaded", url: req.file.path });
 });
@@ -71,7 +103,7 @@ app.use("/api/comments", commentRoute);
 app.use("/api/stats", statsRoute);
 
 // Serve index.html for all unknown routes (Fallback for React Router)
-app.use(express.static("build")); // Serve static files from the build folder
+app.use(express.static("build"));
 app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname, "build", "index.html"));
 });
@@ -85,4 +117,6 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "index.html"));
 });
 
+
 module.exports = app;
+
