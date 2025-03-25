@@ -1,13 +1,13 @@
 
 .singlePost {
-    margin-top: 5px;
-    margin-left: 10px;
-    margin-right: -10px;
+    margin: 20px 20px 20px 15px;
     flex: 9;
     background: #f0f0f1; 
-    border: 2px solid #a0c0ff;
+    border: 3px solid #a0c0ff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s ease;
+    border-radius: 10px;
+   
 }
 
 .singlePost:hover {
@@ -16,7 +16,7 @@
 
 .singlePostWrapper {
     padding: 20px;
-    padding-right: 0;
+    padding-right: 10px;
     display: flex;
     flex-direction: column;
 }
@@ -521,7 +521,16 @@ reply-icon {
     color: #007bff;
 }
 
-.like-section {
+.like-container {
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    gap: 15px; 
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.like-section { 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -565,12 +574,37 @@ reply-icon {
     color: #333; 
 }
 
-.like-container {
-    display: grid;
-    place-items: center;
-    margin-top: 15px;
-    margin-bottom: 20px;
+/* New styles for views container */
+.singlePostViews {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: #ffebee;
+    border: 2px solid #d32f2f;
+    font-size: 18px;
+    font-weight: bold;
+    color: #361cb7;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+    width: fit-content;
+    font-family: "Poppins", sans-serif;
+    margin-left: 5px;
 }
+
+.singlePostViews .view-count {
+    font-size: 20px;
+    font-weight: bold;
+    color: #4214c3;
+}
+
+.singlePostViews .view-icon {
+    font-size: 20px;
+    color: black;
+    background-color: white;
+}
+
 
 .postContainer {
     margin-left: 50px; 

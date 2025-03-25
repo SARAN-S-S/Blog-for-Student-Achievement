@@ -46,11 +46,15 @@ export default function SinglePost() {
   const [yearError, setYearError] = useState("");
   const [commentError, setcommentError] = useState("");
 
-  const [video, setVideo] = useState(null); // New state for video
-  const [newVideo, setNewVideo] = useState(null); // New state for updated video
-  const [initialVideo, setInitialVideo] = useState(null); // New state for initial video
-  const [videoError, setVideoError] = useState(""); // New state for video error
-  const [showVideo, setShowVideo] = useState(false); // Toggle video visibility
+  const [video, setVideo] = useState(null); 
+  const [newVideo, setNewVideo] = useState(null); 
+  const [initialVideo, setInitialVideo] = useState(null);
+  const [videoError, setVideoError] = useState(""); 
+  const [showVideo, setShowVideo] = useState(false); 
+
+  // Inside your SinglePost component, add this state
+  const [viewCount, setViewCount] = useState(post.viewCount || 0);
+
 
   useEffect(() => {
     if (editingComment && textareaRef.current) {
@@ -65,6 +69,8 @@ export default function SinglePost() {
       replyTextareaRef.current.focus();
     }
   }, [replyingToComment]);
+
+
 
   useEffect(() => {
     const getPostData = async () => {
@@ -83,6 +89,7 @@ export default function SinglePost() {
         setInitialPhoto(postData.photo || null);
         setInitialVideo(postData.video || null); // Set initial video
         setLikes(postData.likes || 0);
+        setViewCount(postData.viewCount || 0); // Initialize view count
         setComments(commentsRes.data);
         setLoading(false);
 
@@ -97,6 +104,29 @@ export default function SinglePost() {
     };
     getPostData();
   }, [path, user]);
+
+
+  // Track post view and update view count
+  useEffect(() => {
+    const trackAndUpdateView = async () => {
+      if (user && post._id) {
+        try {
+          // Track the view (increment if first time)
+          await axios.post(`/api/posts/${post._id}/view`, { 
+            userId: user._id 
+          });
+          
+          // Then immediately fetch the updated view count
+          const updatedPost = await axios.get(`/api/posts/${post._id}`);
+          setViewCount(updatedPost.data.viewCount);
+        } catch (err) {
+          console.error("Error tracking view:", err);
+        }
+      }
+    };
+
+    trackAndUpdateView();
+  }, [user, post._id]); // Only run when user or post._id changes
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -720,6 +750,7 @@ export default function SinglePost() {
               <span className="singlePostDate">
                 {new Date(post.createdAt).toDateString()}
               </span>
+              
             </div>
 
             {/* Video Display Section */}
@@ -746,6 +777,10 @@ export default function SinglePost() {
               <div className="like-section" onClick={handleLike}>
                 <FontAwesomeIcon icon={faThumbsUp} className={`like-icon ${liked ? "liked" : ""}`} />
                 <span className="like-count">{likes}</span>
+              </div>
+              <div className="singlePostViews">
+                  <span className="view-icon">👁️</span>
+                  <span className="view-count">{viewCount}</span> views
               </div>
             </div>
             <br></br>

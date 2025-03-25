@@ -83,6 +83,7 @@ export default function ManagePostsCustom() {
                 <thead>
                   <tr>
                     <th>Select</th>
+                    <th>Views Count</th>
                     <th>Title</th>
                     <th>Author</th>
                     <th>Email</th>
@@ -111,6 +112,7 @@ export default function ManagePostsCustom() {
                           }}
                         />
                       </td>
+                      <td>👁️ {post.viewCount ?? 0}</td>
                       <td>{post.title}</td>
                       <td>{post.username}</td>
                       <td>{post.email}</td>

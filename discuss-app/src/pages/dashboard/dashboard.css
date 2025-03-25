@@ -86,6 +86,27 @@
     font-weight: 500;
 }
 
+.count-badge {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  padding: 12px 20px;
+  border-radius: 25px;
+  box-shadow: 0 4px 12px rgba(0, 114, 255, 0.4);
+  margin-top: 12px;
+  display: inline-block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover .count-badge {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 114, 255, 0.6);
+}
+
+
+
 /* Responsive Design for Tablets */
 @media (max-width: 768px) {
     .dashboard {
@@ -116,6 +137,10 @@
   
     .card h2 {
       font-size: 1.2rem;
+    }
+    .count-badge {
+      font-size: 1.3rem;
+      padding: 8px 14px;
     }
   }
   
@@ -149,6 +174,10 @@
   
     .card h2 {
       font-size: 1rem;
+    }
+    .count-badge {
+      font-size: 1.1rem;
+      padding: 6px 12px;
     }
   }
   
