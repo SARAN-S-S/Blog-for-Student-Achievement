@@ -1,222 +1,218 @@
-
 .writeFile {
-    display: none;
+  display: none;
 }
 
 .write {
-    padding-top: 50px;
-    background: linear-gradient(135deg, #f7f8fa 0%, #eaeff5 50%, #f7f8fa 100%);
-    --border-color: rgba(0, 0, 0, 0.25);
+  padding-top: 50px;
+  background: linear-gradient(135deg, #f7f8fa 0%, #eaeff5 50%, #f7f8fa 100%);
+  --border-color: rgba(0, 0, 0, 0.25);
 }
 
 .writeImg {
-    width: 600px;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 10px;
-    border: 3px solid black;
-    display: block;
-    margin: 0 auto;
+  width: 600px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 3px solid black;
+  display: block;
+  margin: 0 auto;
 }
 
 .writeImg:hover {
-    border-color: #8ab32b;
+  border-color: #8ab32b;
 }
 
 .writeForm {
-    position: relative;
-    border: none;
-    padding: 20px;
-    border-radius: 10px;
+  position: relative;
+  border: none;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .writeFormGroup {
-    margin-left: 100px;
-    margin-right: 100px;
-    display: flex;
-    align-items: center;
-    border: 2px solid var(--border-color);
-    padding: 15px; 
-    border-radius: 8px; 
-    margin-bottom: 25px;
-    background: #ffffff; 
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1); 
-    transition: border-color 0.3s ease;
+  margin-left: 100px;
+  margin-right: 100px;
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--border-color);
+  padding: 15px; 
+  border-radius: 8px; 
+  margin-bottom: 25px;
+  background: #ffffff; 
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.1); 
+  transition: border-color 0.3s ease;
 }
 
 .writeFormGroup:focus-within {
-    border-color: rgba(0, 77, 77, 0.8); 
-    box-shadow: 0 0 5px rgba(0, 77, 77, 0.3); 
+  border-color: rgba(0, 77, 77, 0.8); 
+  box-shadow: 0 0 5px rgba(0, 77, 77, 0.3); 
 }
 
 .writeIcon {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 2px solid;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    color: #004d4d;
-    cursor: pointer;
-    margin-right: 10px; 
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  color: #004d4d;
+  cursor: pointer;
+  margin-right: 10px; 
 }
 
 .writeInput {
-    font-size: 18px;
-    border: none;
-    padding: 12px;
-    width: 100%;
-    background: #f4f8fb;
-    border-radius: 6px;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    margin: 5px 0; 
-    line-height: 1.5; 
+  font-size: 18px;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  background: #f4f8fb;
+  border-radius: 6px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin: 5px 0; 
+  line-height: 1.5; 
 }
 
 .writeInput:focus {
-    outline: none;
-    box-shadow: 0 0 4px rgba(0, 77, 77, 0.4);
+  outline: none;
+  box-shadow: 0 0 4px rgba(0, 77, 77, 0.4);
 }
 
 .writeText {
-    font-size: 18px;
-    height: 70vh; 
-    background: #f4f8fb;
-    border-radius: 6px;
-    padding: 10px;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
-    white-space: pre-wrap;
+  font-size: 18px;
+  height: 70vh; 
+  background: #f4f8fb;
+  border-radius: 6px;
+  padding: 10px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  white-space: pre-wrap;
 }
 
 .writeSubmit {
-    position: static; 
-    color: white;
-    background-color: #006d6d;
-    padding: 15px 100px; 
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    margin-left: 600px; 
+  position: static; 
+  color: white;
+  background-color: #006d6d;
+  padding: 15px 100px; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin-left: 600px; 
 }
 
 .writeSubmit:hover {
-    background-color: #fcfcfc;
-    color: black;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  background-color: #fcfcfc;
+  color: black;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .writeFormGroup select.writeInput {
-    margin-right: 10px; 
-  }
-  
-  .writeFormGroup select.writeInput:last-child {
-    margin-right: 0; 
-  }
+  margin-right: 10px; 
+}
 
-  .error-message {
-    color: darkred;
-    font-size: 25px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 10px;
-    text-shadow: 2px 2px 4px rgba(139, 0, 0, 0.5); 
-  }
-  
+.writeFormGroup select.writeInput:last-child {
+  margin-right: 0; 
+}
 
+.error-message {
+  color: darkred;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  text-shadow: 2px 2px 4px rgba(139, 0, 0, 0.5); 
+}
 
 /* Loading Overlay */
 .loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-  }
-  
-  .loading-message {
-    color: white;
-    font-size: 1.5rem;
-    font-weight: bold;
-    background: rgba(255, 255, 255, 0.2);
-    padding: 20px 40px;
-    border-radius: 10px;
-    text-align: center;
-  }
-  
-  /* Error message */
-  .error-message, 
-  .imerror-message {
-    color: red;
-    font-size: 16px;
-    margin-bottom: 10px;
-    text-align: center;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
 
-  .format-error-message {
-    color: darkred;
-    font-size: 25px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 10px;
-    text-shadow: 2px 2px 4px rgba(139, 0, 0, 0.5); 
-  }
+.loading-message {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 20px 40px;
+  border-radius: 10px;
+  text-align: center;
+}
 
-  .videoUploadContainer {
-    margin-left: 100px;
-    margin-right: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 65px;
-    height: 65px;
-    border: 2px solid #007bff;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
+/* Error message */
+.error-message, 
+.imerror-message {
+  color: red;
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.format-error-message {
+  color: darkred;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  text-shadow: 2px 2px 4px rgba(139, 0, 0, 0.5); 
+}
+
+.videoUploadContainer {
+  margin-left: 100px;
+  margin-right: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 65px;
+  height: 65px;
+  border: 2px solid #007bff;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .videoUploadContainer:hover {
-    background: linear-gradient(135deg, #bbdefb, #90caf9);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-    transform: scale(1.05);
+  background: linear-gradient(135deg, #bbdefb, #90caf9);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
 }
 
 .videoUploadContainer i {
-    font-size: 28px;
-    display: block;
-    
-    color: #0d47a1;
-    transition: color 0.3s ease-in-out;
-    cursor: pointer;
+  font-size: 28px;
+  display: block;
+  color: #0d47a1;
+  transition: color 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .videoUploadContainer:hover i {
-    color: #002171;
+  color: #002171;
 }
 
 #videoInput {
-    display: none;
+  display: none;
 }
 
 .video-error-message {
-    color: darkred;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 10px;
-    text-shadow: 2px 2px 4px rgba(139, 0, 0, 0.5);
+  color: darkred;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  text-shadow: 2px 2px 4px rgba(139, 0, 0, 0.5);
 }
 
 .videoContainer {
@@ -224,21 +220,21 @@
   text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers the video */
+  align-items: center;
 }
 
 .videoPlayer {
   max-width: 100%;
-  width: 500px; /* Adjust width as needed */
+  width: 500px;
   border-radius: 10px;
 }
 
 /* Buttons Wrapper */
 .videoButtons {
-  margin-top: 10px; /* Space between video and buttons */
+  margin-top: 10px;
   display: flex;
   justify-content: center;
-  gap: 10px; /* Space between buttons */
+  gap: 10px;
 }
 
 .videoButton,
@@ -269,168 +265,224 @@
   background-color: #b30000;
 }
 
-
 /* Responsive codes */
-@media (max-width: 768px) {
-    .writeImg {
-      margin: 10px auto;
-      width: 90vw;
-      height: 300px;
-    }
+/* 1080px and above (default styles) */
+@media (min-width: 1081px) {
+  .writeFormGroup {
+      margin-left: 100px;
+      margin-right: 100px;
+  }
   
-    .writeFormGroup {
-      margin: 10px auto;
-      width: 90vw;
-      flex-direction: column;
-      padding: 10px;
-    }
+  .writeImg {
+      width: 700px;
+      height: 450px;
+  }
   
-    .writeIcon {
-      margin-right: 0;
-      margin-bottom: 10px;
-    }
+  .writeSubmit {
+      margin-left: 600px;
+      padding: 15px 100px;
+  }
   
-    .writeInput {
-      font-size: 16px;
-      padding: 8px;
-      margin: 5px 0;
-    }
+  .videoUploadContainer {
+      margin-left: 100px;
+      margin-right: 100px;
+  }
   
-    .writeText {
-      font-size: 16px;
-      height: 40vh;
-      padding: 8px;
-    }
-  
-    .writeSubmit {
-      padding: 10px 50px;
-      margin: 10px auto;
-      width: 50%;
-      display: block;
-    }
-  
-    .writeFormGroup select.writeInput {
-      margin-right: 0; /* Remove right margin for stacked selects */
-      margin-bottom: 10px; /* Add bottom margin for spacing */
-    }
-  
-    .writeFormGroup select.writeInput:last-child {
-      margin-bottom: 0; /* Remove bottom margin for the last select */
-    }
-  
-    .error-message,
-    .imerror-message {
-      font-size: 14px;
-    }
-  
-    .loading-message {
-      font-size: 1.2rem;
-      padding: 15px 30px;
-    }
+  .videoPlayer {
+      width: 600px;
+  }
+}
 
-    .format-error-message {
-      font-size: 20px;
-      margin-top: 8px;
-    }
+/* 768px - 1080px */
+@media (max-width: 1080px) and (min-width: 769px) {
+  .writeFormGroup {
+      margin-left: 60px;
+      margin-right: 60px;
+      padding: 12px;
+  }
   
-    .videoUploadContainer {
+  .writeImg {
+      width: 600px;
+      height: 380px;
+  }
+  
+  .writeSubmit {
+      margin-left: 400px;
+      padding: 12px 80px;
+  }
+  
+  .videoUploadContainer {
+      margin-left: 60px;
+      margin-right: 60px;
+  }
+  
+  .videoPlayer {
+      width: 550px;
+  }
+  
+  .writeInput {
+      font-size: 16px;
+      padding: 10px;
+      width: 95%; /* Reduced width to prevent overflow */
+  }
+  
+  .writeText {
+    font-size: 16px;
+    height: 70vh; /* Increased from 60vh */
+    width: 95%;
+    min-height: 400px; /* Added minimum height */
+  }
+}
+
+/* 480px - 768px */
+@media (max-width: 768px) and (min-width: 481px) {
+  .write {
+      padding-top: 30px;
+  }
+  
+  .writeFormGroup {
+      margin-left: 30px;
+      margin-right: 30px;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 12px;
+  }
+  
+  .writeImg {
+      width: 100%;
+      max-width: 500px;
+      height: 300px;
+      margin: 0 auto 20px;
+  }
+  
+  .writeSubmit {
+      margin: 20px auto;
+      padding: 12px 60px;
+      display: block;
+      width: auto;
+  }
+  
+  .videoUploadContainer {
+      margin-left: 30px;
+      margin-right: 30px;
       width: 55px;
       height: 55px;
-    }
-  
-    .videoUploadContainer i {
-      font-size: 24px;
-    }
-  
-    .videoPlayer {
-      width: 90%;
-    }
-  
-    .videoButtons {
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-  
-    .videoButton,
-    .removeVideoButton {
-      width: 80%;
-      font-size: 13px;
-      padding: 7px 10px;
-    }
   }
   
-  @media (max-width: 480px) {
-    .writeImg {
-      height: 200px;
-    }
+  .videoPlayer {
+      width: 100%;
+      max-width: 500px;
+  }
   
-    .writeFormGroup {
-      width: 95vw;
-      padding: 8px;
-    }
+  .videoButtons {
+      flex-direction: row;
+      gap: 10px;
+  }
   
-    .writeIcon {
-      width: 25px;
-      height: 25px;
-      font-size: 18px;
-    }
+  .writeInput {
+      width: 95%; 
+      margin: 8px 0;
+  }
   
-    .writeInput {
-      font-size: 14px;
-      padding: 6px;
-    }
+  select.writeInput {
+      width: 95%; 
+  }
   
-    .writeText {
-      font-size: 14px;
-      height: 30vh;
-      padding: 6px;
-    }
+  .writeText {
+    font-size: 16px;
+    height: 80vh; 
+    width: 95%;
+    min-height: 450px; 
+  }
   
-    .writeSubmit {
-      font-size: 14px;
-      padding: 8px 30px;
-      width: 70%;
-    }
-  
-    .error-message,
-    .imerror-message {
-      font-size: 12px;
-    }
-  
-    .loading-message {
-      font-size: 1rem;
-      padding: 10px 20px;
-    }
+  .error-message,
+  .imerror-message,
+  .format-error-message,
+  .video-error-message {
+      font-size: 16px;
+      margin: 0 30px 15px;
+  }
+}
 
-    .format-error-message {
-      font-size: 18px;
-      margin-top: 6px;
-    }
+/* 480px and below */
+@media (max-width: 480px) {
+  .write {
+      padding-top: 20px;
+  }
   
-    .videoUploadContainer {
+  .writeFormGroup {
+      margin-left: 15px;
+      margin-right: 15px;
+      padding: 10px;
+      flex-direction: column;
+  }
+  
+  .writeImg {
+      width: calc(100% - 30px);
+      height: 220px;
+      margin: 0 auto 15px;
+  }
+  
+  .writeSubmit {
+      margin: 15px auto;
+      padding: 12px 40px;
+      width: 80%;
+      font-size: 14px;
+      display: block; /* Ensure button is centered */
+  }
+  
+  .videoUploadContainer {
+      margin-left: 15px;
+      margin-right: 15px;
       width: 50px;
       height: 50px;
-      border-radius: 10px;
-    }
-  
-    .videoUploadContainer i {
-      font-size: 22px;
-    }
-  
-    .videoPlayer {
-      width: 95%;
-    }
-  
-    .videoButtons {
-      flex-direction: column;
-      gap: 6px;
-    }
-  
-    .videoButton,
-    .removeVideoButton {
-      width: 90%;
-      font-size: 12px;
-      padding: 6px 8px;
-    }
   }
+  
+  .videoPlayer {
+      width: calc(100% - 30px);
+  }
+  
+  .videoButtons {
+      flex-direction: column;
+      width: 100%;
+      gap: 8px;
+  }
+  
+  .videoButton,
+  .removeVideoButton {
+      width: 100%;
+      padding: 8px;
+  }
+  
+  .writeInput {
+      font-size: 14px;
+      padding: 8px;
+      width: 95%; /* Reduced width to prevent overflow */
+  }
+  
+  .writeText {
+    font-size: 14px;
+    height: 70vh; /* Increased from 60vh */
+    width: 95%;
+    min-height: 350px; /* Added minimum height */
+  }
+  
+  .writeIcon {
+      width: 25px;
+      height: 25px;
+      font-size: 16px;
+  }
+  
+  .error-message,
+  .imerror-message,
+  .format-error-message,
+  .video-error-message {
+      font-size: 14px;
+      margin: 0 15px 10px;
+  }
+  
+  .loading-message {
+      font-size: 1rem;
+      padding: 15px 25px;
+  }
+}

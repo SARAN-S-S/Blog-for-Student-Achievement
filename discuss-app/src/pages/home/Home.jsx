@@ -14,6 +14,9 @@ export default function Home() {
   const { search } = useLocation();
 
   useEffect(() => {
+    // Scroll to top whenever search/filters change
+    window.scrollTo(0, 0);
+    
     const fetchPosts = async () => {
       setLoading(true);
       try {
@@ -26,6 +29,7 @@ export default function Home() {
     };
     fetchPosts();
   }, [search]);
+
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
